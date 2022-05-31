@@ -1,0 +1,5 @@
+[35m@picker-cc/common:build: [0mcache hit, replaying output [2md8c3702c0da1b575[0m
+[35m@picker-cc/common:build: [0m
+[35m@picker-cc/common:build: [0m> @picker-cc/common@1.0.0 build /Users/baisheng/Workspace/picker-cms/packages/common
+[35m@picker-cc/common:build: [0m> rimraf lib && tsc -p ./tsconfig.build.json
+[35m@picker-cc/common:build: [0m

@@ -1,0 +1,79 @@
+"作品"
+type Product implements Node {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    "作品标题"
+    title: String
+#    "作品名称"
+#    name: String!
+    "作品标识"
+    slug: String!
+    "作品是否启用"
+    enabled: Boolean
+    "作品类型"
+    type: ProductType!
+    "创造者"
+    creator: User
+    "作品特色图片"
+    featured: Asset
+    "作品相关资产"
+    assets: [Asset]
+    "作品公开内容、内容描述等"
+    publicly: JSON
+    "作品内容"
+    content: JSON!
+    "作品发布状态"
+    state: ProductState
+    "作品配置选项"
+    option: ProductOption
+}
+
+#"作品内容"
+#type ProductContent {
+#    "作品标题"
+#    title: String
+#    "作品公开内容、内容描述等"
+#    publicly: String
+#    "作品内容（解析处理过的)"
+#    result: String
+#    "作品内容的原始信息"
+#    source: String
+#}
+
+"作品的价格配置"
+type DiffPriceOption {
+    "价格的版本名称"
+    versionName: String
+    "售价"
+    price: Float!
+    "定价的信息描述"
+    info: String
+}
+
+"作品的保护机制配置"
+type ProtectOption {
+    "保护类型"
+    type: String
+    "保护方法"
+    method: String
+}
+
+"作品配置"
+type ProductOption {
+    "作品定价"
+    price: Float
+    "作品差异化定价"
+    diffPrice: [DiffPriceOption]
+    "开启订阅制的配置"
+    subscription: ProductSubscriptionPeriod
+    "作品的保护机制配置"
+    protect: ProtectOption
+}
+
+"作品列表"
+type ProductList implements PaginatedList {
+    items: [Product!]!
+    totalItems: Int!
+}

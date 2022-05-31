@@ -1,0 +1,14 @@
+"""
+系统配置选项
+"""
+type Option implements Node {
+  id: ID!
+  "键"
+  key: String!
+  "值"
+  value: JSON
+  "是否公开"
+  shared: Boolean
+  "描述"
+  description: String
+}

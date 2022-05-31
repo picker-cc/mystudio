@@ -1,0 +1,7 @@
+type CurrentUser {
+    id: ID!
+    identifier: String!
+    token: String!
+    code: String!
+    permissions: [Permission!]!
+}

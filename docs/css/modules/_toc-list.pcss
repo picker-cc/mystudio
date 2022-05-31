@@ -1,0 +1,41 @@
+.toc-list {
+  margin-top: var(--spacing-medium);
+
+  & > ul {
+    padding: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  ul ul {
+    padding: 0 var(--spacing-extra-small) var(--spacing-small)
+      var(--spacing-small);
+  }
+
+  li + li {
+    margin-top: var(--spacing-extra-small);
+  }
+
+  a:link,
+  a:visited {
+    color: var(--eggplant);
+    text-decoration: none;
+    border-bottom: 3px solid var(--transparent);
+    padding-bottom: 1px;
+  }
+
+  a:hover {
+    color: var(--dragonfruit-light);
+    border-bottom-color: var(--dragonfruit-light);
+  }
+
+  ol {
+    margin: var(--spacing-extra-small) 0 var(--spacing-medium);
+    list-style-type: none;
+    padding-left: var(--spacing-medium);
+  }
+}

@@ -1,0 +1,9 @@
+type Query {
+    "Returns information about the current authenticated User"
+    me: CurrentUser
+}
+
+type Mutation {
+    login(username: String!, password: String!, rememberMe: Boolean): JSON
+    logout: Success!
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="/docs/static/style.min.css" rel="stylesheet" />
+    <title>{% if title %}{{ title }}{% else %} Picker Docs {% endif %}</title>
+
+    {%- set metaDesc -%}{{ content | extractFirstPara }}{%- endset -%}
+
+    {% metagen
+        desc=description or metaDesc or meta.desc,
+        url=url + page.url,
+        img=meta.img,
+        img_alt=meta.img_alt,
+        twitter_card_type=meta.twitter_card_type,
+        twitter_handle=meta.twitter_handle,
+        name=meta.name
+    %}
+  </head>
+  <body class="relative min-vh-100">
+
+    {% block header %}
+    {% endblock %}
+
+    <div class="relative flex flex-column flex-row-l">
+    {% block nav %}
+    {% endblock %}
+    <div class="flex-grow-1 flex flex-column justify-between {{ contentWrapClasses }} z-0">
+      {% block container %}
+        {{ content | safe }}
+      {% endblock %}
+
+      {% include "partials/footer.njk" %}
+    </div>
+    </div>
+
+    <script type="module" src="/docs/static/js/application.mjs" rel="preload"></script>
+
+    {% if env.includeAnalytics %}
+      {% include "partials/analytics.njk" %}
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,39 @@
+[32m@picker-cc/docs:build: [0mcache hit, replaying output [2m0159d8b45f4b3b0a[0m
+[32m@picker-cc/docs:build: [0m
+[32m@picker-cc/docs:build: [0m> @picker-cc/docs@1.0.0 build /Users/baisheng/Workspace/picker-cms/docs
+[32m@picker-cc/docs:build: [0m> postcss css/style.pcss -o _site/docs/static/style.min.css && ELEVENTY_PRODUCTION=true eleventy && yarn updateAlgoliaIndex
+[32m@picker-cc/docs:build: [0m
+[32m@picker-cc/docs:build: [0m
+[32m@picker-cc/docs:build: [0m
+[32m@picker-cc/docs:build: [0m┌─────────────────────────────────────────────────────────────────────────────────┐
+[32m@picker-cc/docs:build: [0m│                                                                                 │
+[32m@picker-cc/docs:build: [0m│   This version of postcss-preset-env is not optimised to work with PostCSS 8.   │
+[32m@picker-cc/docs:build: [0m│                Please update to version 7 of PostCSS Preset Env.                │
+[32m@picker-cc/docs:build: [0m│                                                                                 │
+[32m@picker-cc/docs:build: [0m│                    If you find issues, you can report it at:                    │
+[32m@picker-cc/docs:build: [0m│          https://github.com/csstools/postcss-plugins/issues/new/choose          │
+[32m@picker-cc/docs:build: [0m│                                                                                 │
+[32m@picker-cc/docs:build: [0m└─────────────────────────────────────────────────────────────────────────────────┘
+[32m@picker-cc/docs:build: [0m			
+[32m@picker-cc/docs:build: [0m
+[32m@picker-cc/docs:build: [0m[11ty] Problem writing Eleventy templates: (more in DEBUG output)
+[32m@picker-cc/docs:build: [0m[11ty] 1. Having trouble reading front matter from template ./docs/getting-started/index.md (via TemplateContentFrontMatterError)
+[32m@picker-cc/docs:build: [0m[11ty] 2. duplicated mapping key at line 10, column 1:
+[32m@picker-cc/docs:build: [0m[11ty]     title: Web
+[32m@picker-cc/docs:build: [0m[11ty]     ^ (via YAMLException)
+[32m@picker-cc/docs:build: [0m[11ty] 
+[32m@picker-cc/docs:build: [0m[11ty] Original error stack trace: YAMLException: duplicated mapping key at line 10, column 1:
+[32m@picker-cc/docs:build: [0m[11ty]     title: Web
+[32m@picker-cc/docs:build: [0m[11ty]     ^
+[32m@picker-cc/docs:build: [0m[11ty]     at generateError (/Users/baisheng/Workspace/picker-cms/node_modules/.pnpm/js-yaml@3.14.1/node_modules/js-yaml/lib/js-yaml/loader.js:167:10)
+[32m@picker-cc/docs:build: [0m[11ty]     at throwError (/Users/baisheng/Workspace/picker-cms/node_modules/.pnpm/js-yaml@3.14.1/node_modules/js-yaml/lib/js-yaml/loader.js:173:9)
+[32m@picker-cc/docs:build: [0m[11ty]     at storeMappingPair (/Users/baisheng/Workspace/picker-cms/node_modules/.pnpm/js-yaml@3.14.1/node_modules/js-yaml/lib/js-yaml/loader.js:335:7)
+[32m@picker-cc/docs:build: [0m[11ty]     at readBlockMapping (/Users/baisheng/Workspace/picker-cms/node_modules/.pnpm/js-yaml@3.14.1/node_modules/js-yaml/lib/js-yaml/loader.js:1098:9)
+[32m@picker-cc/docs:build: [0m[11ty]     at composeNode (/Users/baisheng/Workspace/picker-cms/node_modules/.pnpm/js-yaml@3.14.1/node_modules/js-yaml/lib/js-yaml/loader.js:1359:12)
+[32m@picker-cc/docs:build: [0m[11ty]     at readDocument (/Users/baisheng/Workspace/picker-cms/node_modules/.pnpm/js-yaml@3.14.1/node_modules/js-yaml/lib/js-yaml/loader.js:1525:3)
+[32m@picker-cc/docs:build: [0m[11ty]     at loadDocuments (/Users/baisheng/Workspace/picker-cms/node_modules/.pnpm/js-yaml@3.14.1/node_modules/js-yaml/lib/js-yaml/loader.js:1588:5)
+[32m@picker-cc/docs:build: [0m[11ty]     at load (/Users/baisheng/Workspace/picker-cms/node_modules/.pnpm/js-yaml@3.14.1/node_modules/js-yaml/lib/js-yaml/loader.js:1614:19)
+[32m@picker-cc/docs:build: [0m[11ty]     at Object.safeLoad (/Users/baisheng/Workspace/picker-cms/node_modules/.pnpm/js-yaml@3.14.1/node_modules/js-yaml/lib/js-yaml/loader.js:1637:10)
+[32m@picker-cc/docs:build: [0m[11ty]     at module.exports (/Users/baisheng/Workspace/picker-cms/node_modules/.pnpm/gray-matter@4.0.3/node_modules/gray-matter/lib/parse.js:12:17)
+[32m@picker-cc/docs:build: [0m[11ty] Wrote 0 files in 0.18 seconds (v1.0.1)
+[32m@picker-cc/docs:build: [0m ELIFECYCLE  Command failed with exit code 1.

@@ -1,0 +1,89 @@
+"如果未配置该策略，则在尝试依赖 NativeAuthStrategy 的操作时返回"
+type NativeAuthStrategyError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+"如果用户身份验证凭证无效则返回"
+type InvalidCredentialsError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+    authenticationError: String!
+}
+
+"电子邮箱地址冲突时返回"
+type EmailAddressConflictError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+"手机号冲突错误"
+type PhoneConflictError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+"名字冲突错误"
+type NameConflictError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+type AlreadyLoggedInError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+"更新管理员密码结果"
+union UpdateAdministratorPasswordResult = InvalidCredentialsError | NativeAuthStrategyError | Success
+
+
+type MissingPasswordError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+type PasswordValidationError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+    validationErrorMessage: String!
+}
+
+type PasswordAlreadySetError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+type VerificationTokenInvalidError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+type VerificationTokenExpiredError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+type IdentifierChangeTokenInvalidError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+type IdentifierChangeTokenExpiredError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+type PasswordResetTokenInvalidError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+type PasswordResetTokenExpiredError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+
+type NotVerifiedError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}

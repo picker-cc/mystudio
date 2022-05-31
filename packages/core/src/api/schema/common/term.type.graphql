@@ -1,0 +1,26 @@
+"分类法"
+type Term implements Node {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+
+    "分类名"
+    name: String!
+    "类别标识"
+    slug: String!
+    "分类模式"
+    taxonomy: TaxonomyEnum!
+    "描述"
+    description: String
+    "特色图"
+    featured: Asset
+    "父类别"
+    pid: ID
+    "类别下内容数量统计"
+    count: Int
+}
+
+type TermList implements PaginatedList {
+    items: [Term!]!
+    totalItems: Int!
+}

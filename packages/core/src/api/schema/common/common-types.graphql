@@ -1,0 +1,121 @@
+# 第三方自义标量
+scalar JSON
+scalar DateTime
+scalar Upload
+
+interface PaginatedList {
+    items: [Node!]!
+    totalItems: Int!
+}
+
+interface Node {
+    id: ID!
+}
+
+interface ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+type ConfigArg {
+    name: String!
+    value: String!
+}
+
+type ConfigArgDefinition {
+    name: String!
+    type: String!
+    list: Boolean!
+    required: Boolean!
+    defaultValue: JSON
+    label: String
+    description: String
+    ui: JSON
+}
+
+type ConfigurableOperation {
+    code: String!
+    args: [ConfigArg!]!
+}
+
+type ConfigurableOperationDefinition {
+    code: String!
+    args: [ConfigArgDefinition!]!
+    description: String!
+}
+
+
+type DeletionResponse {
+    result: DeletionResult!
+    message: String
+}
+
+input ConfigArgInput {
+    name: String!
+    "实际值的JSON字符串化表示"
+    value: String!
+}
+
+input ConfigurableOperationInput {
+    code: String!
+    arguments: [ConfigArgInput!]!
+}
+
+input StringOperators {
+    eq: String
+    notEq: String
+    contains: String
+    notContains: String
+    in: [String!]
+    notIn: [String!]
+    regex: String
+}
+
+input BooleanOperators {
+    eq: Boolean
+}
+
+input NumberRange {
+    start: Float!
+    end: Float!
+}
+
+input NumberOperators {
+    eq: Float
+    lt: Float
+    lte: Float
+    gt: Float
+    gte: Float
+    between: NumberRange
+}
+
+input DateRange {
+    start: DateTime!
+    end: DateTime!
+}
+
+input DateOperators {
+    eq: DateTime
+    before: DateTime
+    after: DateTime
+    between: DateRange
+}
+
+input SearchInput {
+    term: String
+    take: Int
+    skip: Int
+    sort: SearchResultSortParameter
+}
+
+input SearchResultSortParameter {
+    name: SortOrder
+    price: SortOrder
+}
+
+"""
+操作成功的指示，这里我们不返回任何具体信息
+"""
+type Success {
+    success: Boolean!
+}

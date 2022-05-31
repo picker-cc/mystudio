@@ -1,0 +1,194 @@
+enum GlobalFlag {
+    TRUE
+    FALSE
+    INHERIT
+}
+
+enum AdjustmentType {
+    PROMOTION
+    DISTRIBUTED_ORDER_PROMOTION
+    OTHER
+}
+
+enum DeletionResult {
+    "实体删除成功"
+    DELETED
+    "未删除，原因请见消息描述"
+    NOT_DELETED
+}
+
+# 运行时（run-time）填充
+enum Permission
+
+enum SortOrder {
+    ASC
+    DESC
+}
+
+enum ErrorCode {
+    UNKNOWN_ERROR
+}
+
+enum LogicalOperator {
+    AND
+    OR
+}
+
+enum JobState {
+    "等待"
+    PENDING
+    "运行"
+    RUNNING
+    "已完成"
+    COMPLETED
+    "重试"
+    RETRYING
+    "错误"
+    FAILED
+    "取消"
+    CANCELLED
+}
+
+enum TaxonomyEnum {
+    "分类"
+    CATEGORY
+    "链接分类"
+    LINK_CATEGORY
+    "内容标签"
+    POST_TAG
+}
+"""
+作品商品类型
+"""
+enum ProductType {
+    """
+    数字产品
+    任何要下载或流媒体的文件集。
+    """
+    DIGITAL
+    """
+    课程或教程
+    卖一节课或教一群学生
+    """
+    COURSE_TUTORIAL
+    """
+    提供PDF、ePub和Mobi格式的书籍或漫画。
+    """
+    EBOOK
+    """
+    通过电子邮件发布的内容。
+    """
+    NEWSLETTER
+    """
+    会员
+    围绕你的粉丝开展会员业务
+    """
+    MEMBERSHIP
+    """
+    播客
+    播客的内容可以使用流媒体直接下载。
+    """
+    PODCAST
+    """
+    有声读物
+    让客户听你的音频内容。
+    """
+    AUDIOBOOK
+    """
+    实物产品
+    出售任何需要运输的东西。
+    """
+    PHYSICAL_GOOD
+}
+"""
+产品订阅周期
+"""
+enum ProductSubscriptionPeriod {
+    "年订阅"
+    YEAR
+    "月订阅"
+    MONTH
+}
+"""
+服务类型
+"""
+enum ServiceType {
+    "标准服务"
+    NORMAL
+    "增值服务"
+    VAS
+}
+
+"""
+产品类别
+"""
+enum ProductCategory {
+    "未分类"
+    UNCATEGORIZED
+    "学习"
+    STUDY
+    "绘画"
+    DRAWING
+    "素材"
+    MATERIAL
+    "科技"
+    TECHNOLOGY
+    "生活"
+    LIFE
+    "播客"
+    PODCAST
+    "资料"
+    DATA
+    "写作"
+    WRITING
+    "视频"
+    VIDEO
+    "手账 LIFE BOOK"
+    TECHO
+    "游戏"
+    GAME
+    "私密"
+    PRIVATE
+    "受限制"
+    LIMITED
+    "其它"
+    OTHER
+}
+
+"作品状态"
+enum ProductState {
+    "草稿"
+    DRAFT
+    "发布"
+    PUBLISH
+    "存档"
+    ARCHIVED
+}
+
+"文章发布状态"
+enum PostState {
+    "草稿"
+    DRAFT
+    "发布"
+    PUBLISH
+    "存档"
+    ARCHIVED
+}
+
+"评论状态"
+enum CommentState {
+    "待审核"
+    AUDITING
+    "审核发布"
+    PUBLISH
+    "垃圾评论"
+    SPAM
+}
+
+"用户 Session 类型"
+enum SessionType {
+    "匿名"
+    ANONYMOUS
+    "授权的"
+    AUTHENTICATED
+}

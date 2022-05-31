@@ -1,0 +1,14 @@
+type Administrator implements Node {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    name: String!
+    emailAddress: String!
+    user: User!
+    domain: String
+}
+
+type AdministratorList implements PaginatedList {
+    items: [Administrator!]!
+    totalItems: Int!
+}

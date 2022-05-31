@@ -1,0 +1,6395 @@
+{
+  "kind": "Document",
+  "definitions": [
+    "",
+    "",
+    "",
+    {
+      "kind": "InputObjectTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "BooleanOperators",
+        "loc": {
+          "start": 396,
+          "end": 412
+        }
+      },
+      "directives": [],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "eq",
+            "loc": {
+              "start": 417,
+              "end": 419
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Boolean",
+              "loc": {
+                "start": 421,
+                "end": 428
+              }
+            },
+            "loc": {
+              "start": 421,
+              "end": 428
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 417,
+            "end": 428
+          }
+        }
+      ],
+      "loc": {
+        "start": 390,
+        "end": 430
+      }
+    },
+    "",
+    "",
+    {
+      "kind": "InputObjectTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "ConfigArgInput",
+        "loc": {
+          "start": 661,
+          "end": 675
+        }
+      },
+      "directives": [],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "name",
+            "loc": {
+              "start": 680,
+              "end": 684
+            }
+          },
+          "type": "String",
+          "directives": [],
+          "loc": {
+            "start": 680,
+            "end": 693
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "实际值的JSON字符串化表示",
+            ue,
+            "loc": {
+              "start": 697,
+              "end": 717
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "value",
+            "loc": {
+              "start": 720,
+              "end": 725
+            }
+          },
+          "type": "String",
+          "directives": [],
+          "loc": {
+            "start": 697,
+            "end": 734
+          }
+        }
+      ],
+      "loc": {
+        "start": 655,
+        "end": 736
+      }
+    },
+    "",
+    "",
+    {
+      "kind": "InputObjectTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "ConfigurableOperationInput",
+        "loc": {
+          "start": 927,
+          "end": 953
+        }
+      },
+      "directives": [],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "arguments",
+            "loc": {
+              "start": 958,
+              "end": 967
+            }
+          },
+          "type": {
+            "kind": "ListType",
+            "type": "ConfigArgInput",
+            "loc": {
+              "start": 969,
+              "end": 986
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 958,
+            "end": 987
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "code",
+            "loc": {
+              "start": 990,
+              "end": 994
+            }
+          },
+          "type": "String",
+          "directives": [],
+          "loc": {
+            "start": 990,
+            "end": 1003
+          }
+        }
+      ],
+      "loc": {
+        "start": 921,
+        "end": 1005
+      }
+    },
+    {
+      "kind": "InputObjectTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "CreateAdministratorInput",
+        "loc": {
+          "start": 1013,
+          "end": 1037
+        }
+      },
+      "directives": [],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "管理员登录账号",
+            "block": true,
+            "loc": {
+              "start": 1042,
+              "end": 1055
+            }
+          },
+          "name"
+          ":"
+          Name
+          ","
+          value
+          ":"
+          emailAddress
+          ","
+          loc
+          ":{"
+          start
+          ":1058,"
+          end
+          ":1070}},"
+          type
+          ":"
+          String
+          ","
+          directives
+          ":[],"
+          loc
+          ":{"
+          start
+          ":1042,"
+          end
+          ":1079}},{"
+          kind
+          ":"
+          InputValueDefinition
+          ","
+          description
+          ":{"
+          kind
+          ":"
+          StringValue
+          ","
+          value
+          ":"
+          管理员姓名
+          ","
+          block
+          ":true,"
+          loc
+          ":{"
+          start
+          ":1083,"
+          end
+          ":1094}},"
+          name
+          "nd": "Name",
+          "value": "name",
+          "loc": {
+            "start": 1097,
+            "end": 1101
+          }
+        },
+        "type"
+        :
+        "String",
+        "directives"
+        :
+        [],
+        "loc"
+        :
+        {
+          "start": 1083,
+          "end": 1110
+        }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "管理员密码",
+            "block": true,
+            "loc": {
+              "start": 1114,
+              "end": 1125
+            }
+          },
+          "name": {
+            "kiname",
+            "value": "password",
+            "loc": {
+              "start": 1128,
+              "end": 1136
+            }
+          },
+          "type": "String",
+          "directives": [],
+          "loc": {
+            "start": 1114,
+            "end": 1145
+          }
+        }
+      ],
+      "loc": {
+        "start": 1007,
+        "end": 1147
+      }
+    },
+    {
+      "kind": "InputObjectTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "DateOperators",
+        "loc": {
+          "start": 1155,
+          "end": 1168
+        }
+      },
+      "directives": [],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "after",
+            "loc": {
+              "start": 1173,
+              "end": 1178
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "DateTime",
+              "loc": {
+                "start": 1180,
+                "end": 1188
+              }
+            },
+            "loc": {
+              "start": 1180,
+              "end": 1188
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 1173,
+            "end": 1188
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "before",
+            "loc": {
+              "start": 1191,
+              "end": 1197
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "DateTime",
+              "loc": {
+                "start": 1199,
+                "end": 1207
+              }
+            },
+            "loc": {
+              "start": 1199,
+              "end": 1207
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 1191,
+            "end": 1207
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "between",
+            "loc": {
+              "start": 1210,
+              "end": 1217
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "DateRange",
+              "loc": {
+                "start": 1219,
+                "end": 1228
+              }
+            },
+            "loc": {
+              "start": 1219,
+              "end": 1228
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 1210,
+            "end": 1228
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "eq",
+            "loc": {
+              "start": 1231,
+              "end": 1233
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "DateTime",
+              "loc": {
+                "start": 1235,
+                "end": 1243
+              }
+            },
+            "loc": {
+              "start": 1235,
+              "end": 1243
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 1231,
+            "end": 1243
+          }
+        }
+      ],
+      "loc": {
+        "start": 1149,
+        "end": 1245
+      }
+    },
+    {
+      "kind": "InputObjectTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "DateRange",
+        "loc": {
+          "start": 1253,
+          "end": 1262
+        }
+      },
+      "directives": [],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "end",
+            "loc": {
+              "start": 1267,
+              "end": 1270
+            }
+          },
+          "type": "DateTime",
+          "directives": [],
+          "loc": {
+            "start": 1267,
+            "end": 1281
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "start",
+            "loc": {
+              "start": 1284,
+              "end": 1289
+            }
+          },
+          "type": "DateTime",
+          "directives": [],
+          "loc": {
+            "start": 1284,
+            "end": 1300
+          }
+        }
+      ],
+      "loc": {
+        "start": 1247,
+        "end": 1302
+      }
+    },
+    {
+      "kind": "ScalarTypeDefinition",
+      "description": {
+        "kind": "StringValue",
+        "value": "A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.",
+        "block": true,
+        "loc": {
+          "start": 1304,
+          "end": 1547
+        }
+      },
+      "name": {
+        "kind": "Name",
+        "value": "DateTime",
+        "loc": {
+          "start": 1555,
+          "end": 1563
+        }
+      },
+      "directives": [],
+      "loc": {
+        "start": 1304,
+        "end": 1563
+      }
+    },
+    "",
+    {
+      "kind": "EnumTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "DeletionResult",
+        "loc": {
+          "start": 1641,
+          "end": 1655
+        }
+      },
+      "directives": [],
+      "values": [
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "实体删除成功",
+            "block": true
+            :
+        {
+          "start": 1660,
+          "end": 1672
+        }
+        },
+        "name"
+        :
+        {
+          "kind": "Name",
+          "value": "DELETED",
+          "loc": {
+            "start": 1675,
+            "end": 1682
+          }
+        },
+        "directives"
+        :
+        [],
+        "loc"
+        :
+        {
+          "start": 1660,
+          "end": 1682
+        }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "未删除，原因请见消息描述",
+            "block": true,
+            "loc": 6,
+            "end": 1704
+          }
+        },
+        "name"
+        :
+        {
+          "kind": "Name",
+          "value": "NOT_DELETED",
+          "loc": {
+            "start": 1707,
+            "end": 1718
+          }
+        },
+        "directives"
+        :
+        [],
+        "loc"
+        :
+        {
+          "start": 1686,
+          "end": 1718
+        }
+        }
+      ],
+      "loc": {
+        "start": 1636,
+        "end": 1720
+      }
+    },
+    "export class EmailAddressConflictError extends ErrorResult {\n  readonly __typename = 'EmailAddressConflictError';\n  readonly errorCode = 'EMAIL_ADDRESS_CONFLICT_ERROR' as any;\n  readonly message = 'EMAIL_ADDRESS_CONFLICT_ERROR';\n  constructor(\n  ) {\n    super();\n  }\n}",
+    {
+      "kind": "EnumTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "ErrorCode",
+        "loc": {
+          "start": 1847,
+          "end": 1856
+        }
+      },
+      "directives": [],
+      "values": [
+        {
+          "kind": "EnumValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "UNKNOWN_ERROR",
+            "loc": {
+              "start": 1861,
+              "end": 1874
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 1861,
+            "end": 1874
+          }
+        }
+      ],
+      "loc": {
+        "start": 1842,
+        "end": 1876
+      }
+    },
+    "export class ErrorResult {\n  readonly __typename: string;\n  readonly errorCode: string;\nmessage: Scalars['String'];\n}",
+    {
+      "kind": "EnumTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "GlobalFlag",
+        "loc": {
+          "start": 1953,
+          "end": 1963
+        }
+      },
+      "directives": [],
+      "values": [
+        {
+          "kind": "EnumValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "FALSE",
+            "loc": {
+              "start": 1968,
+              "end": 1973
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 1968,
+            "end": 1973
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "INHERIT",
+            "loc": {
+              "start": 1976,
+              "end": 1983
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 1976,
+            "end": 1983
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "TRUE",
+            "loc": {
+              "start": 1986,
+              "end": 1990
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 1986,
+            "end": 1990
+          }
+        }
+      ],
+      "loc": {
+        "start": 1948,
+        "end": 1992
+      }
+    },
+    "export class InvalidCredentialsError extends ErrorResult {\n  readonly __typename = 'InvalidCredentialsError';\n  readonly errorCode = 'INVALID_CREDENTIALS_ERROR' as any;\n  readonly message = 'INVALID_CREDENTIALS_ERROR';\n  constructor(\n    public authenticationError: Scalars['String'],\n  ) {\n    super();\n  }\n}",
+    {
+      "kind": "ScalarTypeDefinition",
+      "description": {
+        "kind": "StringValue",
+        "value": "The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).",
+        "block": true,
+        "loc": {
+          "start": 2147,
+          "end": 2303
+        }
+      },
+      "name": {
+        "kind": "Name",
+        "value": "JSON",
+        "loc": {
+          "start": 2311,
+          "end": 2315
+        }
+      },
+      "directives": [],
+      "loc": {
+        "start": 2147,
+        "end": 2315
+      }
+    },
+    {
+      "kind": "EnumTypeDefinition",
+      "description": {
+        "kind": "StringValue",
+        "value": "@description\n具有可选区域或脚本修饰符 ISO 639-1 语言代码形式。\n可用于选择基于 [Unicode CLDR 描述列表](https://unicode-org.gith/charts/37/summary/root.html)，\n包括了世界上主要的标准语言和方言\n@docsCategory common",
+        "ck": true,
+        "loc": {
+          "start": 2317,
+          "end": 2519
+        }
+      },
+      "name": {
+        "kind": "Name",
+        "value": "LanguageCode",
+        "loc": {
+          "start": 2525,
+          "end": 2537
+        }
+      },
+      "directives": [],
+      "values": [
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Afrikaans",
+            "block": true,
+            "loc": {
+              "start": 2542,
+              "end": 2557
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "af",
+            "loc": {
+              "start": 2560,
+              "end": 2562
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2542,
+            "end": 2562
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Akan",
+            "block": true,
+            "loc": {
+              "start": 2566,
+              "end": 2576
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ak",
+            "loc": {
+              "start": 2579,
+              "end": 2581
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2566,
+            "end": 2581
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Amharic",
+            "block": true,
+            "loc": {
+              "start": 2585,
+              "end": 2598
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "am",
+            "loc": {
+              "start": 2601,
+              "end": 2603
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2585,
+            "end": 2603
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Arabic",
+            "block": true,
+            "loc": {
+              "start": 2607,
+              "end": 2619
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ar",
+            "loc": {
+              "start": 2622,
+              "end": 2624
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2607,
+            "end": 2624
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Assamese",
+            "block": true,
+            "loc": {
+              "start": 2628,
+              "end": 2642
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "as",
+            "loc": {
+              "start": 2645,
+              "end": 2647
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2628,
+            "end": 2647
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Azerbaijani",
+            "block": true,
+            "loc": {
+              "start": 2651,
+              "end": 2668
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "az",
+            "loc": {
+              "start": 2671,
+              "end": 2673
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2651,
+            "end": 2673
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Belarusian",
+            "block": true,
+            "loc": {
+              "start": 2677,
+              "end": 2693
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "be",
+            "loc": {
+              "start": 2696,
+              "end": 2698
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2677,
+            "end": 2698
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Bulgarian",
+            "block": true,
+            "loc": {
+              "start": 2702,
+              "end": 2717
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "bg",
+            "loc": {
+              "start": 2720,
+              "end": 2722
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2702,
+            "end": 2722
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Bambara",
+            "block": true,
+            "loc": {
+              "start": 2726,
+              "end": 2739
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "bm",
+            "loc": {
+              "start": 2742,
+              "end": 2744
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2726,
+            "end": 2744
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Bangla",
+            "block": true,
+            "loc": {
+              "start": 2748,
+              "end": 2760
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "bn",
+            "loc": {
+              "start": 2763,
+              "end": 2765
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2748,
+            "end": 2765
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Tibetan",
+            "block": true,
+            "loc": {
+              "start": 2769,
+              "end": 2782
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "bo",
+            "loc": {
+              "start": 2785,
+              "end": 2787
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2769,
+            "end": 2787
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Breton",
+            "block": true,
+            "loc": {
+              "start": 2791,
+              "end": 2803
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "br",
+            "loc": {
+              "start": 2806,
+              "end": 2808
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2791,
+            "end": 2808
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Bosnian",
+            "block": true,
+            "loc": {
+              "start": 2812,
+              "end": 2825
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "bs",
+            "loc": {
+              "start": 2828,
+              "end": 2830
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2812,
+            "end": 2830
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Catalan",
+            "block": true,
+            "loc": {
+              "start": 2834,
+              "end": 2847
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ca",
+            "loc": {
+              "start": 2850,
+              "end": 2852
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2834,
+            "end": 2852
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Chechen",
+            "block": true,
+            "loc": {
+              "start": 2856,
+              "end": 2869
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ce",
+            "loc": {
+              "start": 2872,
+              "end": 2874
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2856,
+            "end": 2874
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Corsican",
+            "block": true,
+            "loc": {
+              "start": 2878,
+              "end": 2892
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "co",
+            "loc": {
+              "start": 2895,
+              "end": 2897
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2878,
+            "end": 2897
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Czech",
+            "block": true,
+            "loc": {
+              "start": 2901,
+              "end": 2912
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "cs",
+            "loc": {
+              "start": 2915,
+              "end": 2917
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2901,
+            "end": 2917
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Church Slavic",
+            "block": true,
+            "loc": {
+              "start": 2921,
+              "end": 2940
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "cu",
+            "loc": {
+              "start": 2943,
+              "end": 2945
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2921,
+            "end": 2945
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Welsh",
+            "block": true,
+            "loc": {
+              "start": 2949,
+              "end": 2960
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "cy",
+            "loc": {
+              "start": 2963,
+              "end": 2965
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2949,
+            "end": 2965
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Danish",
+            "block": true,
+            "loc": {
+              "start": 2969,
+              "end": 2981
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "da",
+            "loc": {
+              "start": 2984,
+              "end": 2986
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2969,
+            "end": 2986
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "German",
+            "block": true,
+            "loc": {
+              "start": 2990,
+              "end": 3002
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "de",
+            "loc": {
+              "start": 3005,
+              "end": 3007
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 2990,
+            "end": 3007
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Austrian German",
+            "block": true,
+            "loc": {
+              "start": 3011,
+              "end": 3032
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "de_AT",
+            "loc": {
+              "start": 3035,
+              "end": 3040
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3011,
+            "end": 3040
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Swiss High German",
+            "block": true,
+            "loc": {
+              "start": 3044,
+              "end": 3067
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "de_CH",
+            "loc": {
+              "start": 3070,
+              "end": 3075
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3044,
+            "end": 3075
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Dzongkha",
+            "block": true,
+            "loc": {
+              "start": 3079,
+              "end": 3093
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "dz",
+            "loc": {
+              "start": 3096,
+              "end": 3098
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3079,
+            "end": 3098
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Ewe",
+            "block": true,
+            "loc": {
+              "start": 3102,
+              "end": 3111
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ee",
+            "loc": {
+              "start": 3114,
+              "end": 3116
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3102,
+            "end": 3116
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Greek",
+            "block": true,
+            "loc": {
+              "start": 3120,
+              "end": 3131
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "el",
+            "loc": {
+              "start": 3134,
+              "end": 3136
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3120,
+            "end": 3136
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "English",
+            "block": true,
+            "loc": {
+              "start": 3140,
+              "end": 3153
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "en",
+            "loc": {
+              "start": 3156,
+              "end": 3158
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3140,
+            "end": 3158
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Australian English",
+            "block": true,
+            "loc": {
+              "start": 3162,
+              "end": 3186
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "en_AU",
+            "loc": {
+              "start": 3189,
+              "end": 3194
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3162,
+            "end": 3194
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Canadian English",
+            "block": true,
+            "loc": {
+              "start": 3198,
+              "end": 3220
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "en_CA",
+            "loc": {
+              "start": 3223,
+              "end": 3228
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3198,
+            "end": 3228
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "British English",
+            "block": true,
+            "loc": {
+              "start": 3232,
+              "end": 3253
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "en_GB",
+            "loc": {
+              "start": 3256,
+              "end": 3261
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3232,
+            "end": 3261
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "American English",
+            "block": true,
+            "loc": {
+              "start": 3265,
+              "end": 3287
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "en_US",
+            "loc": {
+              "start": 3290,
+              "end": 3295
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3265,
+            "end": 3295
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Esperanto",
+            "block": true,
+            "loc": {
+              "start": 3299,
+              "end": 3314
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "eo",
+            "loc": {
+              "start": 3317,
+              "end": 3319
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3299,
+            "end": 3319
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Spanish",
+            "block": true,
+            "loc": {
+              "start": 3323,
+              "end": 3336
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "es",
+            "loc": {
+              "start": 3339,
+              "end": 3341
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3323,
+            "end": 3341
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "European Spanish",
+            "block": true,
+            "loc": {
+              "start": 3345,
+              "end": 3367
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "es_ES",
+            "loc": {
+              "start": 3370,
+              "end": 3375
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3345,
+            "end": 3375
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Mexican Spanish",
+            "block": true,
+            "loc": {
+              "start": 3379,
+              "end": 3400
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "es_MX",
+            "loc": {
+              "start": 3403,
+              "end": 3408
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3379,
+            "end": 3408
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Estonian",
+            "block": true,
+            "loc": {
+              "start": 3412,
+              "end": 3426
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "et",
+            "loc": {
+              "start": 3429,
+              "end": 3431
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3412,
+            "end": 3431
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Basque",
+            "block": true,
+            "loc": {
+              "start": 3435,
+              "end": 3447
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "eu",
+            "loc": {
+              "start": 3450,
+              "end": 3452
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3435,
+            "end": 3452
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Persian",
+            "block": true,
+            "loc": {
+              "start": 3456,
+              "end": 3469
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "fa",
+            "loc": {
+              "start": 3472,
+              "end": 3474
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3456,
+            "end": 3474
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Dari",
+            "block": true,
+            "loc": {
+              "start": 3478,
+              "end": 3488
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "fa_AF",
+            "loc": {
+              "start": 3491,
+              "end": 3496
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3478,
+            "end": 3496
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Fulah",
+            "block": true,
+            "loc": {
+              "start": 3500,
+              "end": 3511
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ff",
+            "loc": {
+              "start": 3514,
+              "end": 3516
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3500,
+            "end": 3516
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Finnish",
+            "block": true,
+            "loc": {
+              "start": 3520,
+              "end": 3533
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "fi",
+            "loc": {
+              "start": 3536,
+              "end": 3538
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3520,
+            "end": 3538
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Faroese",
+            "block": true,
+            "loc": {
+              "start": 3542,
+              "end": 3555
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "fo",
+            "loc": {
+              "start": 3558,
+              "end": 3560
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3542,
+            "end": 3560
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "French",
+            "block": true,
+            "loc": {
+              "start": 3564,
+              "end": 3576
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "fr",
+            "loc": {
+              "start": 3579,
+              "end": 3581
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3564,
+            "end": 3581
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Canadian French",
+            "block": true,
+            "loc": {
+              "start": 3585,
+              "end": 3606
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "fr_CA",
+            "loc": {
+              "start": 3609,
+              "end": 3614
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3585,
+            "end": 3614
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Swiss French",
+            "block": true,
+            "loc": {
+              "start": 3618,
+              "end": 3636
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "fr_CH",
+            "loc": {
+              "start": 3639,
+              "end": 3644
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3618,
+            "end": 3644
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Western Frisian",
+            "block": true,
+            "loc": {
+              "start": 3648,
+              "end": 3669
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "fy",
+            "loc": {
+              "start": 3672,
+              "end": 3674
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3648,
+            "end": 3674
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Irish",
+            "block": true,
+            "loc": {
+              "start": 3678,
+              "end": 3689
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ga",
+            "loc": {
+              "start": 3692,
+              "end": 3694
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3678,
+            "end": 3694
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Scottish Gaelic",
+            "block": true,
+            "loc": {
+              "start": 3698,
+              "end": 3719
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "gd",
+            "loc": {
+              "start": 3722,
+              "end": 3724
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3698,
+            "end": 3724
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Galician",
+            "block": true,
+            "loc": {
+              "start": 3728,
+              "end": 3742
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "gl",
+            "loc": {
+              "start": 3745,
+              "end": 3747
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3728,
+            "end": 3747
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Gujarati",
+            "block": true,
+            "loc": {
+              "start": 3751,
+              "end": 3765
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "gu",
+            "loc": {
+              "start": 3768,
+              "end": 3770
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3751,
+            "end": 3770
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Manx",
+            "block": true,
+            "loc": {
+              "start": 3774,
+              "end": 3784
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "gv",
+            "loc": {
+              "start": 3787,
+              "end": 3789
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3774,
+            "end": 3789
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Hausa",
+            "block": true,
+            "loc": {
+              "start": 3793,
+              "end": 3804
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ha",
+            "loc": {
+              "start": 3807,
+              "end": 3809
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3793,
+            "end": 3809
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Hebrew",
+            "block": true,
+            "loc": {
+              "start": 3813,
+              "end": 3825
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "he",
+            "loc": {
+              "start": 3828,
+              "end": 3830
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3813,
+            "end": 3830
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Hindi",
+            "block": true,
+            "loc": {
+              "start": 3834,
+              "end": 3845
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "hi",
+            "loc": {
+              "start": 3848,
+              "end": 3850
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3834,
+            "end": 3850
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Croatian",
+            "block": true,
+            "loc": {
+              "start": 3854,
+              "end": 3868
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "hr",
+            "loc": {
+              "start": 3871,
+              "end": 3873
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3854,
+            "end": 3873
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Haitian Creole",
+            "block": true,
+            "loc": {
+              "start": 3877,
+              "end": 3897
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ht",
+            "loc": {
+              "start": 3900,
+              "end": 3902
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3877,
+            "end": 3902
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Hungarian",
+            "block": true,
+            "loc": {
+              "start": 3906,
+              "end": 3921
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "hu",
+            "loc": {
+              "start": 3924,
+              "end": 3926
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3906,
+            "end": 3926
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Armenian",
+            "block": true,
+            "loc": {
+              "start": 3930,
+              "end": 3944
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "hy",
+            "loc": {
+              "start": 3947,
+              "end": 3949
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3930,
+            "end": 3949
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Interlingua",
+            "block": true,
+            "loc": {
+              "start": 3953,
+              "end": 3970
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ia",
+            "loc": {
+              "start": 3973,
+              "end": 3975
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3953,
+            "end": 3975
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Indonesian",
+            "block": true,
+            "loc": {
+              "start": 3979,
+              "end": 3995
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "id",
+            "loc": {
+              "start": 3998,
+              "end": 4000
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 3979,
+            "end": 4000
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Igbo",
+            "block": true,
+            "loc": {
+              "start": 4004,
+              "end": 4014
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ig",
+            "loc": {
+              "start": 4017,
+              "end": 4019
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4004,
+            "end": 4019
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Sichuan Yi",
+            "block": true,
+            "loc": {
+              "start": 4023,
+              "end": 4039
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ii",
+            "loc": {
+              "start": 4042,
+              "end": 4044
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4023,
+            "end": 4044
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Icelandic",
+            "block": true,
+            "loc": {
+              "start": 4048,
+              "end": 4063
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "is",
+            "loc": {
+              "start": 4066,
+              "end": 4068
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4048,
+            "end": 4068
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Italian",
+            "block": true,
+            "loc": {
+              "start": 4072,
+              "end": 4085
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "it",
+            "loc": {
+              "start": 4088,
+              "end": 4090
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4072,
+            "end": 4090
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Japanese",
+            "block": true,
+            "loc": {
+              "start": 4094,
+              "end": 4108
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ja",
+            "loc": {
+              "start": 4111,
+              "end": 4113
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4094,
+            "end": 4113
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Javanese",
+            "block": true,
+            "loc": {
+              "start": 4117,
+              "end": 4131
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "jv",
+            "loc": {
+              "start": 4134,
+              "end": 4136
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4117,
+            "end": 4136
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Georgian",
+            "block": true,
+            "loc": {
+              "start": 4140,
+              "end": 4154
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ka",
+            "loc": {
+              "start": 4157,
+              "end": 4159
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4140,
+            "end": 4159
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Kikuyu",
+            "block": true,
+            "loc": {
+              "start": 4163,
+              "end": 4175
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ki",
+            "loc": {
+              "start": 4178,
+              "end": 4180
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4163,
+            "end": 4180
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Kazakh",
+            "block": true,
+            "loc": {
+              "start": 4184,
+              "end": 4196
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "kk",
+            "loc": {
+              "start": 4199,
+              "end": 4201
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4184,
+            "end": 4201
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Kalaallisut",
+            "block": true,
+            "loc": {
+              "start": 4205,
+              "end": 4222
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "kl",
+            "loc": {
+              "start": 4225,
+              "end": 4227
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4205,
+            "end": 4227
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Khmer",
+            "block": true,
+            "loc": {
+              "start": 4231,
+              "end": 4242
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "km",
+            "loc": {
+              "start": 4245,
+              "end": 4247
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4231,
+            "end": 4247
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Kannada",
+            "block": true,
+            "loc": {
+              "start": 4251,
+              "end": 4264
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "kn",
+            "loc": {
+              "start": 4267,
+              "end": 4269
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4251,
+            "end": 4269
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Korean",
+            "block": true,
+            "loc": {
+              "start": 4273,
+              "end": 4285
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ko",
+            "loc": {
+              "start": 4288,
+              "end": 4290
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4273,
+            "end": 4290
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Kashmiri",
+            "block": true,
+            "loc": {
+              "start": 4294,
+              "end": 4308
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ks",
+            "loc": {
+              "start": 4311,
+              "end": 4313
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4294,
+            "end": 4313
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Kurdish",
+            "block": true,
+            "loc": {
+              "start": 4317,
+              "end": 4330
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ku",
+            "loc": {
+              "start": 4333,
+              "end": 4335
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4317,
+            "end": 4335
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Cornish",
+            "block": true,
+            "loc": {
+              "start": 4339,
+              "end": 4352
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "kw",
+            "loc": {
+              "start": 4355,
+              "end": 4357
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4339,
+            "end": 4357
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Kyrgyz",
+            "block": true,
+            "loc": {
+              "start": 4361,
+              "end": 4373
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ky",
+            "loc": {
+              "start": 4376,
+              "end": 4378
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4361,
+            "end": 4378
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Latin",
+            "block": true,
+            "loc": {
+              "start": 4382,
+              "end": 4393
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "la",
+            "loc": {
+              "start": 4396,
+              "end": 4398
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4382,
+            "end": 4398
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Luxembourgish",
+            "block": true,
+            "loc": {
+              "start": 4402,
+              "end": 4421
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "lb",
+            "loc": {
+              "start": 4424,
+              "end": 4426
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4402,
+            "end": 4426
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Ganda",
+            "block": true,
+            "loc": {
+              "start": 4430,
+              "end": 4441
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "lg",
+            "loc": {
+              "start": 4444,
+              "end": 4446
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4430,
+            "end": 4446
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Lingala",
+            "block": true,
+            "loc": {
+              "start": 4450,
+              "end": 4463
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ln",
+            "loc": {
+              "start": 4466,
+              "end": 4468
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4450,
+            "end": 4468
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Lao",
+            "block": true,
+            "loc": {
+              "start": 4472,
+              "end": 4481
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "lo",
+            "loc": {
+              "start": 4484,
+              "end": 4486
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4472,
+            "end": 4486
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Lithuanian",
+            "block": true,
+            "loc": {
+              "start": 4490,
+              "end": 4506
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "lt",
+            "loc": {
+              "start": 4509,
+              "end": 4511
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4490,
+            "end": 4511
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Luba-Katanga",
+            "block": true,
+            "loc": {
+              "start": 4515,
+              "end": 4533
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "lu",
+            "loc": {
+              "start": 4536,
+              "end": 4538
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4515,
+            "end": 4538
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Latvian",
+            "block": true,
+            "loc": {
+              "start": 4542,
+              "end": 4555
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "lv",
+            "loc": {
+              "start": 4558,
+              "end": 4560
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4542,
+            "end": 4560
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Malagasy",
+            "block": true,
+            "loc": {
+              "start": 4564,
+              "end": 4578
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "mg",
+            "loc": {
+              "start": 4581,
+              "end": 4583
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4564,
+            "end": 4583
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Maori",
+            "block": true,
+            "loc": {
+              "start": 4587,
+              "end": 4598
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "mi",
+            "loc": {
+              "start": 4601,
+              "end": 4603
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4587,
+            "end": 4603
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Macedonian",
+            "block": true,
+            "loc": {
+              "start": 4607,
+              "end": 4623
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "mk",
+            "loc": {
+              "start": 4626,
+              "end": 4628
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4607,
+            "end": 4628
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Malayalam",
+            "block": true,
+            "loc": {
+              "start": 4632,
+              "end": 4647
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ml",
+            "loc": {
+              "start": 4650,
+              "end": 4652
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4632,
+            "end": 4652
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Mongolian",
+            "block": true,
+            "loc": {
+              "start": 4656,
+              "end": 4671
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "mn",
+            "loc": {
+              "start": 4674,
+              "end": 4676
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4656,
+            "end": 4676
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Marathi",
+            "block": true,
+            "loc": {
+              "start": 4680,
+              "end": 4693
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "mr",
+            "loc": {
+              "start": 4696,
+              "end": 4698
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4680,
+            "end": 4698
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Malay",
+            "block": true,
+            "loc": {
+              "start": 4702,
+              "end": 4713
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ms",
+            "loc": {
+              "start": 4716,
+              "end": 4718
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4702,
+            "end": 4718
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Maltese",
+            "block": true,
+            "loc": {
+              "start": 4722,
+              "end": 4735
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "mt",
+            "loc": {
+              "start": 4738,
+              "end": 4740
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4722,
+            "end": 4740
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Burmese",
+            "block": true,
+            "loc": {
+              "start": 4744,
+              "end": 4757
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "my",
+            "loc": {
+              "start": 4760,
+              "end": 4762
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4744,
+            "end": 4762
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Norwegian Bokmål",
+            "block": true,
+            "loc": {
+              "start": 4766,
+              "end": 4788
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "nb",
+            "loc": {
+              "start": 4791,
+              "end": 4793
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4766,
+            "end": 4793
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "North Ndebele",
+            "block": true,
+            "loc": {
+              "start": 4797,
+              "end": 4816
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "nd",
+            "loc": {
+              "start": 4819,
+              "end": 4821
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4797,
+            "end": 4821
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Nepali",
+            "block": true,
+            "loc": {
+              "start": 4825,
+              "end": 4837
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ne",
+            "loc": {
+              "start": 4840,
+              "end": 4842
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4825,
+            "end": 4842
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Dutch",
+            "block": true,
+            "loc": {
+              "start": 4846,
+              "end": 4857
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "nl",
+            "loc": {
+              "start": 4860,
+              "end": 4862
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4846,
+            "end": 4862
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Flemish",
+            "block": true,
+            "loc": {
+              "start": 4866,
+              "end": 4879
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "nl_BE",
+            "loc": {
+              "start": 4882,
+              "end": 4887
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4866,
+            "end": 4887
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Norwegian Nynorsk",
+            "block": true,
+            "loc": {
+              "start": 4891,
+              "end": 4914
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "nn",
+            "loc": {
+              "start": 4917,
+              "end": 4919
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4891,
+            "end": 4919
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Nyanja",
+            "block": true,
+            "loc": {
+              "start": 4923,
+              "end": 4935
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ny",
+            "loc": {
+              "start": 4938,
+              "end": 4940
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4923,
+            "end": 4940
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Oromo",
+            "block": true,
+            "loc": {
+              "start": 4944,
+              "end": 4955
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "om",
+            "loc": {
+              "start": 4958,
+              "end": 4960
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4944,
+            "end": 4960
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Odia",
+            "block": true,
+            "loc": {
+              "start": 4964,
+              "end": 4974
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "or",
+            "loc": {
+              "start": 4977,
+              "end": 4979
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4964,
+            "end": 4979
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Ossetic",
+            "block": true,
+            "loc": {
+              "start": 4983,
+              "end": 4996
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "os",
+            "loc": {
+              "start": 4999,
+              "end": 5001
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 4983,
+            "end": 5001
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Punjabi",
+            "block": true,
+            "loc": {
+              "start": 5005,
+              "end": 5018
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "pa",
+            "loc": {
+              "start": 5021,
+              "end": 5023
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5005,
+            "end": 5023
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Polish",
+            "block": true,
+            "loc": {
+              "start": 5027,
+              "end": 5039
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "pl",
+            "loc": {
+              "start": 5042,
+              "end": 5044
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5027,
+            "end": 5044
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Pashto",
+            "block": true,
+            "loc": {
+              "start": 5048,
+              "end": 5060
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ps",
+            "loc": {
+              "start": 5063,
+              "end": 5065
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5048,
+            "end": 5065
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Portuguese",
+            "block": true,
+            "loc": {
+              "start": 5069,
+              "end": 5085
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "pt",
+            "loc": {
+              "start": 5088,
+              "end": 5090
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5069,
+            "end": 5090
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Brazilian Portuguese",
+            "block": true,
+            "loc": {
+              "start": 5094,
+              "end": 5120
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "pt_BR",
+            "loc": {
+              "start": 5123,
+              "end": 5128
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5094,
+            "end": 5128
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "European Portuguese",
+            "block": true,
+            "loc": {
+              "start": 5132,
+              "end": 5157
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "pt_PT",
+            "loc": {
+              "start": 5160,
+              "end": 5165
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5132,
+            "end": 5165
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Quechua",
+            "block": true,
+            "loc": {
+              "start": 5169,
+              "end": 5182
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "qu",
+            "loc": {
+              "start": 5185,
+              "end": 5187
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5169,
+            "end": 5187
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Romansh",
+            "block": true,
+            "loc": {
+              "start": 5191,
+              "end": 5204
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "rm",
+            "loc": {
+              "start": 5207,
+              "end": 5209
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5191,
+            "end": 5209
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Rundi",
+            "block": true,
+            "loc": {
+              "start": 5213,
+              "end": 5224
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "rn",
+            "loc": {
+              "start": 5227,
+              "end": 5229
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5213,
+            "end": 5229
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Romanian",
+            "block": true,
+            "loc": {
+              "start": 5233,
+              "end": 5247
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ro",
+            "loc": {
+              "start": 5250,
+              "end": 5252
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5233,
+            "end": 5252
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Moldavian",
+            "block": true,
+            "loc": {
+              "start": 5256,
+              "end": 5271
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ro_MD",
+            "loc": {
+              "start": 5274,
+              "end": 5279
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5256,
+            "end": 5279
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Russian",
+            "block": true,
+            "loc": {
+              "start": 5283,
+              "end": 5296
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ru",
+            "loc": {
+              "start": 5299,
+              "end": 5301
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5283,
+            "end": 5301
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Kinyarwanda",
+            "block": true,
+            "loc": {
+              "start": 5305,
+              "end": 5322
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "rw",
+            "loc": {
+              "start": 5325,
+              "end": 5327
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5305,
+            "end": 5327
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Sanskrit",
+            "block": true,
+            "loc": {
+              "start": 5331,
+              "end": 5345
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "sa",
+            "loc": {
+              "start": 5348,
+              "end": 5350
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5331,
+            "end": 5350
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Sindhi",
+            "block": true,
+            "loc": {
+              "start": 5354,
+              "end": 5366
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "sd",
+            "loc": {
+              "start": 5369,
+              "end": 5371
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5354,
+            "end": 5371
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Northern Sami",
+            "block": true,
+            "loc": {
+              "start": 5375,
+              "end": 5394
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "se",
+            "loc": {
+              "start": 5397,
+              "end": 5399
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5375,
+            "end": 5399
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Sango",
+            "block": true,
+            "loc": {
+              "start": 5403,
+              "end": 5414
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "sg",
+            "loc": {
+              "start": 5417,
+              "end": 5419
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5403,
+            "end": 5419
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Sinhala",
+            "block": true,
+            "loc": {
+              "start": 5423,
+              "end": 5436
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "si",
+            "loc": {
+              "start": 5439,
+              "end": 5441
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5423,
+            "end": 5441
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Slovak",
+            "block": true,
+            "loc": {
+              "start": 5445,
+              "end": 5457
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "sk",
+            "loc": {
+              "start": 5460,
+              "end": 5462
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5445,
+            "end": 5462
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Slovenian",
+            "block": true,
+            "loc": {
+              "start": 5466,
+              "end": 5481
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "sl",
+            "loc": {
+              "start": 5484,
+              "end": 5486
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5466,
+            "end": 5486
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Samoan",
+            "block": true,
+            "loc": {
+              "start": 5490,
+              "end": 5502
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "sm",
+            "loc": {
+              "start": 5505,
+              "end": 5507
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5490,
+            "end": 5507
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Shona",
+            "block": true,
+            "loc": {
+              "start": 5511,
+              "end": 5522
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "sn",
+            "loc": {
+              "start": 5525,
+              "end": 5527
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5511,
+            "end": 5527
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Somali",
+            "block": true,
+            "loc": {
+              "start": 5531,
+              "end": 5543
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "so",
+            "loc": {
+              "start": 5546,
+              "end": 5548
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5531,
+            "end": 5548
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Albanian",
+            "block": true,
+            "loc": {
+              "start": 5552,
+              "end": 5566
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "sq",
+            "loc": {
+              "start": 5569,
+              "end": 5571
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5552,
+            "end": 5571
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Serbian",
+            "block": true,
+            "loc": {
+              "start": 5575,
+              "end": 5588
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "sr",
+            "loc": {
+              "start": 5591,
+              "end": 5593
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5575,
+            "end": 5593
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Southern Sotho",
+            "block": true,
+            "loc": {
+              "start": 5597,
+              "end": 5617
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "st",
+            "loc": {
+              "start": 5620,
+              "end": 5622
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5597,
+            "end": 5622
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Sundanese",
+            "block": true,
+            "loc": {
+              "start": 5626,
+              "end": 5641
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "su",
+            "loc": {
+              "start": 5644,
+              "end": 5646
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5626,
+            "end": 5646
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Swedish",
+            "block": true,
+            "loc": {
+              "start": 5650,
+              "end": 5663
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "sv",
+            "loc": {
+              "start": 5666,
+              "end": 5668
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5650,
+            "end": 5668
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Swahili",
+            "block": true,
+            "loc": {
+              "start": 5672,
+              "end": 5685
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "sw",
+            "loc": {
+              "start": 5688,
+              "end": 5690
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5672,
+            "end": 5690
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Congo Swahili",
+            "block": true,
+            "loc": {
+              "start": 5694,
+              "end": 5713
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "sw_CD",
+            "loc": {
+              "start": 5716,
+              "end": 5721
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5694,
+            "end": 5721
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Tamil",
+            "block": true,
+            "loc": {
+              "start": 5725,
+              "end": 5736
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ta",
+            "loc": {
+              "start": 5739,
+              "end": 5741
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5725,
+            "end": 5741
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Telugu",
+            "block": true,
+            "loc": {
+              "start": 5745,
+              "end": 5757
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "te",
+            "loc": {
+              "start": 5760,
+              "end": 5762
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5745,
+            "end": 5762
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Tajik",
+            "block": true,
+            "loc": {
+              "start": 5766,
+              "end": 5777
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "tg",
+            "loc": {
+              "start": 5780,
+              "end": 5782
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5766,
+            "end": 5782
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Thai",
+            "block": true,
+            "loc": {
+              "start": 5786,
+              "end": 5796
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "th",
+            "loc": {
+              "start": 5799,
+              "end": 5801
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5786,
+            "end": 5801
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Tigrinya",
+            "block": true,
+            "loc": {
+              "start": 5805,
+              "end": 5819
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ti",
+            "loc": {
+              "start": 5822,
+              "end": 5824
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5805,
+            "end": 5824
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Turkmen",
+            "block": true,
+            "loc": {
+              "start": 5828,
+              "end": 5841
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "tk",
+            "loc": {
+              "start": 5844,
+              "end": 5846
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5828,
+            "end": 5846
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Tongan",
+            "block": true,
+            "loc": {
+              "start": 5850,
+              "end": 5862
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "to",
+            "loc": {
+              "start": 5865,
+              "end": 5867
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5850,
+            "end": 5867
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Turkish",
+            "block": true,
+            "loc": {
+              "start": 5871,
+              "end": 5884
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "tr",
+            "loc": {
+              "start": 5887,
+              "end": 5889
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5871,
+            "end": 5889
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Tatar",
+            "block": true,
+            "loc": {
+              "start": 5893,
+              "end": 5904
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "tt",
+            "loc": {
+              "start": 5907,
+              "end": 5909
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5893,
+            "end": 5909
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Uyghur",
+            "block": true,
+            "loc": {
+              "start": 5913,
+              "end": 5925
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ug",
+            "loc": {
+              "start": 5928,
+              "end": 5930
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5913,
+            "end": 5930
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Ukrainian",
+            "block": true,
+            "loc": {
+              "start": 5934,
+              "end": 5949
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "uk",
+            "loc": {
+              "start": 5952,
+              "end": 5954
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5934,
+            "end": 5954
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Urdu",
+            "block": true,
+            "loc": {
+              "start": 5958,
+              "end": 5968
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ur",
+            "loc": {
+              "start": 5971,
+              "end": 5973
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5958,
+            "end": 5973
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Uzbek",
+            "block": true,
+            "loc": {
+              "start": 5977,
+              "end": 5988
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "uz",
+            "loc": {
+              "start": 5991,
+              "end": 5993
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5977,
+            "end": 5993
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Vietnamese",
+            "block": true,
+            "loc": {
+              "start": 5997,
+              "end": 6013
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "vi",
+            "loc": {
+              "start": 6016,
+              "end": 6018
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 5997,
+            "end": 6018
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Volapük",
+            "block": true,
+            "loc": {
+              "start": 6022,
+              "end": 6035
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "vo",
+            "loc": {
+              "start": 6038,
+              "end": 6040
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6022,
+            "end": 6040
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Wolof",
+            "block": true,
+            "loc": {
+              "start": 6044,
+              "end": 6055
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "wo",
+            "loc": {
+              "start": 6058,
+              "end": 6060
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6044,
+            "end": 6060
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Xhosa",
+            "block": true,
+            "loc": {
+              "start": 6064,
+              "end": 6075
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "xh",
+            "loc": {
+              "start": 6078,
+              "end": 6080
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6064,
+            "end": 6080
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Yiddish",
+            "block": true,
+            "loc": {
+              "start": 6084,
+              "end": 6097
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "yi",
+            "loc": {
+              "start": 6100,
+              "end": 6102
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6084,
+            "end": 6102
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Yoruba",
+            "block": true,
+            "loc": {
+              "start": 6106,
+              "end": 6118
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "yo",
+            "loc": {
+              "start": 6121,
+              "end": 6123
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6106,
+            "end": 6123
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Chinese",
+            "block": true,
+            "loc": {
+              "start": 6127,
+              "end": 6140
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "zh",
+            "loc": {
+              "start": 6143,
+              "end": 6145
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6127,
+            "end": 6145
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Simplified Chinese",
+            "block": true,
+            "loc": {
+              "start": 6149,
+              "end": 6173
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "zh_Hans",
+            "loc": {
+              "start": 6176,
+              "end": 6183
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6149,
+            "end": 6183
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Traditional Chinese",
+            "block": true,
+            "loc": {
+              "start": 6187,
+              "end": 6212
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "zh_Hant",
+            "loc": {
+              "start": 6215,
+              "end": 6222
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6187,
+            "end": 6222
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Zulu",
+            "block": true,
+            "loc": {
+              "start": 6226,
+              "end": 6236
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "zu",
+            "loc": {
+              "start": 6239,
+              "end": 6241
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6226,
+            "end": 6241
+          }
+        }
+      ],
+      "loc": {
+        "start": 2317,
+        "end": 6243
+      }
+    },
+    {
+      "kind": "EnumTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "LogicalOperator",
+        "loc": {
+          "start": 6250,
+          "end": 6265
+        }
+      },
+      "directives": [],
+      "values": [
+        {
+          "kind": "EnumValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "AND",
+            "loc": {
+              "start": 6270,
+              "end": 6273
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6270,
+            "end": 6273
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "OR",
+            "loc": {
+              "start": 6276,
+              "end": 6278
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6276,
+            "end": 6278
+          }
+        }
+      ],
+      "loc": {
+        "start": 6245,
+        "end": 6280
+      }
+    },
+    "",
+    "export class NameConflictError extends ErrorResult {\n  readonly __typename = 'NameConflictError';\n  readonly errorCode = 'NAME_CONFLICT_ERROR' as any;\n  readonly message = 'NAME_CONFLICT_ERROR';\n  constructor(\n  ) {\n    super();\n  }\n}",
+    "export class NativeAuthStrategyError extends ErrorResult {\n  readonly __typename = 'NativeAuthStrategyError';\n  readonly errorCode = 'NATIVE_AUTH_STRATEGY_ERROR' as any;\n  readonly message = 'NATIVE_AUTH_STRATEGY_ERROR';\n  constructor(\n  ) {\n    super();\n  }\n}",
+    "",
+    {
+      "kind": "InputObjectTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "NumberOperators",
+        "loc": {
+          "start": 6664,
+          "end": 6679
+        }
+      },
+      "directives": [],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "between",
+            "loc": {
+              "start": 6684,
+              "end": 6691
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "NumberRange",
+              "loc": {
+                "start": 6693,
+                "end": 6704
+              }
+            },
+            "loc": {
+              "start": 6693,
+              "end": 6704
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6684,
+            "end": 6704
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "eq",
+            "loc": {
+              "start": 6707,
+              "end": 6709
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Float",
+              "loc": {
+                "start": 6711,
+                "end": 6716
+              }
+            },
+            "loc": {
+              "start": 6711,
+              "end": 6716
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6707,
+            "end": 6716
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "gt",
+            "loc": {
+              "start": 6719,
+              "end": 6721
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Float",
+              "loc": {
+                "start": 6723,
+                "end": 6728
+              }
+            },
+            "loc": {
+              "start": 6723,
+              "end": 6728
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6719,
+            "end": 6728
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "gte",
+            "loc": {
+              "start": 6731,
+              "end": 6734
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Float",
+              "loc": {
+                "start": 6736,
+                "end": 6741
+              }
+            },
+            "loc": {
+              "start": 6736,
+              "end": 6741
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6731,
+            "end": 6741
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "lt",
+            "loc": {
+              "start": 6744,
+              "end": 6746
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Float",
+              "loc": {
+                "start": 6748,
+                "end": 6753
+              }
+            },
+            "loc": {
+              "start": 6748,
+              "end": 6753
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6744,
+            "end": 6753
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "lte",
+            "loc": {
+              "start": 6756,
+              "end": 6759
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Float",
+              "loc": {
+                "start": 6761,
+                "end": 6766
+              }
+            },
+            "loc": {
+              "start": 6761,
+              "end": 6766
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 6756,
+            "end": 6766
+          }
+        }
+      ],
+      "loc": {
+        "start": 6658,
+        "end": 6768
+      }
+    },
+    {
+      "kind": "InputObjectTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "NumberRange",
+        "loc": {
+          "start": 6776,
+          "end": 6787
+        }
+      },
+      "directives": [],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "end",
+            "loc": {
+              "start": 6792,
+              "end": 6795
+            }
+          },
+          "type": "Float",
+          "directives": [],
+          "loc": {
+            "start": 6792,
+            "end": 6803
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "start",
+            "loc": {
+              "start": 6806,
+              "end": 6811
+            }
+          },
+          "type": "Float",
+          "directives": [],
+          "loc": {
+            "start": 6806,
+            "end": 6819
+          }
+        }
+      ],
+      "loc": {
+        "start": 6770,
+        "end": 6821
+      }
+    },
+    "",
+    {
+      "kind": "EnumTypeDefinition",
+      "description": {
+        "kind": "StringValue",
+        "value": "@description\nPermissions for administrators and customers. Used to control access to\nGraphQL resolvers via the {@link Allow} decorator.\n\n@docsCategory common",
+        "block": true,
+        "loc": {
+          "start": 6889,
+          "end": 7054
+        }
+      },
+      "name": {
+        "kind": "Name",
+        "value": "Permission",
+        "loc": {
+          "start": 7060,
+          "end": 7070
+        }
+      },
+      "directives": [],
+      "values": [
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Authenticated 仅意味着用户已经登录",
+            "block": true,
+            "loc": {
+              "start": 7075,
+              "end": 7105
+            }
+          },
+          "na": "Name",
+          "value": "Authenticated",
+          "loc": {
+            "start": 7108,
+            "end": 7121
+          }
+        },
+        "directives"
+        :
+        [],
+        "loc"
+        :
+        {
+          "start": 7075,
+          "end": 7121
+        }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权限给 create Administrator",
+            "block": true,
+            "loc": {
+              "start": 7125,
+              "end": 7156
+            }
+          },
+          "na{"
+          kind
+          ":"
+          Name
+          ","
+          value
+          ":"
+          CreateAdministrator
+          ","
+          loc
+          ":{"
+          start
+          ":7159,"
+          end
+          ":7178}},"
+          directives
+          ":[],"
+          loc
+          ":{"
+          start
+          ":7125,"
+          end
+          ":7178}},{"
+          kind
+          ":"
+          EnumValueDefinition
+          ","
+          description
+          ":{"
+          kind
+          ":"
+          StringValue
+          ","
+          value
+          ":"
+          授权限给
+          create
+          Asset
+          ","
+          block
+          ":true,"
+          loc
+          ":{"
+          start
+          ":7182,"
+          end
+          ":7205}}me": {
+            "kind": "Name",
+            "value": "CreateAsset",
+            "loc": {
+              "start": 7208,
+              "end": 7219
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 7182,
+            "end": 7219
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权限给 create Assets, Collections",
+            "block": true,
+            "loc": {
+              "start": 7223,
+              "e7260}},"
+              name
+              ":{"
+              kind
+              ":"
+              Name
+              ","
+              value
+              ":"
+              CreateCatalog
+              ","
+              loc
+              ":{"
+              start
+              ":7263,"
+              end
+              ":7276}},"
+              directives
+              ":[],"
+              loc
+              ":{"
+              start
+              ":7223,"
+              end
+              ":7276}},{"
+              kind
+              ":"
+              EnumValueDefinition
+              ","
+              description
+              ":{"
+              kind
+              ":"
+              StringValue
+              ","
+              value
+              ":"
+              授权限给
+              create
+              System
+              &
+              GlobalSettings
+              ","
+              block
+              ":true,"
+              loc
+              ":art": 7280,
+              "end": 7321
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "CreateSettings",
+            "loc": {
+              "start": 7324,
+              "end": 7338
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 7280,
+            "end": 7338
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权限给 create System",
+            "block": true,
+            "loc": art
+            ":7342,"
+            end
+            ":7366}},"
+            name
+            ":{"
+            kind
+            ":"
+            Name
+            ","
+            value
+            ":"
+            CreateSystem
+            ","
+            loc
+            ":{"
+            start
+            ":7369,"
+            end
+            ":7381}},"
+            directives
+            ":[],"
+            loc
+            ":{"
+            start
+            ":7342,"
+            end
+            ":7381}},{"
+            kind
+            ":"
+            EnumValueDefinition
+            ","
+            description
+            ":{"
+            kind
+            ":"
+            StringValue
+            ","
+            value
+            ":"
+            授权限给
+            delete
+            Administrator
+            ","
+            block
+            ":true,": {
+              "start": 7385,
+              "end": 7416
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "DeleteAdministrator",
+            "loc": {
+              "start": 7419,
+              "end": 7438
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 7385,
+            "end": 7438
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权限给 delete Asset",
+            "block": true,
+            "loc": {
+              "start": 7442,
+              "end": 7465
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "DeleteAsset",
+            "loc": {
+              "start": 7468,
+              "end": 7479
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 7442,
+            "end": 7479
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权限给 delete Assets, Collectio"
+            block
+            ":true,"
+            loc
+            ":{"
+            start
+            ":7483,"
+            end
+            ":7520}},"
+            name
+            ":{"
+            kind
+            ":"
+            Name
+            ","
+            value
+            ":"
+            DeleteCatalog
+            ","
+            loc
+            ":{"
+            start
+            ":7523,"
+            end
+            ":7536}},"
+            directives
+            ":[],"
+            loc
+            ":{"
+            start
+            ":7483,"
+            end
+            ":7536}},{"
+            kind
+            ":"
+            EnumValueDefinition
+            ","
+            description
+            ":{"
+            kind
+            ":"
+            StringValue
+            ","
+            value
+            ":"
+            授权限给
+            delete
+            SysteGlobalSettings
+            ","
+            block
+            ":true,"
+            loc
+            ":{"
+            start
+            ":7540,"
+            end
+            ":7581}},"
+            name
+            ":{"
+            kind
+            ":"
+            Name
+            ","
+            value
+            ":"
+            DeleteSettings
+            ","
+            loc
+            ":{"
+            start
+            ":7584,"
+            end
+            ":7598}},"
+            directives
+            ":[],"
+            loc
+            ":{"
+            start
+            ":7540,"
+            end
+            ":7598}},{"
+            kind
+            ":"
+            EnumValueDefinition
+            ","
+            description
+            ":{"
+            kind
+            ":"
+            StringValue
+            ","
+            value
+            ":"
+            授权
+            delete
+            System
+            ","
+            block
+            ":true,"
+            loc
+            ":{"
+            start
+            ":7602,"
+            end
+            ":7626}},"
+            name
+            ":{"
+            kind
+            ":"
+            Name
+            ","
+            value
+            ":"
+            DeleteSystem
+            ","
+            loc
+            ":{"
+            start
+            ":7629,"
+            end
+            ":7641}},"
+            directives
+            ":[],"
+            loc
+            ":{"
+            start
+            ":7602,"
+            end
+            ":7641}},{"
+            kind
+            ":"
+            EnumValueDefinition
+            ","
+            description
+            ":{"
+            kind
+            ":"
+            StringValue
+            ","
+            value
+            ":"
+            Owner
+            指用户拥有该实体
+            ，
+            例如客户自己的订单
+            ","
+            block
+            ":true,"
+            loc
+            ":{"
+            start
+            ":7645,"
+            end
+            ":7675}},"
+            name
+            "alue": "Owner",
+            "loc": {
+              "start": 7678,
+              "end": 7683
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 7645,
+            "end": 7683
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Public 表任何未经身份验证的用户都可能执行该操作",
+            "block": true,
+            "loc": {
+              "start": 7687,
+              "end": 7721
+            }
+          },
+          "namvalue": "Public",
+          "loc": {
+            "start": 7724,
+            "end": 7730
+          }
+        },
+        "directives"
+        :
+        [],
+        "loc"
+        :
+        {
+          "start": 7687,
+          "end": 7730
+        }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权限给ad Administrator",
+            "block": true,
+            "loc": {
+              "start": 7734,
+              "end": 7763
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ReadAdministrator",
+            "loc": {
+              "start": 7766,
+              "end": 7783
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 7734,
+            "end": 7783
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权限给 read Asset",
+            "block": true,
+            "loc": {
+              "start": 7787,
+              "end": 7808
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "ReadAsset",
+            "loc": {
+              "start": 7811,
+              "end": 7820
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 7787,
+            "end": 7820
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权给 read Assets, Collections",
+            "block": true,
+            "loc": {
+              "start": 7824,
+              "end": 7859
+            }
+          },
+          "name": {
+            "kind": Name
+            ","
+            value
+            ":"
+            ReadCatalog
+            ","
+            loc
+            ":{"
+            start
+            ":7862,"
+            end
+            ":7873}},"
+            directives
+            ":[],"
+            loc
+            ":{"
+            start
+            ":7824,"
+            end
+            ":7873}},{"
+            kind
+            ":"
+            EnumValueDefinition
+            ","
+            description
+            ":{"
+            kind
+            ":"
+            StringValue
+            ","
+            value
+            ":"
+            授权限给
+            read
+            System
+            &
+            GlobalSettings
+            ","
+            block
+            ":true,"
+            loc
+            ":{"
+            start
+            ":7877,"
+            end
+            ":7916}},e": {
+              "kind": "Name",
+              "value": "ReadSettings",
+              "loc": {
+                "start": 7919,
+                "end": 7931
+              }
+            },
+            "directives": [],
+            "loc": {
+              "start": 7877,
+              "end": 7931
+            }
+          },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权限给 read System",
+            "block": true,
+            "loc": {
+              "start": 7935,
+              "end": 7957
+            }
+          },
+          "nam"
+          kind
+          ":"
+          Name
+          ","
+          value
+          ":"
+          ReadSystem
+          ","
+          loc
+          ":{"
+          start
+          ":7960,"
+          end
+          ":7970}},"
+          directives
+          ":[],"
+          loc
+          ":{"
+          start
+          ":7935,"
+          end
+          ":7970}},{"
+          kind
+          ":"
+          EnumValueDefinition
+          ","
+          description
+          ":{"
+          kind
+          ":"
+          StringValue
+          ","
+          value
+          ":"
+          SuperAdmin
+          可以不受限制地进入所有操作
+          ","
+          block
+          ":true,"
+          loc
+          ":{"
+          start
+          ":7974,"
+          end
+          "::{"
+          kind
+          ":"
+          Name
+          ","
+          value
+          ":"
+          SuperAdmin
+          ","
+          loc
+          ":{"
+          start
+          ":8007,"
+          end
+          ":8017}},"
+          directives
+          ":[],"
+          loc
+          ":{"
+          start
+          ":7974,"
+          end
+          ":8017}},{"
+          kind
+          ":"
+          EnumValueDefinition
+          ","
+          description
+          ":{"
+          kind
+          ":"
+          StringValue
+          ","
+          value
+          ":"
+          授权限给
+          update
+          Administrator
+          ","
+          block
+          ":true,"
+          loc
+          ":{"
+          start
+          ":8021,"
+          end
+          ":8052}}me": {
+            "kind": "Name",
+            "value": "UpdateAdministrator",
+            "loc": {
+              "start": 8055,
+              "end": 8074
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8021,
+            "end": 8074
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权限给 update Asset",
+            "block": true,
+            "loc": {
+              "start": 8078,
+              "end": 81,
+              "name": {
+                "kind": "Name",
+                "value": "UpdateAsset",
+                "loc": {
+                  "start": 8104,
+                  "end": 8115
+                }
+              },
+              "directives": [],
+              "loc": {
+                "start": 8078,
+                "end": 8115
+              }
+            },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权限给 update Assets, Collections",
+            "block": true,
+            "loc": {
+              "start": 811nd
+              ":8156}},"
+              name
+              ":{"
+              kind
+              ":"
+              Name
+              ","
+              value
+              ":"
+              UpdateCatalog
+              ","
+              loc
+              ":{"
+              start
+              ":8159,"
+              end
+              ":8172}},"
+              directives
+              ":[],"
+              loc
+              ":{"
+              start
+              ":8119,"
+              end
+              ":8172}},{"
+              kind
+              ":"
+              EnumValueDefinition
+              ","
+              description
+              ":{"
+              kind
+              ":"
+              StringValue
+              ","
+              value
+              ":"
+              授权更新
+              GlobalSettings
+              ","
+              block
+              ":true,"
+              loc
+              ":{"
+              start
+              ":817nd": 8201
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "UpdateGlobalSettings",
+            "loc": {
+              "start": 8204,
+              "end": 8224
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8176,
+            "end": 8224
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权限给 update System & GlobalSettings",
+            "block":,
+            "loc": {
+              "start": 8228,
+              "end": 8269
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "UpdateSettings",
+            "loc": {
+              "start": 8272,
+              "end": 8286
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8228,
+            "end": 8286
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "授权限给 update System",
+            "block":,
+            "loc": {
+              "start": 8290,
+              "end": 8314
+            }
+          },
+          "name": {
+            "kind": "Name",
+            "value": "UpdateSystem",
+            "loc": {
+              "start": 8317,
+              "end": 8329
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8290,
+            "end": 8329
+          }
+        }
+      ],
+      "loc": {
+        "start": 6889,
+        "end": 8331
+      }
+    },
+    "export class PhoneConflictError extends ErrorResult {\n  readonly __typename = 'PhoneConflictError';\n  readonly errorCode = 'PHONE_CONFLICT_ERROR' as any;\n  readonly message = 'PHONE_CONFLICT_ERROR';\n  constructor(\n  ) {\n    super();\n  }\n}",
+    "",
+    "",
+    "",
+    {
+      "kind": "InputObjectTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "SearchInput",
+        "loc": {
+          "start": 8741,
+          "end": 8752
+        }
+      },
+      "directives": [],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "skip",
+            "loc": {
+              "start": 8757,
+              "end": 8761
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Int",
+              "loc": {
+                "start": 8763,
+                "end": 8766
+              }
+            },
+            "loc": {
+              "start": 8763,
+              "end": 8766
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8757,
+            "end": 8766
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "sort",
+            "loc": {
+              "start": 8769,
+              "end": 8773
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "SearchResultSortParameter",
+              "loc": {
+                "start": 8775,
+                "end": 8800
+              }
+            },
+            "loc": {
+              "start": 8775,
+              "end": 8800
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8769,
+            "end": 8800
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "take",
+            "loc": {
+              "start": 8803,
+              "end": 8807
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Int",
+              "loc": {
+                "start": 8809,
+                "end": 8812
+              }
+            },
+            "loc": {
+              "start": 8809,
+              "end": 8812
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8803,
+            "end": 8812
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "term",
+            "loc": {
+              "start": 8815,
+              "end": 8819
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String",
+              "loc": {
+                "start": 8821,
+                "end": 8827
+              }
+            },
+            "loc": {
+              "start": 8821,
+              "end": 8827
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8815,
+            "end": 8827
+          }
+        }
+      ],
+      "loc": {
+        "start": 8735,
+        "end": 8829
+      }
+    },
+    {
+      "kind": "InputObjectTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "SearchResultSortParameter",
+        "loc": {
+          "start": 8837,
+          "end": 8862
+        }
+      },
+      "directives": [],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "name",
+            "loc": {
+              "start": 8867,
+              "end": 8871
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "SortOrder",
+              "loc": {
+                "start": 8873,
+                "end": 8882
+              }
+            },
+            "loc": {
+              "start": 8873,
+              "end": 8882
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8867,
+            "end": 8882
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "price",
+            "loc": {
+              "start": 8885,
+              "end": 8890
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "SortOrder",
+              "loc": {
+                "start": 8892,
+                "end": 8901
+              }
+            },
+            "loc": {
+              "start": 8892,
+              "end": 8901
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8885,
+            "end": 8901
+          }
+        }
+      ],
+      "loc": {
+        "start": 8831,
+        "end": 8903
+      }
+    },
+    {
+      "kind": "EnumTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "SortOrder",
+        "loc": {
+          "start": 8910,
+          "end": 8919
+        }
+      },
+      "directives": [],
+      "values": [
+        {
+          "kind": "EnumValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "ASC",
+            "loc": {
+              "start": 8924,
+              "end": 8927
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8924,
+            "end": 8927
+          }
+        },
+        {
+          "kind": "EnumValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "DESC",
+            "loc": {
+              "start": 8930,
+              "end": 8934
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8930,
+            "end": 8934
+          }
+        }
+      ],
+      "loc": {
+        "start": 8905,
+        "end": 8936
+      }
+    },
+    {
+      "kind": "InputObjectTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "StringOperators",
+        "loc": {
+          "start": 8944,
+          "end": 8959
+        }
+      },
+      "directives": [],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "contains",
+            "loc": {
+              "start": 8964,
+              "end": 8972
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String",
+              "loc": {
+                "start": 8974,
+                "end": 8980
+              }
+            },
+            "loc": {
+              "start": 8974,
+              "end": 8980
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8964,
+            "end": 8980
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "eq",
+            "loc": {
+              "start": 8983,
+              "end": 8985
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String",
+              "loc": {
+                "start": 8987,
+                "end": 8993
+              }
+            },
+            "loc": {
+              "start": 8987,
+              "end": 8993
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8983,
+            "end": 8993
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "in",
+            "loc": {
+              "start": 8996,
+              "end": 8998
+            }
+          },
+          "type": {
+            "kind": "ListType",
+            "type": "String",
+            "loc": {
+              "start": 9000,
+              "end": 9009
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 8996,
+            "end": 9009
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "notContains",
+            "loc": {
+              "start": 9012,
+              "end": 9023
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String",
+              "loc": {
+                "start": 9025,
+                "end": 9031
+              }
+            },
+            "loc": {
+              "start": 9025,
+              "end": 9031
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 9012,
+            "end": 9031
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "notEq",
+            "loc": {
+              "start": 9034,
+              "end": 9039
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String",
+              "loc": {
+                "start": 9041,
+                "end": 9047
+              }
+            },
+            "loc": {
+              "start": 9041,
+              "end": 9047
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 9034,
+            "end": 9047
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "notIn",
+            "loc": {
+              "start": 9050,
+              "end": 9055
+            }
+          },
+          "type": {
+            "kind": "ListType",
+            "type": "String",
+            "loc": {
+              "start": 9057,
+              "end": 9066
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 9050,
+            "end": 9066
+          }
+        },
+        {
+          "kind": "InputValueDefinition",
+          "name": {
+            "kind": "Name",
+            "value": "regex",
+            "loc": {
+              "start": 9069,
+              "end": 9074
+            }
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String",
+              "loc": {
+                "start": 9076,
+                "end": 9082
+              }
+            },
+            "loc": {
+              "start": 9076,
+              "end": 9082
+            }
+          },
+          "directives": [],
+          "loc": {
+            "start": 9069,
+            "end": 9082
+          }
+        }
+      ],
+      "loc": {
+        "start": 8938,
+        "end": 9084
+      }
+    },
+    "",
+    {
+      "kind": "ScalarTypeDefinition",
+      "description": {
+        "kind": "StringValue",
+        "value": "The `Upload` scalar type represents a file upload.",
+        "block": true,
+        "loc": {
+          "start": 9152,
+          "end": 9208
+        }
+      },
+      "name": {
+        "kind": "Name",
+        "value": "Upload",
+        "loc": {
+          "start": 9216,
+          "end": 9222
+        }
+      },
+      "directives": [],
+      "loc": {
+        "start": 9152,
+        "end": 9222
+      }
+    },
+    ""
+  ],
+  "loc": {
+    "start": 0,
+    "end": 9442
+  }
+}

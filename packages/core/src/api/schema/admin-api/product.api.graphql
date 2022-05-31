@@ -1,0 +1,60 @@
+type Query {
+    "查询全部作品"
+    products(options: ProductListOptions): ProductList
+}
+
+type Mutation {
+    "创建一个作品"
+    createProduct(input: CreateProductInput!): Product
+}
+
+input ProductListOptions
+
+"创建作品内容"
+input CreateProductInput {
+    "作品名"
+    title: String
+    "作品商品类型"
+    type: ProductType
+    "特色图"
+    featuredId: ID
+    "作品相关资产"
+    assetIds: [ID!]
+    "作品公开内容、内容描述等"
+    publicly: JSON
+    "作品内容"
+    content: JSON
+    "作品发布状态"
+    state: ProductState
+    "作品配置"
+    setting: ProductSettingInput
+}
+
+input DiffPriceOptionInput {
+    "价格的版本名称"
+    versionName: String!
+    "售价"
+    price: Float!
+    "定价的信息描述"
+    info: String
+}
+
+"作品配置输入"
+input ProductSettingInput {
+    "作品定价"
+    price: Float
+    "作品差异化定价"
+    diffPrice: [DiffPriceOptionInput!]
+    "开启订阅制的配置"
+    subscription: ProductSubscriptionPeriod
+    "作品的保护机制配置"
+    protect: [ProductSettingInput!]
+}
+
+"作品的保护机制配置"
+input ProductSettingInput {
+    "保护方法"
+    method: String!
+    "保护类型"
+    type: String!
+}

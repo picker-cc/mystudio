@@ -1,0 +1,36 @@
+
+{%- set issueBodyTemplate -%}Hello there, I spotted an issue on https://pusher.com{{ page.url }}{%- endset -%}
+
+{% extends "./base.njk" %}
+
+{% block header %}
+  {% include "partials/top-nav.njk" %}
+{% endblock %}
+
+{% block nav %}
+  {% include "partials/side-nav.njk" %}
+{% endblock %}
+
+{% block container %}
+  <section class="flex-ns flex-wrap flex-nowrap-l items-start justify-around relative mw10 mt6-ns mh5">
+    <article class="mw7 f7 lh-copy nested-img nested-links nested-code nested-headlines nested-copy-letter-spacing nested-measure-wide nested-list-spacing mh5-l basis-70-ns">
+
+      {{ super() }}
+
+    </article>
+    {% set TOC = content | toc | replace("∞", "") | safe %}
+    <div class="measure sticky basis-30-ns flex-grow-1-ns" style="top: 88px;">
+      {% if not hideTOC and TOC != "" %}
+        <div class="mt5 bg-snow-light ba b--smoke-light pa4 br2 nested-copy-seperator nested-code">
+          <header class="mb4 lh-title bb b--smoke">
+            <h2 class="f4 fw5 ma0">Contents</h2>
+          </header>
+          {{ TOC }}
+        </div>
+      {% endif %}
+
+      <p class="measure mt4 f6 ph4 slate">Spotted something that isn’t quite right? <a class="link dragonfruit hover-dragonfruit-light underline" href="https://github.com/pusher/docs/issues/new?title={{ title | urlencode }}page&amp;body={{ issueBodyTemplate | urlencode }}" target="_blank" rel="noreferrer">Create an issue</a> on&nbsp;GitHub</a>.</p>
+    </div>
+  </section>
+
+{% endblock %}
