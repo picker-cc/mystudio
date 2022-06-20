@@ -1,9 +1,10 @@
-import {DeepPartial} from '@picker-cc/common/lib/shared-types';
+import {DeepPartial, ID} from '@picker-cc/common/lib/shared-types';
 import {Entity, Index, ManyToOne, Property} from '@mikro-orm/core';
 
 import {PickerMongoEntity} from '../base/mongo-base.entity';
 import {User} from '../user/user.entity';
 import {SessionType} from "@picker-cc/common/lib/generated-types";
+import { Order } from '../order/order.entity';
 
 /**
  * @description
@@ -28,9 +29,12 @@ export class Session extends PickerMongoEntity {
     @Property()
     invalidated: boolean;
 
-    @Index()
-    @Property()
-    identifier: string;
+    // @EntityId({ nullable: true })
+    @Property({ nullable: true})
+    activeOrderId?: ID;
+
+    @ManyToOne(() => Order, { nullable: true})
+    activeOrder: Order | null;
 
     @ManyToOne(() => User)
     user: User;

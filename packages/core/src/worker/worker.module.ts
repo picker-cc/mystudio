@@ -3,6 +3,7 @@ import { Module, OnApplicationShutdown } from '@nestjs/common';
 import { ConfigModule } from '../config/config.module';
 import { Logger } from '../config/logger/picker-logger';
 import { ConnectionModule } from '../connection/connection.module';
+import { I18nModule } from '../i18n/i18n.module';
 // import { I18nModule } from '../i18n/i18n.module';
 import { PluginModule } from '../plugin/plugin.module';
 import { ProcessContextModule } from '../process-context/process-context.module';
@@ -19,7 +20,7 @@ import { WorkerHealthService } from './worker-health.service';
     imports: [
         ProcessContextModule,
         ConfigModule,
-        // I18nModule,
+        I18nModule,
         PluginModule.forRoot(),
         ConnectionModule.forRoot(),
         ServiceModule,

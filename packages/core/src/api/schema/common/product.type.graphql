@@ -3,13 +3,15 @@ type Product implements Node {
     id: ID!
     createdAt: DateTime!
     updatedAt: DateTime!
-    deletedAt: DateTime
+    languageCode: LanguageCode!
+    #    deletedAt: DateTime
     "作品标题"
     title: String
 #    "作品名称"
 #    name: String!
     "作品标识"
     slug: String!
+    description: String!
     "作品是否启用"
     enabled: Boolean
     "作品类型"
@@ -20,8 +22,8 @@ type Product implements Node {
     featured: Asset
     "作品相关资产"
     assets: [Asset]
-    "作品公开内容、内容描述等"
-    publicly: JSON
+#    "作品公开内容、内容描述等"
+#    publicly: JSON
     "作品内容"
     content: JSON!
     "作品发布状态"

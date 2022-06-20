@@ -19,16 +19,21 @@ import {ID, PaginatedList} from "@picker-cc/common/lib/shared-types";
 import {patchEntity} from "../helpers/utils/patch-entity";
 import {assertFound, ListQueryOptions} from "../../common";
 import {Term} from "../../entity/taxonomy/term.entity";
+import {Injectable} from "@nestjs/common";
+import {MikroORM, UseRequestContext} from "@mikro-orm/core";
 
+@Injectable()
 export class RoleService {
     constructor(
         private em: EntityManager,
+        private readonly orm: MikroORM,
         private listQueryBuilder: ListQueryBuilder,
         private configService: ConfigService,
         private eventBus: EventBus,
         private readonly authzService: AuthZRBACService,
     ) {
     }
+    @UseRequestContext()
     async initRoles() {
         await this.ensureSuperAdminRoleExists();
         // await this.ensureCustomerRoleExists();
@@ -160,11 +165,12 @@ export class RoleService {
      * 确保 SuperAdmin 角色存在并且拥有所有可能的权限
      */
     private async ensureSuperAdminRoleExists() {
+
         const assignablePermissions = this.getAllAssignablePermissions();
         try {
             const superAdminRole = await this.getSuperAdminRole();
             superAdminRole.permissions = assignablePermissions;
-            await this.em.persistAndFlush(superAdminRole)
+            await this.orm.em.persistAndFlush(superAdminRole)
         } catch (err) {
             await this.createRoleForStudio(
                 RequestContext.empty(),

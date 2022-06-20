@@ -1,0 +1,195 @@
+type Order implements Node {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    """
+    下单的日期和时间，即客户完成结账，下单不再"活动"
+    """
+    orderPlacedAt: DateTime
+    "一个唯一的订单编码"
+    code: String!
+    state: String!
+    "只要付款流程尚未完成，订单就处于活动状态"
+    active: Boolean!
+    customer: Customer
+    shippingAddress: OrderAddress
+    billingAddress: OrderAddress
+#    lines: [OrderLine!]!
+    """
+    附加费用是对订单总额的任意修改，两者都不是产品变量或因使用促销而产生的折扣。
+    例如，基于客户互动的一次性折扣，或基于付款的附加费方法。
+    """
+    surcharges: [Surcharge!]!
+    discounts: [Discount!]!
+    "应用于该订单的所有优惠券代码的数组"
+    couponCodes: [String!]!
+    "该订单适用于促销。只有在支付过程完成后才会出现"
+    promotions: [Promotion!]!
+    "支付方法"
+    payments: [Payment!]
+    fulfillments: [Fulfillment!]
+    totalQuantity: Int!
+    """
+    subTotal 是 Order 中所有 orderline 的总和。这个数字还包括在 OrderItems 中按比例（按比例分布）分配的任何订单级折扣。
+    要获得所有不占比例折扣的 OrderLine 的总和，使用 `OrderLine.discountedLinePrice` 值。
+    """
+    subTotal: Int!
+    "与小计相同，但包括税金"
+    subTotalWithTax: Int!
+    "货币代码"
+    currencyCode: CurrencyCode!
+    shippingLines: [ShippingLine!]!
+    shipping: Int!
+    shippingWithTax: Int!
+    """
+    等于 subTotal 加上 shipping
+    """
+    total: Int!
+    """
+    最终应付金额。等于 subTotalWithTax 加上 shippingWithTax
+    """
+    totalWithTax: Int!
+    """
+    税种摘要
+    """
+    taxSummary: [OrderTaxSummary!]!
+    history(options: HistoryEntryListOptions): HistoryEntryList!
+}
+
+"""
+订单适用的税种摘要，按分组税率
+"""
+type OrderTaxSummary {
+    "A description of this tax"
+    description: String!
+    "以百分比计算的税率"
+    taxRate: Float!
+    "适用本税率的订单项目总净价格"
+    taxBase: Int!
+    "订单所适用的总税额按本税率计算"
+    taxTotal: Int!
+}
+
+type OrderAddress {
+    fullName: String
+    company: String
+    streetLine1: String
+    streetLine2: String
+    city: String
+    province: String
+    postalCode: String
+    country: String
+    countryCode: String
+    phoneNumber: String
+}
+
+type OrderList implements PaginatedList {
+    items: [Order!]!
+    totalItems: Int!
+}
+
+type ShippingLine {
+    shippingMethod: ShippingMethod!
+    price: Int!
+    priceWithTax: Int!
+    discountedPrice: Int!
+    discountedPriceWithTax: Int!
+    discounts: [Discount!]!
+}
+
+type Discount {
+    adjustmentSource: String!
+    type: AdjustmentType!
+    description: String!
+    amount: Int!
+    amountWithTax: Int!
+}
+
+type OrderItem implements Node {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    cancelled: Boolean!
+    "单价，不含税和折扣"
+    unitPrice: Int!
+    "单价，含税但不含折扣"
+    unitPriceWithTax: Int!
+    """
+    单价含折扣，不含税。
+
+    如果应用了订单级折扣，这将不是实际的应税单价(参见`proratedUnitPrice`)，
+    但通常是显示给客户的正确价格，以避免对分布式订单级折扣的内部处理造成混淆。
+    """
+    discountedUnitPrice: Int!
+    "单价（含折扣和税）"
+    discountedUnitPriceWithTax: Int!
+    """
+    The actual unit price, taking into account both item discounts _and_ prorated (proportionally-distributed)
+    Order-level discounts. This value is the true economic value of the OrderItem, and is used in tax
+    and refund calculations.
+    考虑商品折扣和按比例分配的实际单价。
+    Order-level折扣。该值是OrderItem的真实经济值，用于税收和退款计算。
+    """
+    proratedUnitPrice: Int!
+    "按比例计算的单价(含税)"
+    proratedUnitPriceWithTax: Int!
+    unitTax: Int!
+    taxRate: Float!
+    adjustments: [Adjustment!]!
+    taxLines: [TaxLine!]!
+    fulfillment: Fulfillment
+    refundId: ID
+}
+
+
+type Payment implements Node {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    method: String!
+    amount: Int!
+    state: String!
+    transactionId: String
+    errorMessage: String
+    refunds: [Refund!]!
+    metadata: JSON
+}
+
+type Refund implements Node {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    items: Int!
+    shipping: Int!
+    adjustment: Int!
+    total: Int!
+    method: String
+    state: String!
+    transactionId: String
+    reason: String
+    orderItems: [OrderItem!]!
+    paymentId: ID!
+    metadata: JSON
+}
+
+type Fulfillment implements Node {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    orderItems: [OrderItem!]!
+    state: String!
+    method: String!
+    trackingCode: String
+}
+
+type Surcharge implements Node {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    description: String!
+    sku: String
+    taxLines: [TaxLine!]!
+    price: Int!
+    priceWithTax: Int!
+    taxRate: Float!
+}

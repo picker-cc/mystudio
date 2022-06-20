@@ -6,7 +6,7 @@ import path from 'path';
 const SCHEMAS_GLOB = [ '../src/**/*.graphql' ];
 // const SCHEMAS_GLOB = [ '../src/schema/**/*.graphql' ];
 const MESSAGES_GLOB = [ '../src/i18n/messages/**/*' ];
-const CONF_GLOB = [ '../src/**/*.conf' ]
+const CONF_GLOB = [ '../src/service/model.conf' ]
 
 function copySchemas() {
     return src(SCHEMAS_GLOB).pipe(dest('../dist'));
@@ -14,7 +14,7 @@ function copySchemas() {
 }
 
 function copyConfigs() {
-    return src(CONF_GLOB).pipe(dest('../dist/api/'))
+    return src(CONF_GLOB).pipe(dest('../dist/service'))
 }
 
 function copyI18nMessages() {

@@ -1,59 +1,83 @@
 import {
     AuthenticationResult as AdminAuthenticationResult,
-    AuthenticationResult as CsmAuthenticationResult,
-    CurrentUser,
-    DomainEnum,
+    AuthenticationResult as StudioAuthenticationResult,
+    CurrentUser, MutationAuthenticateArgs,
     MutationLoginArgs,
-    Permission,
-    UserRoleType,
+    Permission, Success,
 } from '@picker-cc/common/lib/generated-types';
-import { Request, Response } from 'express';
-
-import { CasbinService } from '../../casbin/casbin.service';
-import { ForbiddenError, InvalidCredentialsError, isGraphQlErrorResult } from '../../common';
-import { NotVerifiedError } from '../../common/error/generated-graphql-csm-errors';
-import { ConfigService } from '../../config';
-import { User } from '../../entity/user/user.entity';
-import { AdministratorService, AssetService, AuthService, UserService } from '../../service';
-import { extractSessionToken } from '../common/extract-auth-token';
-import { ApiType } from '../common/get-api-type';
-import { RequestContext } from '../common/request-context';
-import { setAuthToken } from '../common/set-auth-token';
+import {Request, Response} from 'express';
+import {AdministratorService} from '../../../service/services/administrator.service';
+import {AuthService} from '../../../service/services/auth.service';
+import {UserService} from '../../../service/services/user.service';
+import {ConfigService, Logger, LogLevel} from "../../../config";
+import {AssetService} from '../../../service/services/asset.service';
+import {RequestContext} from "../../common/request-context";
+import {ApiType} from "../../common/get-api-type";
+import {InvalidCredentialsError, NotVerifiedError} from "../../../common/error/generated-graphql-admin-errors";
+import {extractSessionToken} from "../../common/extract-auth-token";
+import {NATIVE_AUTH_STRATEGY_NAME} from '../../../config/auth/native-authentication-strategy';
+import {ForbiddenError, isGraphQlErrorResult} from "../../../common";
+import {setSessionToken} from "../../common/set-session-token";
+import {User} from "../../../entity";
+import {AuthZRBACService} from "nest-authz";
+import {
+    NativeAuthStrategyError as AdminNativeAuthStrategyError
+} from '../../../common/error/generated-graphql-admin-errors';
+import {
+    NativeAuthStrategyError as StudioNativeAuthStrategyError
+} from '../../../common/error/generated-graphql-studio-errors';
+import {unique} from '@picker-cc/common/lib/unique';
+import {getUserPermissions} from "../../../service/helpers/get-user-permissions";
 
 export class BaseAuthResolver {
+    protected readonly nativeAuthStrategyIsConfigured: boolean;
+
     constructor(
         protected authService: AuthService,
+        protected authzService: AuthZRBACService,
         protected userService: UserService,
         protected administratorService: AdministratorService,
         protected configService: ConfigService,
-        protected casbinService: CasbinService,
         protected assetService: AssetService,
-    ) {}
+    ) {
+        this.nativeAuthStrategyIsConfigured =
+            !!this.configService.authOptions.studioAuthenticationStrategy.find(
+                strategy => strategy.name === NATIVE_AUTH_STRATEGY_NAME,
+            );
+    }
 
     async baseLogin(
         args: MutationLoginArgs,
         ctx: RequestContext,
         req: Request,
         res: Response,
-        apiType: ApiType,
-    ): Promise<AdminAuthenticationResult | CsmAuthenticationResult | NotVerifiedError> {
-        return await this.authenticateAndCreateSession(ctx, args, req, res, apiType);
+    ): Promise<AdminAuthenticationResult | StudioAuthenticationResult | NotVerifiedError> {
+        return await this.authenticateAndCreateSession(
+            ctx,
+            {
+                input: {[NATIVE_AUTH_STRATEGY_NAME]: args},
+                rememberMe: args.rememberMe,
+            },
+            req,
+            res,
+        );
     }
 
-    async logout(ctx: RequestContext, req: Request, res: Response): Promise<boolean> {
+    async logout(ctx: RequestContext, req: Request, res: Response): Promise<Success> {
         const token = extractSessionToken(req, this.configService.authOptions.tokenMethod);
         if (!token) {
-            return false;
+            return {success: false};
         }
-        await this.authService.deleteSessionByToken(ctx, token);
-        setAuthToken({
+        await this.authService.destroyAuthenticatedSession(ctx, token);
+
+        setSessionToken({
             req,
             res,
             authOptions: this.configService.authOptions,
             rememberMe: false,
-            authToken: '',
-        });
-        return true;
+            sessionToken: '',
+        })
+        return {success: true}
     }
 
     /**
@@ -67,39 +91,41 @@ export class BaseAuthResolver {
         if (apiType === 'admin') {
             const administrator = await this.administratorService.findOneByUserId(ctx, userId);
             if (!administrator) {
-                throw new ForbiddenError();
+                throw new ForbiddenError(LogLevel.Verbose);
             }
         }
         const user = userId && (await this.userService.getUserById(userId));
-        const casbinDomain = apiType === 'csm' ? DomainEnum.DOMAIN_CSM : DomainEnum.DOMAIN_ADMIN;
-        const roles = await this.casbinService.getRolesForUser(user.id.toString(), casbinDomain);
-        const findPermissions = await this.casbinService.getPermissionsForUser(user.id.toString());
-        const permissions: Permission[] = [];
-        if (findPermissions.length > 0) {
-            for (let i = 1; i < findPermissions[0].length; i++) {
-                const permissionKey = findPermissions[0][i];
-                // permissions.push(findPermissions[i])
-                if (Permission[permissionKey]) {
-                    permissions.push(Permission[permissionKey]);
-                }
-            }
-        }
+        // const casbinDomain = apiType === 'csm' ? DomainEnum.DOMAIN_CSM : DomainEnum.DOMAIN_ADMIN;
+        // const roles = await this.casbinService.getRolesForUser(user.id.toString(), casbinDomain);
+        // const roles = await this.authzService.getRolesForUser(user.id.toString());
+        // const findPermissions = await this.authzService.getPermissionsForUser(user.id.toString());
+        // const findPermissions = await this.casbinService.getPermissionsForUser(user.id.toString());
+        // const permissions: Permission[] = [];
+        //
+        // if (findPermissions.length > 0) {
+        //     for (let i = 1; i < findPermissions[0].length; i++) {
+        //         const permissionKey = findPermissions[0][i];
+        //         // permissions.push(findPermissions[i])
+        //         if (Permission[permissionKey]) {
+        //             permissions.push(Permission[permissionKey]);
+        //         }
+        //     }
+        // }
         // console.log(permissions)
-        if (roles.length > 0) {
-            user.roles = [];
-            roles.forEach(role => {
-                user.roles.push({
-                    code: UserRoleType[role] || role,
-                    permissions,
-                    description: '',
-                });
-            });
-        }
+        // if (roles.length > 0) {
+        //     user.roles = [];
+        //     roles.forEach(role => {
+        //         user.roles.push({
+        //             code: UserRoleType[role] || role,
+        //             permissions,
+        //             description: '',
+        //         });
+        //     });
+        // }
         if (user.featured?.id) {
             user.featured = await this.assetService.findOne(ctx, user.featured.id);
         }
-        // return user ? this.publiclyAccessibleUser(ctx.session.user, ctx.session.token) : null;
-        return user;
+        return user ? this.publiclyAccessibleUser(user, ctx.session.token) : null;
     }
 
     /**
@@ -107,13 +133,13 @@ export class BaseAuthResolver {
      */
     protected async authenticateAndCreateSession(
         ctx: RequestContext,
-        args: MutationLoginArgs,
+        args: MutationAuthenticateArgs,
         req: Request,
         res: Response,
-        apiType?: ApiType,
-    ): Promise<AdminAuthenticationResult | InvalidCredentialsError | NotVerifiedError> {
-        const session = await this.authService.authenticate(ctx, apiType, args.username, args.password);
-
+    ): Promise<AdminAuthenticationResult | StudioAuthenticationResult | NotVerifiedError> {
+        const [ method, data ] = Object.entries(args.input)[0];
+        const {apiType} = ctx;
+        const session = await this.authService.authenticate(ctx, apiType, method, data);
         if (isGraphQlErrorResult(session)) {
             return session;
         }
@@ -121,28 +147,26 @@ export class BaseAuthResolver {
             const administrator = await this.administratorService.findOneByUserId(ctx, session.user.id);
             // TODO 当前管理员仅允许 admin 域用户，csm 域管理用户待定
             // console.log(administrator)
-            if (!administrator || administrator.domain !== DomainEnum.DOMAIN_ADMIN) {
-                return new InvalidCredentialsError('');
+            // if (!administrator || administrator.domain !== DomainEnum.DOMAIN_ADMIN) {
+            //     return new InvalidCredentialsError('');
+            // }
+            if (apiType && apiType === 'admin') {
+                const administrator = await this.administratorService.findOneByUserId(ctx, session.user.id);
+                if (!administrator) {
+                    return new InvalidCredentialsError('');
+                }
             }
         }
 
-        setAuthToken({
+        setSessionToken({
             req,
             res,
             authOptions: this.configService.authOptions,
             rememberMe: args.rememberMe || false,
-            authToken: session.token,
-        });
+            sessionToken: session.token,
+        })
+
         return this.publiclyAccessibleUser(session.user, session.token);
-        // return {
-        //   // user: {
-        //   //   id: session.user.id,
-        //   //   identifier: session.user.identifier,
-        //   //   token: session.token,
-        //   //   permissions: [Permission.SuperAdmin],
-        //   // },
-        //   user: this.publiclyAccessibleUser(session.user),
-        // };
     }
 
     // @Query()
@@ -182,14 +206,35 @@ export class BaseAuthResolver {
     }
 
     /**
-     * Exposes a subset of the User properties which we want to expose to the public API.
+     * 公开我们想要公开给公共API的User属性的子集
      */
-    private publiclyAccessibleUser(user: User, token: string): CurrentUser {
+    private async publiclyAccessibleUser(user: User, token: string): Promise<CurrentUser> {
+        // let permissions = []
+        // for (const role of user.roles) {
+        //     permissions = unique([
+        //         ...role.permissions
+        //     ])
+        // }
         return {
             id: user.id,
-            identifier: user.identifier,
             token,
-            permissions: [Permission.SuperAdmin],
+            permissions: getUserPermissions(user),
         };
+    }
+
+    protected requireNativeAuthStrategy():
+        | AdminNativeAuthStrategyError
+        | StudioNativeAuthStrategyError
+        | undefined {
+        if (!this.nativeAuthStrategyIsConfigured) {
+            const authStrategyNames = this.configService.authOptions.studioAuthenticationStrategy
+                .map(s => s.name)
+                .join(', ');
+            const errorMessage =
+                '这个 GraphQL 操作要求为 Studio API 配置 NativeAuthenticationStategy。\n' +
+                `当前启用的谁上策略如下: ${authStrategyNames}`;
+            Logger.error(errorMessage);
+            return new AdminNativeAuthStrategyError();
+        }
     }
 }

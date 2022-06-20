@@ -1,14 +1,15 @@
 import {DeepPartial, HasCustomFields} from '@picker-cc/common/lib/shared-types';
-import {Embedded, Entity, Index, OneToMany, Property, Unique} from '@mikro-orm/core';
+import {Collection, Embedded, Entity, Index, ManyToMany, OneToMany, Property, Unique} from '@mikro-orm/core';
 
 import {InternalServerError, SoftDeletable} from '../../common';
-import { Asset } from '../asset/asset.entity';
-import { PickerMongoEntity } from '../base/mongo-base.entity';
+import {Asset} from '../asset/asset.entity';
+import {PickerMongoEntity} from '../base/mongo-base.entity';
 
 // import {AuthenticationMethod} from "../authentication-method/authentication-method.entity";
-import { CustomUserFields } from '../custom-entity-fields';
+import {CustomUserFields} from '../custom-entity-fields';
 import {UserRole} from "./user.embedded";
 import {NativeAuthenticationMethod, ExternalAuthenticationMethod, AuthenticationMethod} from "../authentication-method";
+import {Role} from '../role/role.entity';
 
 /**
  * @description
@@ -18,18 +19,19 @@ import {NativeAuthenticationMethod, ExternalAuthenticationMethod, Authentication
 @Entity({
     tableName: 'users'
 })
-export class User extends PickerMongoEntity implements HasCustomFields, SoftDeletable {
+export class User extends PickerMongoEntity implements SoftDeletable {
     constructor(input?: DeepPartial<User>) {
         super(input);
     }
-    @Property({ type: Date, nullable: true })
+
+    @Property({type: Date, nullable: true})
     deletedAt: Date | null;
 
     /**
      * 识别码
      */
     @Property()
-    @Unique({ options: { partialFilterExpression: { identifier: { $exists: true } } } })
+    @Unique({options: {partialFilterExpression: {identifier: {$exists: true}}}})
     identifier!: string;
 
     /**
@@ -48,32 +50,36 @@ export class User extends PickerMongoEntity implements HasCustomFields, SoftDele
     @Property({nullable: true})
     featured?: Asset;
 
-    @Embedded(() => [NativeAuthenticationMethod, ExternalAuthenticationMethod], {array: true})
-    authenticationMethods?: AuthenticationMethod[]
+    // @Embedded(() => [ NativeAuthenticationMethod, ExternalAuthenticationMethod], {array: true, nullable: true})
+    // authenticationMethods: (NativeAuthenticationMethod | ExternalAuthenticationMethod)[] = []
+    // @Embedded(() => [ NativeAuthenticationMethod, ExternalAuthenticationMethod], {array: true, nullable: true})
+    // authenticationMethods: (NativeAuthenticationMethod | ExternalAuthenticationMethod)[] = []
+    @Embedded(() => [ NativeAuthenticationMethod ], {array: true, nullable: true})
+    authenticationMethods: NativeAuthenticationMethod [] = []
 
     /** 是否验证或绑定 */
-    @Property({ default: false })
+    @Property({default: false})
     verified?: boolean;
 
-    @Embedded(() => UserRole, { array: true })
-    roles: UserRole[];
-
+    @ManyToMany({entity: () => Role, nullable: true, eager: true})
+    roles? = new Collection<Role>(this);
     // 是否启用
-    @Property({ default: true })
+    @Property({default: true})
     enabled?: boolean;
 
     // 最后登录时间
-    @Property({ type: Date, nullable: true })
+    @Property({type: Date, nullable: true})
     lastLogin?: Date | null;
 
 
-    @Property({type: CustomUserFields})
-    customFields: CustomUserFields
+    // @Property({type: CustomUserFields})
+    // customFields: CustomUserFields
 
     getNativeAuthenticationMethod(): NativeAuthenticationMethod {
         if (!this.authenticationMethods) {
             throw new InternalServerError('error.user-authentication-methods-not-loaded');
         }
+        // if (this.authenticationMethods instanceof NativeAuthenticationMethod[]) {
         const match = this.authenticationMethods.find(
             (m): m is NativeAuthenticationMethod => m instanceof NativeAuthenticationMethod,
         );
@@ -81,5 +87,8 @@ export class User extends PickerMongoEntity implements HasCustomFields, SoftDele
             throw new InternalServerError('error.native-authentication-methods-not-found');
         }
         return match;
+        // }
+
+        // return null
     }
 }

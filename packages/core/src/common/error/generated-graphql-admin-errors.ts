@@ -211,9 +211,19 @@ function isGraphQLError(input: any): input is import('@picker-cc/common/lib/gene
 }
 
 export const adminErrorOperationTypeResolvers = {
+  AuthenticationResult: {
+    __resolveType(value: any) {
+      return isGraphQLError(value) ? (value as any).__typename : 'CurrentUser';
+    },
+  },
   CreateAssetResult: {
     __resolveType(value: any) {
       return isGraphQLError(value) ? (value as any).__typename : 'Asset';
+    },
+  },
+  NativeAuthenticationResult: {
+    __resolveType(value: any) {
+      return isGraphQLError(value) ? (value as any).__typename : 'CurrentUser';
     },
   },
   UpdateAdministratorPasswordResult: {

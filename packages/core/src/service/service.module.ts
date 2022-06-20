@@ -1,4 +1,4 @@
-import {Module} from '@nestjs/common';
+import {Module, OnModuleInit} from '@nestjs/common';
 
 import {CacheModule} from '../cache/cache.module';
 import {ConfigModule} from '../config/config.module';
@@ -8,6 +8,7 @@ import {EventBusModule} from '../event-bus/event-bus.module';
 import {PasswordCipher} from "./helpers/password-cipher/password-cipher";
 import {ListQueryBuilder} from "./helpers/list-query-builder/list-query-builder";
 import {VerificationTokenGenerator} from "./helpers/verification-token-generator";
+import { InitializerService } from './initializer.service';
 import {AdministratorService} from "./services/administrator.service";
 import {AssetService} from "./services/asset.service";
 import {ConfigService} from "../config";
@@ -19,6 +20,8 @@ import {TermService} from "./services/term.service";
 import {ProductService} from "./services/product.service";
 import {AuthService} from "./services/auth.service";
 import {SessionService} from "./services/session.service";
+import {NativeAuthenticationStrategy} from "../config/auth/native-authentication-strategy";
+import { RoleService } from './services/role.service';
 
 
 const services = [
@@ -30,12 +33,14 @@ const services = [
     TermService,
     ProductService,
     AuthService,
+    RoleService,
 ];
 
 const helpers = [
     PasswordCipher,
     ListQueryBuilder,
     VerificationTokenGenerator,
+    NativeAuthenticationStrategy,
 ]
 
 /**
@@ -76,7 +81,16 @@ const helpers = [
     providers: [ ...services, ...helpers ],
     exports: [ ...services, ...helpers ],
 })
-export class ServiceCoreModule {
+export class ServiceCoreModule implements OnModuleInit {
+    constructor(
+        private roleService: RoleService,
+        private administratorService: AdministratorService,
+    ) {
+    }
+    async onModuleInit() {
+        // await this.roleService.initRoles();
+        // await this.administratorService.initAdministrators();
+    }
 }
 
 /**

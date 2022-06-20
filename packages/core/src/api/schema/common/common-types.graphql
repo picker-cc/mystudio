@@ -17,6 +17,18 @@ interface ErrorResult {
     message: String!
 }
 
+type Adjustment {
+    adjustmentSource: String!
+    type: AdjustmentType!
+    description: String!
+    amount: Int!
+}
+
+type TaxLine {
+    description: String!
+    taxRate: Float!
+}
+
 type ConfigArg {
     name: String!
     value: String!

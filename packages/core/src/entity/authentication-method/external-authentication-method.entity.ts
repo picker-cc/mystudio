@@ -1,6 +1,6 @@
 import {DeepPartial} from "@picker-cc/common/lib/shared-types";
 
-import { AuthenticationMethod } from './authentication-method.entity';
+import {AnimalType, AuthenticationMethod} from './authentication-method.entity';
 import {Embeddable, Entity, Property} from "@mikro-orm/core";
 
 /**
@@ -11,10 +11,17 @@ import {Embeddable, Entity, Property} from "@mikro-orm/core";
  * @docsCategory entities
  * @docsPage AuthenticationMethod
  */
-@Embeddable()
+@Embeddable({discriminatorValue: 'ExternalAuthenticationMethod'})
 export class ExternalAuthenticationMethod extends AuthenticationMethod {
-    constructor(input: DeepPartial<ExternalAuthenticationMethod>) {
-        super(input);
+    // constructor(input: DeepPartial<ExternalAuthenticationMethod>) {
+    //     super(input);
+    // }
+
+    constructor(strategy: string) {
+        super();
+        this.strategy = strategy
+        this.type = AnimalType.ExternalAuthenticationMethod;
+
     }
 
     @Property()

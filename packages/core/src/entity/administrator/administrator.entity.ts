@@ -35,7 +35,7 @@ export class Administrator extends PickerMongoEntity implements SoftDeletable, H
     @Enum({type: 'DomainEnum', nullable: true})
     domain?: String
 
-    @Property({type: CustomAdministratorFields})
+    @Property({type: CustomAdministratorFields, nullable: true})
     customFields: CustomAdministratorFields;
 }
 

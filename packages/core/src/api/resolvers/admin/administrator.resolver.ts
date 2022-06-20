@@ -39,7 +39,7 @@ export class AdministratorResolver {
   }
 
   @Query()
-  // @Allow(Permission.ReadAdministrator)
+  @Allow(Permission.ReadAdministrator)
   async administrator(
     @Ctx() ctx: RequestContext,
     @Args() args: QueryAdministratorArgs,

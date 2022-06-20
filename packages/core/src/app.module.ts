@@ -8,8 +8,9 @@ import {I18nModule} from "./i18n/i18n.module";
 // import {PluginModule} from "./plugin/plugin.module";
 import {ServiceModule} from "./service/service.module";
 import {ConnectionModule} from "./connection/connection.module";
-import { PluginModule } from "./plugin/plugin.module";
+import {PluginModule} from "./plugin/plugin.module";
 import {I18nService} from "./i18n";
+import {InitializerService} from "./service/initializer.service";
 
 @Module({
     imports: [
@@ -20,25 +21,34 @@ import {I18nService} from "./i18n";
         PluginModule.forRoot(),
         ServiceModule,
         ConnectionModule,
-    ]
+    ],
+    providers: [ InitializerService, ]
 })
 export class AppModule implements NestModule, OnApplicationShutdown {
-    constructor(private configService: ConfigService, private i18nService: I18nService) {}
+    constructor(
+        private configService: ConfigService,
+        private i18nService: I18nService,
+    ) {
+    }
 
     configure(consumer: MiddlewareConsumer): any {
-        const { adminApiPath, studioApiPath, middleware } = this.configService.apiOptions;
+        const {adminApiPath, studioApiPath, middleware} = this.configService.apiOptions;
         const i18nextHandler = this.i18nService.handle();
         const defaultMiddleware: Middleware[] = [
-            { handler: i18nextHandler, route: adminApiPath },
-            { handler: i18nextHandler, route: studioApiPath },
+            {handler: i18nextHandler, route: adminApiPath},
+            {handler: i18nextHandler, route: studioApiPath},
         ];
         const allMiddleware = defaultMiddleware.concat(middleware);
         const consumableMiddlewares = allMiddleware.filter(mid => !mid.beforeListen);
         const middlewareByRoute = this.groupMiddlewareByRoute(consumableMiddlewares);
-        for (const [route, handlers] of Object.entries(middlewareByRoute)) {
+        for (const [ route, handlers ] of Object.entries(middlewareByRoute)) {
             consumer.apply(...handlers).forRoutes(route);
         }
     }
+
+    // async onModuleInit() {
+    //     await this.initializerService.init()
+    // }
 
     async onApplicationShutdown(signal?: string) {
         if (signal) {

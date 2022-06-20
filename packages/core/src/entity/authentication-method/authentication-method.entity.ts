@@ -1,7 +1,10 @@
 import {User} from '../user/user.entity';
-import {Embeddable, Entity, ManyToOne} from "@mikro-orm/core";
+import {Embeddable, Entity, Enum, ManyToOne} from "@mikro-orm/core";
 import {DeepPartial} from "@picker-cc/common/lib/shared-types";
-
+export enum AnimalType {
+    NativeAuthenticationMethod,
+    ExternalAuthenticationMethod,
+}
 /**
  * @description
  * AuthenticationMethod 表示用于验证用户 {@link User} 的方法。包含两种方案：
@@ -13,13 +16,15 @@ import {DeepPartial} from "@picker-cc/common/lib/shared-types";
 // @Entity()
 @Embeddable({ abstract: true, discriminatorColumn: 'authenticationMethods' })
 export abstract class AuthenticationMethod {
+    @Enum()
+    type!: AnimalType;
     // @ManyToOne(type => User, {eager: true})
     // user: User;
-    protected constructor(input?: DeepPartial<AuthenticationMethod>) {
-        if (input) {
-            for (const [key, value] of Object.entries(input as any)) {
-                (this as any)[key] = value;
-            }
-        }
-    }
+    // protected constructor(input?: DeepPartial<AuthenticationMethod>) {
+    //     if (input) {
+    //         for (const [key, value] of Object.entries(input as any)) {
+    //             (this as any)[key] = value;
+    //         }
+    //     }
+    // }
 }

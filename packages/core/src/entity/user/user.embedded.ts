@@ -11,3 +11,5 @@ export class UserRole {
     @Property()
     permissions: Permission[];
 }
+
+export class Customer {}

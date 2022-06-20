@@ -6,11 +6,12 @@ import {GraphQLResolveInfo} from 'graphql';
 
 import {ApiType, getApiType} from './get-api-type';
 import {RequestContext} from './request-context';
-import {CachedSession} from "../../config/session-cache/session-cache-strategy";
+import {CachedSession, CachedSessionUser} from "../../config/session-cache/session-cache-strategy";
 import {User} from "../../entity";
 import {ID} from "@picker-cc/common/lib/shared-types";
 import ms from "ms";
 import {AuthZRBACService} from "nest-authz";
+import {getUserPermissions} from "../../service/helpers/get-user-permissions";
 
 // import {ConfigService} from '../../config';
 
@@ -32,7 +33,8 @@ export class RequestContextService {
      * Creates a RequestContext based on the config provided. This can be useful when interacting
      * with services outside the request-response cycle, for example in stand-alone scripts or in
      * worker jobs.
-     * 根据提供的配置创建一个 RequestContext，这在与请求-响应周期之外的服务交互时很有用，例如在独立脚本或 worker jobs中
+     * 根据提供的配置创建一个 RequestContext，这在与请求-响应周期之外的服务交互时很有用，
+     * 例如在独立脚本或 worker jobs中
      *
      */
     async create(config: {
@@ -46,11 +48,13 @@ export class RequestContextService {
 
         let session: CachedSession | undefined;
         if (user) {
+            // const permission = user.roles ?
             session = {
                 user: {
                     id: user.id,
                     identifier: user.identifier,
                     verified: user.verified,
+                    permissions: user.roles ? getUserPermissions(user) : []
                 },
                 id: '__dummy_session_id__',
                 token: '__dummy_session_token__',
@@ -87,9 +91,8 @@ export class RequestContextService {
         const apiType = getApiType(info);
         const hasOwnerPermission = !!requiredPermissions && requiredPermissions.includes(Permission.Owner);
         const user = session && session.user;
-        const permissions = user && (
-            await this.authzService.getImplicitPermissionsForUser(user.id.toString())
-        )
+        const permissions = user && user.permissions
+        // const permissions = user.
         // console.log(permissions)
         // this.authZRBACService.getImplicitPermissionsForUser(user.id.toString())
         // TODO 从 casbin 获取用户权限来检查用户是否有权限

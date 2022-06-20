@@ -37,45 +37,30 @@ export class TermService {
     }
 
 
-    async getUserById(userId: ID): Promise<User | undefined> {
-        // return this.em.getRepository(User).findOne({
-        //   id: userId,
-        // }, [ 'roles', 'authenticationMethods' ]);
-        return this.em.getRepository(User).findOne({
-            id: userId,
-        });
-    }
+    // async getUserById(userId: ID): Promise<User | undefined> {
+    //     // return this.em.getRepository(User).findOne({
+    //     //   id: userId,
+    //     // }, [ 'roles', 'authenticationMethods' ]);
+    //     return this.em.getRepository(User).findOne({
+    //         id: userId,
+    //     });
+    // }
+    //
+    //
+    // async getUserByEmailAddress(ctx: RequestContext, emailAddress: string): Promise<User | undefined> {
+    //     return this.em.getRepository(User).findOne({
+    //         identifier: emailAddress,
+    //         deletedAt: null,
+    //     });
+    // }
+    //
+    // async getUserByIdentifier(ctx: RequestContext, identifier: string): Promise<User | undefined> {
+    //     return this.em.getRepository(User).findOne({
+    //         identifier,
+    //         deletedAt: null,
+    //     });
+    // }
 
-
-    async getUserByEmailAddress(ctx: RequestContext, emailAddress: string): Promise<User | undefined> {
-        return this.em.getRepository(User).findOne({
-            identifier: emailAddress,
-            deletedAt: null,
-        });
-    }
-
-    async getUserByIdentifier(ctx: RequestContext, identifier: string): Promise<User | undefined> {
-        return this.em.getRepository(User).findOne({
-            identifier,
-            deletedAt: null,
-        });
-    }
-
-
-    async createAdminUser(ctx: RequestContext, identifier: string, password: string): Promise<User> {
-        const adminUser = new User({
-            identifier,
-            verified: true,
-            authenticationMethods: []
-        })
-        adminUser.authenticationMethods.push(new NativeAuthenticationMethod({
-            passwordHash: await this.passwordCipher.hash(password)
-        }))
-
-        await this.em.persistAndFlush(adminUser);
-
-        return adminUser
-    }
 
     /**
      * 创建分类法

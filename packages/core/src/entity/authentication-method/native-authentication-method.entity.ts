@@ -1,5 +1,5 @@
 import {DeepPartial} from "@picker-cc/common/lib/shared-types";
-import {AuthenticationMethod} from './authentication-method.entity';
+import {AnimalType, AuthenticationMethod} from './authentication-method.entity';
 import {Embeddable, Property} from "@mikro-orm/core";
 
 /**
@@ -9,16 +9,21 @@ import {Embeddable, Property} from "@mikro-orm/core";
  * @docsCategory entities
  * @docsPage AuthenticationMethod
  */
-@Embeddable()
+@Embeddable({ discriminatorValue: 'NativeAuthenticationMethod'})
 export class NativeAuthenticationMethod extends AuthenticationMethod {
-    constructor(input?: DeepPartial<NativeAuthenticationMethod>) {
-        super(input);
+    // constructor(input?: DeepPartial<NativeAuthenticationMethod>) {
+    //     super(input);
+    // }
+
+    constructor(passwordHash: string) {
+        super();
+        this.passwordHash = passwordHash
+        this.type = AnimalType.NativeAuthenticationMethod;
     }
-
-    @Property()
-    identifier: string;
-
-    @Property({lazy: true}) passwordHash: string;
+    // @Property()
+    // identifier: string;
+    //
+    @Property() passwordHash: string;
 
     @Property({type: 'string', nullable: true})
     verificationToken: string | null;

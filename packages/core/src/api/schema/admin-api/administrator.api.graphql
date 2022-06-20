@@ -33,6 +33,8 @@ input CreateAdministratorInput {
     emailAddress: String!
     "管理员密码"
     password: String!
+    "角色"
+    roleIds: [ID!]!
 #    "所属域"
 #    domain: DomainEnum!
 }

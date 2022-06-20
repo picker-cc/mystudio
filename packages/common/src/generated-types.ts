@@ -19,6 +19,14 @@ export type Scalars = {
   Upload: any;
 };
 
+export type Adjustment = {
+  __typename?: 'Adjustment';
+  adjustmentSource: Scalars['String'];
+  amount: Scalars['Int'];
+  description: Scalars['String'];
+  type: AdjustmentType;
+};
+
 export enum AdjustmentType {
   DISTRIBUTED_ORDER_PROMOTION = 'DISTRIBUTED_ORDER_PROMOTION',
   OTHER = 'OTHER',
@@ -156,6 +164,10 @@ export type AssignAssetsToChannelInput = {
   channelId: Scalars['ID'];
 };
 
+export type AuthenticationInput = {
+  native?: InputMaybe<NativeAuthInput>;
+};
+
 export type AuthenticationMethod = Node & {
   __typename?: 'AuthenticationMethod';
   createdAt: Scalars['DateTime'];
@@ -163,6 +175,8 @@ export type AuthenticationMethod = Node & {
   strategy: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
+
+export type AuthenticationResult = CurrentUser | InvalidCredentialsError;
 
 export type BooleanOperators = {
   eq?: InputMaybe<Scalars['Boolean']>;
@@ -250,6 +264,8 @@ export type CreateAdministratorInput = {
   name: Scalars['String'];
   /** 管理员密码 */
   password: Scalars['String'];
+  /** 角色 */
+  roleIds: Array<Scalars['ID']>;
 };
 
 export type CreateAssetInput = {
@@ -312,13 +328,352 @@ export type CreateTermInput = {
   taxonomy?: InputMaybe<TaxonomyEnum>;
 };
 
+/**
+ * @description
+ * ISO 4217 currency code
+ *
+ * @docsCategory common
+ */
+export enum CurrencyCode {
+  /** United Arab Emirates dirham */
+  AED = 'AED',
+  /** Afghan afghani */
+  AFN = 'AFN',
+  /** Albanian lek */
+  ALL = 'ALL',
+  /** Armenian dram */
+  AMD = 'AMD',
+  /** Netherlands Antillean guilder */
+  ANG = 'ANG',
+  /** Angolan kwanza */
+  AOA = 'AOA',
+  /** Argentine peso */
+  ARS = 'ARS',
+  /** Australian dollar */
+  AUD = 'AUD',
+  /** Aruban florin */
+  AWG = 'AWG',
+  /** Azerbaijani manat */
+  AZN = 'AZN',
+  /** Bosnia and Herzegovina convertible mark */
+  BAM = 'BAM',
+  /** Barbados dollar */
+  BBD = 'BBD',
+  /** Bangladeshi taka */
+  BDT = 'BDT',
+  /** Bulgarian lev */
+  BGN = 'BGN',
+  /** Bahraini dinar */
+  BHD = 'BHD',
+  /** Burundian franc */
+  BIF = 'BIF',
+  /** Bermudian dollar */
+  BMD = 'BMD',
+  /** Brunei dollar */
+  BND = 'BND',
+  /** Boliviano */
+  BOB = 'BOB',
+  /** Brazilian real */
+  BRL = 'BRL',
+  /** Bahamian dollar */
+  BSD = 'BSD',
+  /** Bhutanese ngultrum */
+  BTN = 'BTN',
+  /** Botswana pula */
+  BWP = 'BWP',
+  /** Belarusian ruble */
+  BYN = 'BYN',
+  /** Belize dollar */
+  BZD = 'BZD',
+  /** Canadian dollar */
+  CAD = 'CAD',
+  /** Congolese franc */
+  CDF = 'CDF',
+  /** Swiss franc */
+  CHF = 'CHF',
+  /** Chilean peso */
+  CLP = 'CLP',
+  /** Renminbi (Chinese) yuan */
+  CNY = 'CNY',
+  /** Colombian peso */
+  COP = 'COP',
+  /** Costa Rican colon */
+  CRC = 'CRC',
+  /** Cuban convertible peso */
+  CUC = 'CUC',
+  /** Cuban peso */
+  CUP = 'CUP',
+  /** Cape Verde escudo */
+  CVE = 'CVE',
+  /** Czech koruna */
+  CZK = 'CZK',
+  /** Djiboutian franc */
+  DJF = 'DJF',
+  /** Danish krone */
+  DKK = 'DKK',
+  /** Dominican peso */
+  DOP = 'DOP',
+  /** Algerian dinar */
+  DZD = 'DZD',
+  /** Egyptian pound */
+  EGP = 'EGP',
+  /** Eritrean nakfa */
+  ERN = 'ERN',
+  /** Ethiopian birr */
+  ETB = 'ETB',
+  /** Euro */
+  EUR = 'EUR',
+  /** Fiji dollar */
+  FJD = 'FJD',
+  /** Falkland Islands pound */
+  FKP = 'FKP',
+  /** Pound sterling */
+  GBP = 'GBP',
+  /** Georgian lari */
+  GEL = 'GEL',
+  /** Ghanaian cedi */
+  GHS = 'GHS',
+  /** Gibraltar pound */
+  GIP = 'GIP',
+  /** Gambian dalasi */
+  GMD = 'GMD',
+  /** Guinean franc */
+  GNF = 'GNF',
+  /** Guatemalan quetzal */
+  GTQ = 'GTQ',
+  /** Guyanese dollar */
+  GYD = 'GYD',
+  /** Hong Kong dollar */
+  HKD = 'HKD',
+  /** Honduran lempira */
+  HNL = 'HNL',
+  /** Croatian kuna */
+  HRK = 'HRK',
+  /** Haitian gourde */
+  HTG = 'HTG',
+  /** Hungarian forint */
+  HUF = 'HUF',
+  /** Indonesian rupiah */
+  IDR = 'IDR',
+  /** Israeli new shekel */
+  ILS = 'ILS',
+  /** Indian rupee */
+  INR = 'INR',
+  /** Iraqi dinar */
+  IQD = 'IQD',
+  /** Iranian rial */
+  IRR = 'IRR',
+  /** Icelandic króna */
+  ISK = 'ISK',
+  /** Jamaican dollar */
+  JMD = 'JMD',
+  /** Jordanian dinar */
+  JOD = 'JOD',
+  /** Japanese yen */
+  JPY = 'JPY',
+  /** Kenyan shilling */
+  KES = 'KES',
+  /** Kyrgyzstani som */
+  KGS = 'KGS',
+  /** Cambodian riel */
+  KHR = 'KHR',
+  /** Comoro franc */
+  KMF = 'KMF',
+  /** North Korean won */
+  KPW = 'KPW',
+  /** South Korean won */
+  KRW = 'KRW',
+  /** Kuwaiti dinar */
+  KWD = 'KWD',
+  /** Cayman Islands dollar */
+  KYD = 'KYD',
+  /** Kazakhstani tenge */
+  KZT = 'KZT',
+  /** Lao kip */
+  LAK = 'LAK',
+  /** Lebanese pound */
+  LBP = 'LBP',
+  /** Sri Lankan rupee */
+  LKR = 'LKR',
+  /** Liberian dollar */
+  LRD = 'LRD',
+  /** Lesotho loti */
+  LSL = 'LSL',
+  /** Libyan dinar */
+  LYD = 'LYD',
+  /** Moroccan dirham */
+  MAD = 'MAD',
+  /** Moldovan leu */
+  MDL = 'MDL',
+  /** Malagasy ariary */
+  MGA = 'MGA',
+  /** Macedonian denar */
+  MKD = 'MKD',
+  /** Myanmar kyat */
+  MMK = 'MMK',
+  /** Mongolian tögrög */
+  MNT = 'MNT',
+  /** Macanese pataca */
+  MOP = 'MOP',
+  /** Mauritanian ouguiya */
+  MRU = 'MRU',
+  /** Mauritian rupee */
+  MUR = 'MUR',
+  /** Maldivian rufiyaa */
+  MVR = 'MVR',
+  /** Malawian kwacha */
+  MWK = 'MWK',
+  /** Mexican peso */
+  MXN = 'MXN',
+  /** Malaysian ringgit */
+  MYR = 'MYR',
+  /** Mozambican metical */
+  MZN = 'MZN',
+  /** Namibian dollar */
+  NAD = 'NAD',
+  /** Nigerian naira */
+  NGN = 'NGN',
+  /** Nicaraguan córdoba */
+  NIO = 'NIO',
+  /** Norwegian krone */
+  NOK = 'NOK',
+  /** Nepalese rupee */
+  NPR = 'NPR',
+  /** New Zealand dollar */
+  NZD = 'NZD',
+  /** Omani rial */
+  OMR = 'OMR',
+  /** Panamanian balboa */
+  PAB = 'PAB',
+  /** Peruvian sol */
+  PEN = 'PEN',
+  /** Papua New Guinean kina */
+  PGK = 'PGK',
+  /** Philippine peso */
+  PHP = 'PHP',
+  /** Pakistani rupee */
+  PKR = 'PKR',
+  /** Polish złoty */
+  PLN = 'PLN',
+  /** Paraguayan guaraní */
+  PYG = 'PYG',
+  /** Qatari riyal */
+  QAR = 'QAR',
+  /** Romanian leu */
+  RON = 'RON',
+  /** Serbian dinar */
+  RSD = 'RSD',
+  /** Russian ruble */
+  RUB = 'RUB',
+  /** Rwandan franc */
+  RWF = 'RWF',
+  /** Saudi riyal */
+  SAR = 'SAR',
+  /** Solomon Islands dollar */
+  SBD = 'SBD',
+  /** Seychelles rupee */
+  SCR = 'SCR',
+  /** Sudanese pound */
+  SDG = 'SDG',
+  /** Swedish krona/kronor */
+  SEK = 'SEK',
+  /** Singapore dollar */
+  SGD = 'SGD',
+  /** Saint Helena pound */
+  SHP = 'SHP',
+  /** Sierra Leonean leone */
+  SLL = 'SLL',
+  /** Somali shilling */
+  SOS = 'SOS',
+  /** Surinamese dollar */
+  SRD = 'SRD',
+  /** South Sudanese pound */
+  SSP = 'SSP',
+  /** São Tomé and Príncipe dobra */
+  STN = 'STN',
+  /** Salvadoran colón */
+  SVC = 'SVC',
+  /** Syrian pound */
+  SYP = 'SYP',
+  /** Swazi lilangeni */
+  SZL = 'SZL',
+  /** Thai baht */
+  THB = 'THB',
+  /** Tajikistani somoni */
+  TJS = 'TJS',
+  /** Turkmenistan manat */
+  TMT = 'TMT',
+  /** Tunisian dinar */
+  TND = 'TND',
+  /** Tongan paʻanga */
+  TOP = 'TOP',
+  /** Turkish lira */
+  TRY = 'TRY',
+  /** Trinidad and Tobago dollar */
+  TTD = 'TTD',
+  /** New Taiwan dollar */
+  TWD = 'TWD',
+  /** Tanzanian shilling */
+  TZS = 'TZS',
+  /** Ukrainian hryvnia */
+  UAH = 'UAH',
+  /** Ugandan shilling */
+  UGX = 'UGX',
+  /** United States dollar */
+  USD = 'USD',
+  /** Uruguayan peso */
+  UYU = 'UYU',
+  /** Uzbekistan som */
+  UZS = 'UZS',
+  /** Venezuelan bolívar soberano */
+  VES = 'VES',
+  /** Vietnamese đồng */
+  VND = 'VND',
+  /** Vanuatu vatu */
+  VUV = 'VUV',
+  /** Samoan tala */
+  WST = 'WST',
+  /** CFA franc BEAC */
+  XAF = 'XAF',
+  /** East Caribbean dollar */
+  XCD = 'XCD',
+  /** CFA franc BCEAO */
+  XOF = 'XOF',
+  /** CFP franc (franc Pacifique) */
+  XPF = 'XPF',
+  /** Yemeni rial */
+  YER = 'YER',
+  /** South African rand */
+  ZAR = 'ZAR',
+  /** Zambian kwacha */
+  ZMW = 'ZMW',
+  /** Zimbabwean dollar */
+  ZWL = 'ZWL'
+}
+
 export type CurrentUser = {
   __typename?: 'CurrentUser';
-  code: Scalars['String'];
   id: Scalars['ID'];
-  identifier: Scalars['String'];
   permissions: Array<Permission>;
   token: Scalars['String'];
+};
+
+export type Customer = Node & {
+  __typename?: 'Customer';
+  createdAt: Scalars['DateTime'];
+  emailAddress: Scalars['String'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  phoneNumber?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+  user?: Maybe<User>;
+};
+
+export type CustomerList = PaginatedList & {
+  __typename?: 'CustomerList';
+  items: Array<Customer>;
+  totalItems: Scalars['Int'];
 };
 
 export type DateOperators = {
@@ -378,6 +733,15 @@ export type DiffPriceOptionInput = {
   versionName: Scalars['String'];
 };
 
+export type Discount = {
+  __typename?: 'Discount';
+  adjustmentSource: Scalars['String'];
+  amount: Scalars['Int'];
+  amountWithTax: Scalars['Int'];
+  description: Scalars['String'];
+  type: AdjustmentType;
+};
+
 /** 电子邮箱地址冲突时返回 */
 export type EmailAddressConflictError = ErrorResult & {
   __typename?: 'EmailAddressConflictError';
@@ -386,12 +750,41 @@ export type EmailAddressConflictError = ErrorResult & {
 };
 
 export enum ErrorCode {
-  UNKNOWN_ERROR = 'UNKNOWN_ERROR'
+  ALREADY_LOGGED_IN_ERROR = 'ALREADY_LOGGED_IN_ERROR',
+  CHANNEL_DEFAULT_LANGUAGE_ERROR = 'CHANNEL_DEFAULT_LANGUAGE_ERROR',
+  EMAIL_ADDRESS_CONFLICT_ERROR = 'EMAIL_ADDRESS_CONFLICT_ERROR',
+  IDENTIFIER_CHANGE_TOKEN_EXPIRED_ERROR = 'IDENTIFIER_CHANGE_TOKEN_EXPIRED_ERROR',
+  IDENTIFIER_CHANGE_TOKEN_INVALID_ERROR = 'IDENTIFIER_CHANGE_TOKEN_INVALID_ERROR',
+  INVALID_CREDENTIALS_ERROR = 'INVALID_CREDENTIALS_ERROR',
+  MIME_TYPE_ERROR = 'MIME_TYPE_ERROR',
+  MISSING_PASSWORD_ERROR = 'MISSING_PASSWORD_ERROR',
+  NAME_CONFLICT_ERROR = 'NAME_CONFLICT_ERROR',
+  NATIVE_AUTH_STRATEGY_ERROR = 'NATIVE_AUTH_STRATEGY_ERROR',
+  NOT_VERIFIED_ERROR = 'NOT_VERIFIED_ERROR',
+  PASSWORD_ALREADY_SET_ERROR = 'PASSWORD_ALREADY_SET_ERROR',
+  PASSWORD_RESET_TOKEN_EXPIRED_ERROR = 'PASSWORD_RESET_TOKEN_EXPIRED_ERROR',
+  PASSWORD_RESET_TOKEN_INVALID_ERROR = 'PASSWORD_RESET_TOKEN_INVALID_ERROR',
+  PASSWORD_VALIDATION_ERROR = 'PASSWORD_VALIDATION_ERROR',
+  PHONE_CONFLICT_ERROR = 'PHONE_CONFLICT_ERROR',
+  UNKNOWN_ERROR = 'UNKNOWN_ERROR',
+  VERIFICATION_TOKEN_EXPIRED_ERROR = 'VERIFICATION_TOKEN_EXPIRED_ERROR',
+  VERIFICATION_TOKEN_INVALID_ERROR = 'VERIFICATION_TOKEN_INVALID_ERROR'
 }
 
 export type ErrorResult = {
   errorCode: ErrorCode;
   message: Scalars['String'];
+};
+
+export type Fulfillment = Node & {
+  __typename?: 'Fulfillment';
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ID'];
+  method: Scalars['String'];
+  orderItems: Array<OrderItem>;
+  state: Scalars['String'];
+  trackingCode?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
 };
 
 export enum GlobalFlag {
@@ -406,6 +799,73 @@ export type GlobalSettings = {
   id: Scalars['ID'];
   updatedAt: Scalars['DateTime'];
 };
+
+export type HistoryEntry = Node & {
+  __typename?: 'HistoryEntry';
+  createdAt: Scalars['DateTime'];
+  data: Scalars['JSON'];
+  id: Scalars['ID'];
+  type: HistoryEntryType;
+  updatedAt: Scalars['DateTime'];
+};
+
+export type HistoryEntryFilterParameter = {
+  createdAt?: InputMaybe<DateOperators>;
+  type?: InputMaybe<StringOperators>;
+  updatedAt?: InputMaybe<DateOperators>;
+};
+
+export type HistoryEntryList = PaginatedList & {
+  __typename?: 'HistoryEntryList';
+  items: Array<HistoryEntry>;
+  totalItems: Scalars['Int'];
+};
+
+export type HistoryEntryListOptions = {
+  /** 允许过滤结果 */
+  filter?: InputMaybe<HistoryEntryFilterParameter>;
+  /** 指定多个 "filter" 参数是否应该与逻辑的 AND 或 OR 操作组合，默认为 AND */
+  filterOperator?: InputMaybe<LogicalOperator>;
+  /** 跳过前n个结果以用于分页 */
+  skip?: InputMaybe<Scalars['Int']>;
+  /** 指定根据哪些属性对结果进行排序 */
+  sort?: InputMaybe<HistoryEntrySortParameter>;
+  /** 获取n个结果，用于分页 */
+  take?: InputMaybe<Scalars['Int']>;
+};
+
+export type HistoryEntrySortParameter = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export enum HistoryEntryType {
+  CUSTOMER_ADDED_TO_GROUP = 'CUSTOMER_ADDED_TO_GROUP',
+  CUSTOMER_ADDRESS_CREATED = 'CUSTOMER_ADDRESS_CREATED',
+  CUSTOMER_ADDRESS_DELETED = 'CUSTOMER_ADDRESS_DELETED',
+  CUSTOMER_ADDRESS_UPDATED = 'CUSTOMER_ADDRESS_UPDATED',
+  CUSTOMER_DETAIL_UPDATED = 'CUSTOMER_DETAIL_UPDATED',
+  CUSTOMER_EMAIL_UPDATE_REQUESTED = 'CUSTOMER_EMAIL_UPDATE_REQUESTED',
+  CUSTOMER_EMAIL_UPDATE_VERIFIED = 'CUSTOMER_EMAIL_UPDATE_VERIFIED',
+  CUSTOMER_NOTE = 'CUSTOMER_NOTE',
+  CUSTOMER_PASSWORD_RESET_REQUESTED = 'CUSTOMER_PASSWORD_RESET_REQUESTED',
+  CUSTOMER_PASSWORD_RESET_VERIFIED = 'CUSTOMER_PASSWORD_RESET_VERIFIED',
+  CUSTOMER_PASSWORD_UPDATED = 'CUSTOMER_PASSWORD_UPDATED',
+  CUSTOMER_REGISTERED = 'CUSTOMER_REGISTERED',
+  CUSTOMER_REMOVED_FROM_GROUP = 'CUSTOMER_REMOVED_FROM_GROUP',
+  CUSTOMER_VERIFIED = 'CUSTOMER_VERIFIED',
+  ORDER_CANCELLATION = 'ORDER_CANCELLATION',
+  ORDER_COUPON_APPLIED = 'ORDER_COUPON_APPLIED',
+  ORDER_COUPON_REMOVED = 'ORDER_COUPON_REMOVED',
+  ORDER_FULFILLMENT = 'ORDER_FULFILLMENT',
+  ORDER_FULFILLMENT_TRANSITION = 'ORDER_FULFILLMENT_TRANSITION',
+  ORDER_MODIFIED = 'ORDER_MODIFIED',
+  ORDER_NOTE = 'ORDER_NOTE',
+  ORDER_PAYMENT_TRANSITION = 'ORDER_PAYMENT_TRANSITION',
+  ORDER_REFUND_TRANSITION = 'ORDER_REFUND_TRANSITION',
+  ORDER_STATE_TRANSITION = 'ORDER_STATE_TRANSITION'
+}
 
 export type IdentifierChangeTokenExpiredError = ErrorResult & {
   __typename?: 'IdentifierChangeTokenExpiredError';
@@ -791,6 +1251,8 @@ export type Mutation = {
   assignAssetsToChannel: Array<Asset>;
   /** Assign a Role to an Administrator */
   assignRoleToAdministrator: Administrator;
+  /** 使用命名身份验证策略对用户进行身份验证 */
+  authenticate: AuthenticationResult;
   /** 创建一个超级管理员 */
   createAdministrator: Administrator;
   /** Create a new Asset */
@@ -815,6 +1277,9 @@ export type Mutation = {
   deleteTerm?: Maybe<DeletionResponse>;
   /** Enabled/Disabled Administrator */
   enabledAdministrator: Success;
+  /** 使用本地认证策略对用户进行认证。 这个 mutation 的命名方式 `authenticate({ native: { ... }})` */
+  login: NativeAuthenticationResult;
+  logout: Success;
   /** Update the active (currently logged-in) Administrator */
   updateActiveAdministrator: Administrator;
   /** Update an existing Administrator */
@@ -840,6 +1305,12 @@ export type MutationAssignAssetsToChannelArgs = {
 export type MutationAssignRoleToAdministratorArgs = {
   administratorId: Scalars['ID'];
   roleId: Scalars['ID'];
+};
+
+
+export type MutationAuthenticateArgs = {
+  input: AuthenticationInput;
+  rememberMe?: InputMaybe<Scalars['Boolean']>;
 };
 
 
@@ -904,6 +1375,13 @@ export type MutationEnabledAdministratorArgs = {
 };
 
 
+export type MutationLoginArgs = {
+  password: Scalars['String'];
+  rememberMe?: InputMaybe<Scalars['Boolean']>;
+  username: Scalars['String'];
+};
+
+
 export type MutationUpdateActiveAdministratorArgs = {
   input: UpdateActiveAdministratorInput;
 };
@@ -951,12 +1429,19 @@ export type NameConflictError = ErrorResult & {
   message: Scalars['String'];
 };
 
+export type NativeAuthInput = {
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
 /** 如果未配置该策略，则在尝试依赖 NativeAuthStrategy 的操作时返回 */
 export type NativeAuthStrategyError = ErrorResult & {
   __typename?: 'NativeAuthStrategyError';
   errorCode: ErrorCode;
   message: Scalars['String'];
 };
+
+export type NativeAuthenticationResult = CurrentUser | InvalidCredentialsError | NativeAuthStrategyError;
 
 export type Node = {
   id: Scalars['ID'];
@@ -996,6 +1481,131 @@ export type Option = Node & {
   value?: Maybe<Scalars['JSON']>;
 };
 
+export type Order = Node & {
+  __typename?: 'Order';
+  /** 只要付款流程尚未完成，订单就处于活动状态 */
+  active: Scalars['Boolean'];
+  billingAddress?: Maybe<OrderAddress>;
+  /** 一个唯一的订单编码 */
+  code: Scalars['String'];
+  /** 应用于该订单的所有优惠券代码的数组 */
+  couponCodes: Array<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  /** 货币代码 */
+  currencyCode: CurrencyCode;
+  customer?: Maybe<Customer>;
+  discounts: Array<Discount>;
+  fulfillments?: Maybe<Array<Fulfillment>>;
+  history: HistoryEntryList;
+  id: Scalars['ID'];
+  /** 下单的日期和时间，即客户完成结账，下单不再"活动" */
+  orderPlacedAt?: Maybe<Scalars['DateTime']>;
+  /** 支付方法 */
+  payments?: Maybe<Array<Payment>>;
+  /** 该订单适用于促销。只有在支付过程完成后才会出现 */
+  promotions: Array<Promotion>;
+  shipping: Scalars['Int'];
+  shippingAddress?: Maybe<OrderAddress>;
+  shippingLines: Array<ShippingLine>;
+  shippingWithTax: Scalars['Int'];
+  state: Scalars['String'];
+  /**
+   * subTotal 是 Order 中所有 orderline 的总和。这个数字还包括在 OrderItems 中按比例（按比例分布）分配的任何订单级折扣。
+   * 要获得所有不占比例折扣的 OrderLine 的总和，使用 `OrderLine.discountedLinePrice` 值。
+   */
+  subTotal: Scalars['Int'];
+  /** 与小计相同，但包括税金 */
+  subTotalWithTax: Scalars['Int'];
+  /**
+   * 附加费用是对订单总额的任意修改，两者都不是产品变量或因使用促销而产生的折扣。
+   * 例如，基于客户互动的一次性折扣，或基于付款的附加费方法。
+   */
+  surcharges: Array<Surcharge>;
+  /** 税种摘要 */
+  taxSummary: Array<OrderTaxSummary>;
+  /** 等于 subTotal 加上 shipping */
+  total: Scalars['Int'];
+  totalQuantity: Scalars['Int'];
+  /** 最终应付金额。等于 subTotalWithTax 加上 shippingWithTax */
+  totalWithTax: Scalars['Int'];
+  updatedAt: Scalars['DateTime'];
+};
+
+
+export type OrderHistoryArgs = {
+  options?: InputMaybe<HistoryEntryListOptions>;
+};
+
+export type OrderAddress = {
+  __typename?: 'OrderAddress';
+  city?: Maybe<Scalars['String']>;
+  company?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  countryCode?: Maybe<Scalars['String']>;
+  fullName?: Maybe<Scalars['String']>;
+  phoneNumber?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+  province?: Maybe<Scalars['String']>;
+  streetLine1?: Maybe<Scalars['String']>;
+  streetLine2?: Maybe<Scalars['String']>;
+};
+
+export type OrderItem = Node & {
+  __typename?: 'OrderItem';
+  adjustments: Array<Adjustment>;
+  cancelled: Scalars['Boolean'];
+  createdAt: Scalars['DateTime'];
+  /**
+   * 单价含折扣，不含税。
+   *
+   * 如果应用了订单级折扣，这将不是实际的应税单价(参见`proratedUnitPrice`)，
+   * 但通常是显示给客户的正确价格，以避免对分布式订单级折扣的内部处理造成混淆。
+   */
+  discountedUnitPrice: Scalars['Int'];
+  /** 单价（含折扣和税） */
+  discountedUnitPriceWithTax: Scalars['Int'];
+  fulfillment?: Maybe<Fulfillment>;
+  id: Scalars['ID'];
+  /**
+   * The actual unit price, taking into account both item discounts _and_ prorated (proportionally-distributed)
+   * Order-level discounts. This value is the true economic value of the OrderItem, and is used in tax
+   * and refund calculations.
+   * 考虑商品折扣和按比例分配的实际单价。
+   * Order-level折扣。该值是OrderItem的真实经济值，用于税收和退款计算。
+   */
+  proratedUnitPrice: Scalars['Int'];
+  /** 按比例计算的单价(含税) */
+  proratedUnitPriceWithTax: Scalars['Int'];
+  refundId?: Maybe<Scalars['ID']>;
+  taxLines: Array<TaxLine>;
+  taxRate: Scalars['Float'];
+  /** 单价，不含税和折扣 */
+  unitPrice: Scalars['Int'];
+  /** 单价，含税但不含折扣 */
+  unitPriceWithTax: Scalars['Int'];
+  unitTax: Scalars['Int'];
+  updatedAt: Scalars['DateTime'];
+};
+
+export type OrderList = PaginatedList & {
+  __typename?: 'OrderList';
+  items: Array<Order>;
+  totalItems: Scalars['Int'];
+};
+
+/** 订单适用的税种摘要，按分组税率 */
+export type OrderTaxSummary = {
+  __typename?: 'OrderTaxSummary';
+  /** A description of this tax */
+  description: Scalars['String'];
+  /** 适用本税率的订单项目总净价格 */
+  taxBase: Scalars['Int'];
+  /** 以百分比计算的税率 */
+  taxRate: Scalars['Float'];
+  /** 订单所适用的总税额按本税率计算 */
+  taxTotal: Scalars['Int'];
+};
+
 export type PaginatedList = {
   items: Array<Node>;
   totalItems: Scalars['Int'];
@@ -1024,6 +1634,20 @@ export type PasswordValidationError = ErrorResult & {
   errorCode: ErrorCode;
   message: Scalars['String'];
   validationErrorMessage: Scalars['String'];
+};
+
+export type Payment = Node & {
+  __typename?: 'Payment';
+  amount: Scalars['Int'];
+  createdAt: Scalars['DateTime'];
+  errorMessage?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  metadata?: Maybe<Scalars['JSON']>;
+  method: Scalars['String'];
+  refunds: Array<Refund>;
+  state: Scalars['String'];
+  transactionId?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
 };
 
 /**
@@ -1134,16 +1758,15 @@ export type Product = Node & {
   createdAt: Scalars['DateTime'];
   /** 创造者 */
   creator?: Maybe<User>;
-  deletedAt?: Maybe<Scalars['DateTime']>;
+  description: Scalars['String'];
   /** 作品是否启用 */
   enabled?: Maybe<Scalars['Boolean']>;
   /** 作品特色图片 */
   featured?: Maybe<Asset>;
   id: Scalars['ID'];
+  languageCode: LanguageCode;
   /** 作品配置选项 */
   option?: Maybe<ProductOption>;
-  /** 作品公开内容、内容描述等 */
-  publicly?: Maybe<Scalars['JSON']>;
   /** 作品标识 */
   slug: Scalars['String'];
   /** 作品发布状态 */
@@ -1191,8 +1814,9 @@ export enum ProductCategory {
 
 export type ProductFilterParameter = {
   createdAt?: InputMaybe<DateOperators>;
-  deletedAt?: InputMaybe<DateOperators>;
+  description?: InputMaybe<StringOperators>;
   enabled?: InputMaybe<BooleanOperators>;
+  languageCode?: InputMaybe<StringOperators>;
   slug?: InputMaybe<StringOperators>;
   state?: InputMaybe<StringOperators>;
   title?: InputMaybe<StringOperators>;
@@ -1251,7 +1875,7 @@ export type ProductSettingInput = {
 
 export type ProductSortParameter = {
   createdAt?: InputMaybe<SortOrder>;
-  deletedAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   slug?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
@@ -1314,6 +1938,28 @@ export enum ProductType {
   PODCAST = 'PODCAST'
 }
 
+/** 促销活动 */
+export type Promotion = Node & {
+  __typename?: 'Promotion';
+  actions: Array<ConfigurableOperation>;
+  conditions: Array<ConfigurableOperation>;
+  couponCode?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  enabled: Scalars['Boolean'];
+  endsAt?: Maybe<Scalars['DateTime']>;
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  perCustomerUsageLimit?: Maybe<Scalars['Int']>;
+  startsAt?: Maybe<Scalars['DateTime']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+export type PromotionList = PaginatedList & {
+  __typename?: 'PromotionList';
+  items: Array<Promotion>;
+  totalItems: Scalars['Int'];
+};
+
 /** 作品的保护机制配置 */
 export type ProtectOption = {
   __typename?: 'ProtectOption';
@@ -1333,6 +1979,7 @@ export type Query = {
   /** Get a list of Assets */
   assets: AssetList;
   globalSettings: GlobalSettings;
+  me?: Maybe<CurrentUser>;
   /** 查询全部作品 */
   products?: Maybe<ProductList>;
   role?: Maybe<Role>;
@@ -1379,6 +2026,24 @@ export type QueryRolesArgs = {
 
 export type QueryTermsArgs = {
   options?: InputMaybe<TermListOptions>;
+};
+
+export type Refund = Node & {
+  __typename?: 'Refund';
+  adjustment: Scalars['Int'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ID'];
+  items: Scalars['Int'];
+  metadata?: Maybe<Scalars['JSON']>;
+  method?: Maybe<Scalars['String']>;
+  orderItems: Array<OrderItem>;
+  paymentId: Scalars['ID'];
+  reason?: Maybe<Scalars['String']>;
+  shipping: Scalars['Int'];
+  state: Scalars['String'];
+  total: Scalars['Int'];
+  transactionId?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
 };
 
 export type Role = Node & {
@@ -1459,6 +2124,46 @@ export enum SessionType {
   AUTHENTICATED = 'AUTHENTICATED'
 }
 
+export type ShippingLine = {
+  __typename?: 'ShippingLine';
+  discountedPrice: Scalars['Int'];
+  discountedPriceWithTax: Scalars['Int'];
+  discounts: Array<Discount>;
+  price: Scalars['Int'];
+  priceWithTax: Scalars['Int'];
+  shippingMethod: ShippingMethod;
+};
+
+export type ShippingMethod = Node & {
+  __typename?: 'ShippingMethod';
+  calculator: ConfigurableOperation;
+  checker: ConfigurableOperation;
+  code: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  description: Scalars['String'];
+  fulfillmentHandlerCode: Scalars['String'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  translations: Array<ShippingMethodTranslation>;
+  updatedAt: Scalars['DateTime'];
+};
+
+export type ShippingMethodList = PaginatedList & {
+  __typename?: 'ShippingMethodList';
+  items: Array<ShippingMethod>;
+  totalItems: Scalars['Int'];
+};
+
+export type ShippingMethodTranslation = {
+  __typename?: 'ShippingMethodTranslation';
+  createdAt: Scalars['DateTime'];
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  languageCode: LanguageCode;
+  name: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
+};
+
 export enum SortOrder {
   ASC = 'ASC',
   DESC = 'DESC'
@@ -1480,6 +2185,19 @@ export type Success = {
   success: Scalars['Boolean'];
 };
 
+export type Surcharge = Node & {
+  __typename?: 'Surcharge';
+  createdAt: Scalars['DateTime'];
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  price: Scalars['Int'];
+  priceWithTax: Scalars['Int'];
+  sku?: Maybe<Scalars['String']>;
+  taxLines: Array<TaxLine>;
+  taxRate: Scalars['Float'];
+  updatedAt: Scalars['DateTime'];
+};
+
 export type Tag = Node & {
   __typename?: 'Tag';
   createdAt: Scalars['DateTime'];
@@ -1492,6 +2210,12 @@ export type TagList = PaginatedList & {
   __typename?: 'TagList';
   items: Array<Tag>;
   totalItems: Scalars['Int'];
+};
+
+export type TaxLine = {
+  __typename?: 'TaxLine';
+  description: Scalars['String'];
+  taxRate: Scalars['Float'];
 };
 
 export enum TaxonomyEnum {

@@ -9,6 +9,8 @@ import {PasswordCipher} from "../helpers/password-cipher/password-cipher";
 import {RequestContext} from "../../api";
 import {Session, User} from "../../entity";
 import {CachedSession, SessionCacheStrategy} from '../../config/session-cache/session-cache-strategy';
+import {SessionType} from "@picker-cc/common/lib/generated-types";
+import {getUserPermissions} from "../helpers/get-user-permissions";
 
 @Injectable()
 export class SessionService {
@@ -21,6 +23,7 @@ export class SessionService {
         private configService: ConfigService,
         private eventBus: EventBus,
     ) {
+        this.sessionCacheStrategy = this.configService.authOptions.sessionCacheStrategy;
         this.sessionDurationInMs = ms(this.configService.authOptions.sessionDuration as string);
     }
 
@@ -78,6 +81,7 @@ export class SessionService {
             authenticationStrategy: authenticationStrategyName,
             expires: this.getExpiryDate(this.sessionDurationInMs),
             invalidated: false,
+            type: SessionType.AUTHENTICATED,
         })
         await this.em.persistAndFlush(authenticatedSession)
         return authenticatedSession
@@ -94,6 +98,7 @@ export class SessionService {
             token,
             expires: this.getExpiryDate(this.sessionDurationInMs),
             invalidated: false,
+            type: SessionType.ANONYMOUS,
         })
         // 保存新 session
         await this.em.persistAndFlush(newSession);
@@ -139,8 +144,6 @@ export class SessionService {
             id: session.id,
             token: session.token,
             expires: session.expires,
-            // activeOrderId: session.activeOrderId,
-            // activeChannelId: session.activeChannelId,
         };
         if (this.isAuthenticatedSession(session)) {
             serializedSession.authenticationStrategy = session.authenticationStrategy;
@@ -149,6 +152,7 @@ export class SessionService {
                 id: user.id,
                 identifier: user.identifier,
                 verified: user.verified,
+                permissions: user.roles ? getUserPermissions(user) : []
                 // channelPermissions: getUserChannelsPermissions(user),
             };
         }
@@ -169,6 +173,18 @@ export class SessionService {
         if (session && session.expires > new Date()) {
             await this.updateSessionExpiry(session)
             return session
+        }
+    }
+
+    /**
+     * @description
+     * 删除给定用户的所有现有会话。
+     */
+    async deleteSessionsByUser(ctx: RequestContext, user: User): Promise<void> {
+        const userSessions = await this.em.find(Session, {user});
+        await this.em.remove(userSessions);
+        for (const session of userSessions) {
+            await this.sessionCacheStrategy.delete(session.token);
         }
     }
 }

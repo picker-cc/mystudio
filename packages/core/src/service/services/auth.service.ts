@@ -7,11 +7,16 @@ import {EntityNotFoundError, InternalServerError, ListQueryOptions} from "../../
 import {ApiType, RequestContext} from "../../api";
 import {Injectable} from "@nestjs/common";
 import {EventBus, LoginEvent} from "../../event-bus";
-import {NATIVE_AUTH_STRATEGY_NAME, NativeAuthenticationData, NativeAuthenticationStrategy} from "../../config/auth/native-authentication-strategy";
+import {
+    NATIVE_AUTH_STRATEGY_NAME,
+    NativeAuthenticationData,
+    NativeAuthenticationStrategy
+} from "../../config/auth/native-authentication-strategy";
 import {AttemptedLoginEvent} from "../../event-bus/events/AttemptedLoginEvent";
-import { InvalidCredentialsError, NotVerifiedError } from "../../common/error/generated-graphql-admin-errors";
+import {InvalidCredentialsError, NotVerifiedError} from "../../common/error/generated-graphql-admin-errors";
 import {AuthenticatedSession} from "../../entity/session/authenticated-session.entity";
-import { SessionService } from "./session.service";
+import {SessionService} from "./session.service";
+import {LogoutEvent} from "../../event-bus/events/logout-event";
 
 @Injectable()
 export class AuthService {
@@ -49,7 +54,7 @@ export class AuthService {
             return new InvalidCredentialsError(authenticateResult);
         }
         if (!authenticateResult) {
-           return new InvalidCredentialsError('') ;
+            return new InvalidCredentialsError('');
         }
         return this.createAuthenticatedSessionForUser(ctx, authenticateResult, authenticationStrategy.name)
     }
@@ -74,20 +79,44 @@ export class AuthService {
         return session
     }
 
+    /**
+     * @description
+     * 删除与给定会话令牌关联的用户的所有会话。
+     */
+    async destroyAuthenticatedSession(ctx: RequestContext, sessionToken: string): Promise<void> {
+        // const session = await this.connection.getRepository(ctx, AuthenticatedSession).findOne({
+        //     where: { token: sessionToken },
+        //     relations: ['user', 'user.authenticationMethods'],
+        // });
+        const session = await this.em.findOne(Session, {token: sessionToken})
+
+        if (session) {
+            const authenticationStrategy = this.getAuthenticationStrategy(
+                ctx.apiType,
+                session.authenticationStrategy,
+            );
+            if (typeof authenticationStrategy.onLogOut === 'function') {
+                await authenticationStrategy.onLogOut(ctx, session.user);
+            }
+            this.eventBus.publish(new LogoutEvent(ctx));
+            return this.sessionService.deleteSessionsByUser(ctx, session.user);
+        }
+    }
+
     private getAuthenticationStrategy(
         apiType: ApiType,
         method: typeof NATIVE_AUTH_STRATEGY_NAME,
     ): NativeAuthenticationStrategy;
     private getAuthenticationStrategy(apiType: ApiType, method: string): AuthenticationStrategy;
     private getAuthenticationStrategy(apiType: ApiType, method: string): AuthenticationStrategy {
-        const { authOptions } = this.configService;
+        const {authOptions} = this.configService;
         const strategies =
             apiType === 'admin'
                 ? authOptions.adminAuthenticationStrategy
                 : authOptions.studioAuthenticationStrategy;
         const match = strategies.find(s => s.name === method);
         if (!match) {
-            throw new InternalServerError('error.unrecognized-authentication-strategy', { name: method });
+            throw new InternalServerError('error.unrecognized-authentication-strategy', {name: method});
         }
         return match;
     }

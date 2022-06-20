@@ -13,6 +13,7 @@ import {AdministratorResolver} from "./resolvers/admin/administrator.resolver";
 import {TermResolver} from "./resolvers/admin/term.resolver";
 import {ProductResolver} from "./resolvers/admin/product.resolver";
 import {createDynamicGraphQlModulesForPlugins} from "../plugin/dynamic-plugin-api.module";
+import {AuthResolver} from "./resolvers/admin/auth.resolver";
 
 const sharedResolvers = [
     AssetResolver,
@@ -21,8 +22,9 @@ const sharedResolvers = [
     // UserFileResolver,
 ];
 const adminResolvers = [
-    AssetResolver,
     AdministratorResolver,
+    AssetResolver,
+    AuthResolver,
     TermResolver,
     ProductResolver,
 ];

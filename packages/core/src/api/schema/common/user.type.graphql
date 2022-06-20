@@ -6,9 +6,9 @@ type User implements Node {
     updatedAt: DateTime!
     identifier: String!
     verified: Boolean!
-#    roles: [Role!]!
-#    lastLogin: DateTime
-#    authenticationMethods: [AuthenticationMethod!]!
+    roles: [Role!]!
+    lastLogin: DateTime
+    authenticationMethods: [AuthenticationMethod!]!
 }
 
 type AuthenticationMethod implements Node {

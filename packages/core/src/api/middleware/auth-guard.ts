@@ -8,13 +8,13 @@ import {AuthService} from '../../service/services/auth.service';
 import {extractSessionToken} from '../common/extract-auth-token';
 import {parseContext} from '../common/parse-context';
 import {REQUEST_CONTEXT_KEY, RequestContextService} from '../common/request-context.service';
-import {setAuthToken} from '../common/set-auth-token';
 import {PERMISSIONS_METADATA_KEY} from '../decorators/allow.decorator';
 import {SessionService} from '../../service/services/session.service';
 import {GraphQLResolveInfo} from "graphql";
 import {RequestContext} from '../common/request-context';
 import {ForbiddenError} from '../../common/error/errors';
 import {CachedSession} from "../../config/session-cache/session-cache-strategy";
+import {setSessionToken} from "../common/set-session-token";
 
 /**
  * @description
@@ -47,16 +47,21 @@ export class AuthGuard implements CanActivate {
 
         const isPublic = !!permissions && permissions.includes(Permission.Public);
         const hasOwnerPermission = !!permissions && permissions.includes(Permission.Owner);
-        let requestContext: RequestContext;
-
-        if (isFieldResolver) {
-            requestContext = (req as any)[REQUEST_CONTEXT_KEY];
-        } else {
+        // let requestContext: RequestContext;
+        //
+        // if (isFieldResolver) {
+        //     requestContext = (req as any)[REQUEST_CONTEXT_KEY];
+        // } else {
+        //     const session = await this.getSession(req, res, hasOwnerPermission);
+        //     requestContext = await this.requestContextService.fromRequest(req, info, permissions, session);
+        //     (req as any)[REQUEST_CONTEXT_KEY] = requestContext;
+        // }
             const session = await this.getSession(req, res, hasOwnerPermission);
-            requestContext = await this.requestContextService.fromRequest(req, info, permissions, session);
-            (req as any)[REQUEST_CONTEXT_KEY] = requestContext;
-        }
+        const requestContext = await this.requestContextService.fromRequest(req, info, permissions, session);
+        (req as any)[REQUEST_CONTEXT_KEY] = requestContext;
 
+        console.log('x-x-x-x----')
+        console.log(session)
         if (authDisabled || !permissions || isPublic) {
             return true;
         } else {
@@ -79,13 +84,15 @@ export class AuthGuard implements CanActivate {
         if (sessionToken) {
             // session = await this.authService.validateSession(authToken);
             serializedSession = await this.sessionService.getSessionFromToken(sessionToken);
+            console.log('yyyyy0---')
+            console.log(serializedSession)
             if (serializedSession) {
                 return serializedSession;
             }
 
             // 如果有一个 token，但它不能验证为一个会话，
             // 那么这个 token 就不在有效，应该取消设置。
-            setAuthToken({
+            setSessionToken({
                 req,
                 res,
                 authOptions: this.configService.authOptions,
@@ -96,7 +103,7 @@ export class AuthGuard implements CanActivate {
 
         if (hasOwnerPermission && !serializedSession) {
             serializedSession = await this.sessionService.createAnonymousSession();
-            setAuthToken({
+            setSessionToken({
                 sessionToken: serializedSession.token,
                 rememberMe: true,
                 authOptions: this.configService.authOptions,

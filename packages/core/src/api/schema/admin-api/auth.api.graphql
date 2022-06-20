@@ -1,0 +1,17 @@
+type Query {
+    me: CurrentUser
+}
+
+type Mutation {
+    "使用本地认证策略对用户进行认证。 这个 mutation 的命名方式 `authenticate({ native: { ... }})`"
+    login(username: String!, password: String!, rememberMe: Boolean): NativeAuthenticationResult!
+    "使用命名身份验证策略对用户进行身份验证"
+    authenticate(input: AuthenticationInput!, rememberMe: Boolean): AuthenticationResult!
+    logout: Success!
+}
+
+# Populated at run-time
+input AuthenticationInput
+
+union NativeAuthenticationResult = CurrentUser | InvalidCredentialsError | NativeAuthStrategyError
+union AuthenticationResult = CurrentUser | InvalidCredentialsError

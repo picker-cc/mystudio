@@ -13,7 +13,7 @@ import {
     PasswordResetTokenInvalidError, PasswordValidationError,
 } from "../../common/error/generated-graphql-admin-errors";
 import {User} from "../../entity";
-import {FilterQuery} from "@mikro-orm/core";
+import {FilterQuery, MikroORM, UseRequestContext} from "@mikro-orm/core";
 import {ID} from "@picker-cc/common/lib/shared-types";
 import {EntityNotFoundError} from "../../common";
 import {DeletionResult} from "@picker-cc/common/lib/generated-types";
@@ -23,6 +23,7 @@ import {NativeAuthenticationMethod} from "../../entity/authentication-method";
 export class UserService {
     constructor(
         private readonly em: EntityManager,
+        private readonly orm: MikroORM,
         private readonly configService: ConfigService,
         private readonly authService: AuthZRBACService,
         private passwordCipher: PasswordCipher,
@@ -39,6 +40,8 @@ export class UserService {
         // }, [ 'roles', 'authenticationMethods' ]);
         return this.em.getRepository(User).findOne({
             id: userId,
+        }, {
+            populate: ['roles']
         });
     }
 
@@ -58,25 +61,38 @@ export class UserService {
     }
 
 
+    // @UseRequestContext()
     async createAdminUser(ctx: RequestContext, identifier: string, password: string): Promise<User> {
         const adminUser = new User({
             identifier,
             verified: true,
-            authenticationMethods: [
-                new NativeAuthenticationMethod({
-                    identifier,
-                    passwordHash: await this.passwordCipher.hash(password)
-                })
-            ]
+            // authenticationMethods: [],
+            // authenticationMethods: [
+            //     new NativeAuthenticationMethod({
+            //         identifier,
+                    // passwordHash: await this.passwordCipher.hash(password)
+                // })
+            // ]
         })
-        // adminUser.authenticationMethods.push(new NativeAuthenticationMethod({
+        // console.log('x-x--x-x-x--x------')
+        // console.log(await this.passwordCipher.hash(password))
+        // adminUser.authenticationMethods = [new NativeAuthenticationMethod({
         //     passwordHash: await this.passwordCipher.hash(password)
-        // }))
-
+        // })]
+        const nativeAuthenticationMethod = new NativeAuthenticationMethod(
+                await this.passwordCipher.hash(password)
+            )
+        adminUser.authenticationMethods.push(nativeAuthenticationMethod)
         // adminUser.roles = [{
         //     code: UserRoleType
         // }]
-        await this.em.persistAndFlush(adminUser);
+        // if (ctx instanceof RequestContext) {
+            await this.em.persistAndFlush(adminUser);
+        await this.em.clear()
+        // } else {
+        //     const em = this.orm.em.fork();
+        //     await em.persistAndFlush(adminUser);
+        // }
 
         return adminUser
     }

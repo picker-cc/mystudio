@@ -9,6 +9,7 @@ import { User } from '../../entity/user/user.entity';
 import { AuthenticationStrategy } from './authentication-strategy';
 // import {NativeAuthenticationMethod} from "../../entity";
 import {EntityManager, Loaded} from "@mikro-orm/core";
+import {Injectable} from "@nestjs/common";
 
 export interface NativeAuthenticationData {
     username: string;
@@ -24,15 +25,20 @@ export const NATIVE_AUTH_STRATEGY_NAME = 'native';
  *
  * @docsCategory auth
  */
+// @Injectable()
 export class NativeAuthenticationStrategy implements AuthenticationStrategy<NativeAuthenticationData> {
     readonly name = NATIVE_AUTH_STRATEGY_NAME;
-
     // private connection: TransactionalConnection;
     private connection: EntityManager;
+    constructor(
+        // private connection: EntityManager
+    ) {
+        // this.connection = connection
+    }
     private passwordCipher: import('../../service/helpers/password-cipher/password-cipher').PasswordCipher;
 
     async init(injector: Injector) {
-        // this.connection = injector.get(TransactionalConnection);
+        this.connection = injector.get(EntityManager);
         // This is lazily-loaded to avoid a circular dependency
         const { PasswordCipher } = await import('../../service/helpers/password-cipher/password-cipher');
         this.passwordCipher = injector.get(PasswordCipher);

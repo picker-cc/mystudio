@@ -22,6 +22,8 @@ import { I18nService } from '../../i18n/i18n.service';
 import {I18nModule} from "../../i18n/i18n.module";
 import {TranslateErrorsPlugin} from "../middleware/translate-errors-plugin";
 import {AssetInterceptorPlugin} from "../middleware/asset-interceptor-plugin";
+import {generateErrorCodeEnum} from "./generate-error-code-enum";
+import {generateAuthenticationTypes} from "./generate-auth-types";
 
 export interface GraphQLApiOptions {
     apiType: 'studio' | 'admin';
@@ -126,10 +128,10 @@ async function createGraphQLOptions(
         // 参考 https://github.com/nestjs/graphql/issues/336
         const normalizedPaths = options.typePaths.map(p => p.split(path.sep).join('/'));
         const typeDefs = await typesLoader.mergeTypesByPaths(normalizedPaths);
-        // const authStrategies =
-        //     apiType === 'cms'
-        //         ? configService.authOptions.adminAuthenticationStrategy
-        //         : configService.authOptions.adminAuthenticationStrategy;
+        const authStrategies =
+            apiType === 'studio'
+                ? configService.authOptions.studioAuthenticationStrategy
+                : configService.authOptions.adminAuthenticationStrategy;
         let schema = buildSchema(typeDefs);
 
         // getPluginAPIExtensions(configService.plugins, apiType)
@@ -138,7 +140,8 @@ async function createGraphQLOptions(
         //     .forEach(documentNode => (schema = extendSchema(schema, documentNode)));
 
         schema = generateListOptions(schema);
-        // schema = generateErrorCodeEnum(schema);
+        schema = generateErrorCodeEnum(schema);
+        schema = generateAuthenticationTypes(schema, authStrategies);
 
         // schema = addGraphQLCustomFields(schema, customFields, apiType === 'shop');
         // if (apiType === 'admin') {
