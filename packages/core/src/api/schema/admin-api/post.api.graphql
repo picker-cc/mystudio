@@ -1,0 +1,68 @@
+type Query {
+    "查询全部内容"
+    posts(options: PostListOptions): PostList!
+    "查询单个内容，按ID或 slug"
+    post(id: ID, slug: String): Post
+}
+
+type Mutation {
+    "创建一个内容"
+    createPost(input: CreatePostInput!): Post!
+    "更新一个内容"
+    updatePost(input: UpdatePostInput): Post!
+    "删除一个内容"
+    deletePost(id: ID!): DeletionResponse!
+}
+
+"运行时自动生成"
+input PostListOptions
+
+"创建作品内容"
+input CreatePostInput {
+    "作品名"
+    title: String
+    "作品商品类型"
+    type: PostType
+    "特色图"
+    featuredId: ID
+#    "作品相关资产"
+#    assetIds: [ID!]
+    "内容"
+    content: JSON
+    "创建者"
+    creatorId: ID
+    "类别"
+    terms: [ID!]
+    "作品发布状态"
+    state: PostState
+    "是否允许评论"
+    allowComment: Boolean
+    "排序"
+    order: Int
+    "父内容"
+    parent: ID
+}
+
+input UpdatePostInput {
+    id: ID!
+    "作品名"
+    title: String
+    "作品商品类型"
+    type: PostType
+    "特色图"
+    featuredId: ID
+    "内容"
+    content: JSON
+    "创建者"
+    creatorId: ID
+    "类别"
+    terms: [ID!]
+    "作品发布状态"
+    state: PostState
+    "是否允许评论"
+    allowComment: Boolean
+    "排序"
+    order: Int
+    "父内容"
+    parent: ID
+}

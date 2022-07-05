@@ -34,6 +34,7 @@ export class SessionService {
     async getSessionFromToken(sessionToken: string): Promise<CachedSession | undefined> {
         let serializedSession = await this.sessionCacheStrategy.get(sessionToken)
         const stale = !!(serializedSession && serializedSession.cacheExpiry < new Date().getTime() / 1000);
+        // 如果Token过期将不会返回 Session信息，所有 session 信息会在logout 动作后清除
         const expired = !!(serializedSession && serializedSession.expires < new Date());
         if (!serializedSession || stale || expired) {
             const session = await this.findSessionByToken(sessionToken);
@@ -45,6 +46,8 @@ export class SessionService {
                 return
             }
         }
+        return serializedSession;
+
     }
 
     /**
@@ -186,5 +189,6 @@ export class SessionService {
         for (const session of userSessions) {
             await this.sessionCacheStrategy.delete(session.token);
         }
+        await this.em.flush()
     }
 }

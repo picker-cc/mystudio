@@ -1,0 +1,15 @@
+type Query {
+    globalSettings: GlobalSettings!
+}
+
+type Mutation {
+    updateGlobalSettings(input: UpdateGlobalSettingsInput!): UpdateGlobalSettingsResult!
+}
+
+input UpdateGlobalSettingsInput {
+    availableLanguages: [LanguageCode!]
+    trackInventory: Boolean
+    outOfStockThreshold: Int
+}
+
+union UpdateGlobalSettingsResult = GlobalSettings

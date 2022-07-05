@@ -10,7 +10,7 @@ import {ID, PaginatedList} from "@picker-cc/common/lib/shared-types";
 import {EntityNotFoundError, ListQueryOptions} from "../../common";
 import {CreateProductInput, CreateTermInput, DeletionResult} from "@picker-cc/common/lib/generated-types";
 import {Product} from "../../entity/product/product.entity";
-import {Asset} from "../../../dist/entity/asset/asset.entity";
+import { Asset } from "../../entity/asset/asset.entity";
 
 @Injectable()
 export class ProductService {

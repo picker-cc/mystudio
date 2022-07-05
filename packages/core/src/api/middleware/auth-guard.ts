@@ -40,6 +40,7 @@ export class AuthGuard implements CanActivate {
         const {req, res, info} = parseContext(context);
         const isFieldResolver = this.isFieldResolver(info);
         const permissions = this.reflector.get<Permission[]>(PERMISSIONS_METADATA_KEY, context.getHandler());
+        // console.log(permissions)
         if (isFieldResolver && !permissions) {
             return true;
         }
@@ -56,11 +57,10 @@ export class AuthGuard implements CanActivate {
         //     requestContext = await this.requestContextService.fromRequest(req, info, permissions, session);
         //     (req as any)[REQUEST_CONTEXT_KEY] = requestContext;
         // }
-            const session = await this.getSession(req, res, hasOwnerPermission);
+        const session = await this.getSession(req, res, hasOwnerPermission);
         const requestContext = await this.requestContextService.fromRequest(req, info, permissions, session);
         (req as any)[REQUEST_CONTEXT_KEY] = requestContext;
 
-        console.log('x-x-x-x----')
         console.log(session)
         if (authDisabled || !permissions || isPublic) {
             return true;
@@ -84,8 +84,6 @@ export class AuthGuard implements CanActivate {
         if (sessionToken) {
             // session = await this.authService.validateSession(authToken);
             serializedSession = await this.sessionService.getSessionFromToken(sessionToken);
-            console.log('yyyyy0---')
-            console.log(serializedSession)
             if (serializedSession) {
                 return serializedSession;
             }

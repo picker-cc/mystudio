@@ -22,6 +22,7 @@ import {AuthService} from "./services/auth.service";
 import {SessionService} from "./services/session.service";
 import {NativeAuthenticationStrategy} from "../config/auth/native-authentication-strategy";
 import { RoleService } from './services/role.service';
+import { PostService } from './services/post.service';
 
 
 const services = [
@@ -32,6 +33,7 @@ const services = [
     SessionService,
     TermService,
     ProductService,
+    PostService,
     AuthService,
     RoleService,
 ];

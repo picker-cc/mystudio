@@ -10,11 +10,14 @@ import {Role} from './role/role.entity';
 import {Order} from "./order/order.entity";
 import {Customer} from "./customer/customer.entity";
 import {CustomerGroup} from "./customer-group/customer-group.entity";
+import {Post} from "./posts/post.entity";
+import {ContentParser, NavMenuItem, PostMeta} from './posts/post.embedded';
 
 /**
  * 所有核心数据库实体的映射。
  */
 export const coreEntitiesMap = {
+    Post, PostMeta, NavMenuItem, ContentParser,
     Product, ProductSetting, ProtectSetting, DiffPriceOption,
     Term,
     Option,

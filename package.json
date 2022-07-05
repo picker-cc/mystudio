@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "watch:all": "pnpm watch --parallel",
-    "watch:core-common": "pnpm run --filter @caixie/common --filter @caixie/core watch --parallel",
+    "watch:core-common": "pnpm run --filter @picker-cc/common --filter @picker-cc/core watch --parallel",
     "lint": "pnpm tslint --fix",
     "format": "prettier --write --html-whitespace-sensitivity ignore",
     "bootstrap": "pnpm recursive install",

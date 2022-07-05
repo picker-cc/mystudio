@@ -1,5 +1,5 @@
 import {DeepPartial, ID} from '@picker-cc/common/lib/shared-types';
-import {Entity, Index, ManyToOne, Property} from '@mikro-orm/core';
+import {Entity, EventArgs, Index, ManyToOne, Property} from '@mikro-orm/core';
 
 import {PickerMongoEntity} from '../base/mongo-base.entity';
 import {User} from '../user/user.entity';
@@ -36,7 +36,7 @@ export class Session extends PickerMongoEntity {
     @ManyToOne(() => Order, { nullable: true})
     activeOrder: Order | null;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, {eager: true})
     user: User;
 
     // Authenticated | Anonymous
@@ -45,4 +45,12 @@ export class Session extends PickerMongoEntity {
 
     @Property()
     authenticationStrategy: string;
+
+    // async doAfterCreate(args)
+    // private async clearSessionCacheOnDataChange(
+    //     eventArgs: EventArgs<Session>
+    // ) {
+    //     if (eventArgs.entity) {
+    //     }
+    // }
 }

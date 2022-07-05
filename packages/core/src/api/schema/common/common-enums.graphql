@@ -56,7 +56,30 @@ enum TaxonomyEnum {
     LINK_CATEGORY
     "内容标签"
     POST_TAG
+    "内容格式"
+    POST_FORMAT
+    "产品类型"
+    PRODUCT_TYPE
+    "产品类别"
+    PRODUCT_CATEGORY
+    "菜单"
+    NAV_MENU
 }
+
+"""
+内容类型
+"""
+enum PostType {
+    "博客文章"
+    POST
+    "页面"
+    PAGE
+    "导航项"
+    NAV_MENU_ITEM
+    "产品"
+    PRODUCT
+}
+
 """
 作品商品类型
 """
@@ -165,7 +188,7 @@ enum ProductState {
     ARCHIVED
 }
 
-"文章发布状态"
+"内容发布状态"
 enum PostState {
     "草稿"
     DRAFT
@@ -174,15 +197,16 @@ enum PostState {
     "存档"
     ARCHIVED
 }
-
 "评论状态"
 enum CommentState {
-    "待审核"
-    AUDITING
-    "审核发布"
-    PUBLISH
+    "审核中, 比如审核通"
+    PENDING
+    "已批准"
+    APPROVED
     "垃圾评论"
     SPAM
+    "已删除"
+    TRASH
 }
 
 "用户 Session 类型"

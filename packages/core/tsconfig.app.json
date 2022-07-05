@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "declaration": false,
-    "outDir": "../../dist/apps/asset-server-plugin",
+    "outDir": "../../dist/apps/core",
     "lib": [
       "es2015.promise"
     ]

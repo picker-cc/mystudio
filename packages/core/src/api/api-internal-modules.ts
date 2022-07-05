@@ -14,6 +14,7 @@ import {TermResolver} from "./resolvers/admin/term.resolver";
 import {ProductResolver} from "./resolvers/admin/product.resolver";
 import {createDynamicGraphQlModulesForPlugins} from "../plugin/dynamic-plugin-api.module";
 import {AuthResolver} from "./resolvers/admin/auth.resolver";
+import {PostResolver} from "./resolvers/admin/post.resolver";
 
 const sharedResolvers = [
     AssetResolver,
@@ -27,6 +28,7 @@ const adminResolvers = [
     AuthResolver,
     TermResolver,
     ProductResolver,
+    PostResolver,
 ];
 
 const studioResolvers = [];

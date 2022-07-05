@@ -182,26 +182,16 @@ export type BooleanOperators = {
   eq?: InputMaybe<Scalars['Boolean']>;
 };
 
-/**
- * Returned when the default LanguageCode of a Channel is no longer found in the `availableLanguages`
- * of the GlobalSettings
- */
-export type ChannelDefaultLanguageError = ErrorResult & {
-  __typename?: 'ChannelDefaultLanguageError';
-  channelCode: Scalars['String'];
-  errorCode: ErrorCode;
-  language: Scalars['String'];
-  message: Scalars['String'];
-};
-
 /** 评论状态 */
 export enum CommentState {
-  /** 待审核 */
-  AUDITING = 'AUDITING',
-  /** 审核发布 */
-  PUBLISH = 'PUBLISH',
+  /** 已批准 */
+  APPROVED = 'APPROVED',
+  /** 审核中, 比如审核通 */
+  PENDING = 'PENDING',
   /** 垃圾评论 */
-  SPAM = 'SPAM'
+  SPAM = 'SPAM',
+  /** 已删除 */
+  TRASH = 'TRASH'
 }
 
 export type ConfigArg = {
@@ -288,6 +278,30 @@ export type CreateOptionInput = {
 };
 
 /** 创建作品内容 */
+export type CreatePostInput = {
+  /** 是否允许评论 */
+  allowComment?: InputMaybe<Scalars['Boolean']>;
+  /** 内容 */
+  content?: InputMaybe<Scalars['JSON']>;
+  /** 创建者 */
+  creatorId?: InputMaybe<Scalars['ID']>;
+  /** 特色图 */
+  featuredId?: InputMaybe<Scalars['ID']>;
+  /** 排序 */
+  order?: InputMaybe<Scalars['Int']>;
+  /** 父内容 */
+  parent?: InputMaybe<Scalars['ID']>;
+  /** 作品发布状态 */
+  state?: InputMaybe<PostState>;
+  /** 类别 */
+  terms?: InputMaybe<Array<Scalars['ID']>>;
+  /** 作品名 */
+  title?: InputMaybe<Scalars['String']>;
+  /** 作品商品类型 */
+  type?: InputMaybe<PostType>;
+};
+
+/** 创建作品内容 */
 export type CreateProductInput = {
   /** 作品相关资产 */
   assetIds?: InputMaybe<Array<Scalars['ID']>>;
@@ -321,12 +335,14 @@ export type CreateTermInput = {
   /** 类别名 */
   name: Scalars['String'];
   /** 父级类别 */
-  pid?: InputMaybe<Scalars['ID']>;
+  parent?: InputMaybe<Scalars['ID']>;
   /** slug 标识 */
   slug?: InputMaybe<Scalars['String']>;
   /** 分类法 */
   taxonomy?: InputMaybe<TaxonomyEnum>;
 };
+
+export type CreateTermResult = NameConflictError | Term;
 
 /**
  * @description
@@ -751,7 +767,6 @@ export type EmailAddressConflictError = ErrorResult & {
 
 export enum ErrorCode {
   ALREADY_LOGGED_IN_ERROR = 'ALREADY_LOGGED_IN_ERROR',
-  CHANNEL_DEFAULT_LANGUAGE_ERROR = 'CHANNEL_DEFAULT_LANGUAGE_ERROR',
   EMAIL_ADDRESS_CONFLICT_ERROR = 'EMAIL_ADDRESS_CONFLICT_ERROR',
   IDENTIFIER_CHANGE_TOKEN_EXPIRED_ERROR = 'IDENTIFIER_CHANGE_TOKEN_EXPIRED_ERROR',
   IDENTIFIER_CHANGE_TOKEN_INVALID_ERROR = 'IDENTIFIER_CHANGE_TOKEN_INVALID_ERROR',
@@ -795,8 +810,12 @@ export enum GlobalFlag {
 
 export type GlobalSettings = {
   __typename?: 'GlobalSettings';
+  availableLanguages: Array<LanguageCode>;
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
+  outOfStockThreshold: Scalars['Int'];
+  serverConfig: ServerConfig;
+  trackInventory: Scalars['Boolean'];
   updatedAt: Scalars['DateTime'];
 };
 
@@ -1259,18 +1278,22 @@ export type Mutation = {
   createAssets: Array<CreateAssetResult>;
   /** Create a new Option */
   createOption: Option;
+  /** 创建一个内容 */
+  createPost: Post;
   /** 创建一个作品 */
   createProduct?: Maybe<Product>;
   /** 创建一个新角色 */
   createRole: Role;
   /** 创建分类项 */
-  createTerm: Term;
+  createTerm: CreateTermResult;
   /** Delete an Administrator */
   deleteAdministrator: DeletionResponse;
   /** Delete an Asset */
   deleteAsset: DeletionResponse;
   /** Delete multiple Assets */
   deleteAssets: DeletionResponse;
+  /** 删除一个内容 */
+  deletePost: DeletionResponse;
   /** 删除角色 */
   deleteRole: DeletionResponse;
   /** 删除CSM用户 */
@@ -1290,10 +1313,12 @@ export type Mutation = {
   updateAsset: Asset;
   updateGlobalSettings: UpdateGlobalSettingsResult;
   updateOption: Option;
+  /** 更新一个内容 */
+  updatePost: Post;
   /** 更新角色 */
   updateRole: Role;
   /** 更新分类项 */
-  updateTerm: Term;
+  updateTerm: UpdateTermResult;
 };
 
 
@@ -1329,6 +1354,11 @@ export type MutationCreateOptionArgs = {
 };
 
 
+export type MutationCreatePostArgs = {
+  input: CreatePostInput;
+};
+
+
 export type MutationCreateProductArgs = {
   input: CreateProductInput;
 };
@@ -1356,6 +1386,11 @@ export type MutationDeleteAssetArgs = {
 
 export type MutationDeleteAssetsArgs = {
   input: DeleteAssetsInput;
+};
+
+
+export type MutationDeletePostArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -1410,6 +1445,11 @@ export type MutationUpdateGlobalSettingsArgs = {
 
 export type MutationUpdateOptionArgs = {
   input: UpdateOptionInput;
+};
+
+
+export type MutationUpdatePostArgs = {
+  input?: InputMaybe<UpdatePostInput>;
 };
 
 
@@ -1593,6 +1633,12 @@ export type OrderList = PaginatedList & {
   totalItems: Scalars['Int'];
 };
 
+export type OrderProcessState = {
+  __typename?: 'OrderProcessState';
+  name: Scalars['String'];
+  to: Array<Scalars['String']>;
+};
+
 /** 订单适用的税种摘要，按分组税率 */
 export type OrderTaxSummary = {
   __typename?: 'OrderTaxSummary';
@@ -1664,6 +1710,8 @@ export enum Permission {
   CreateAsset = 'CreateAsset',
   /** 授权限给 create Assets, Collections */
   CreateCatalog = 'CreateCatalog',
+  /** 授权限给 create Post */
+  CreatePost = 'CreatePost',
   /** 授权限给 create Product */
   CreateProduct = 'CreateProduct',
   /** 授权限给 create System & GlobalSettings */
@@ -1678,6 +1726,8 @@ export enum Permission {
   DeleteAsset = 'DeleteAsset',
   /** 授权限给 delete Assets, Collections */
   DeleteCatalog = 'DeleteCatalog',
+  /** 授权限给 delete Post */
+  DeletePost = 'DeletePost',
   /** 授权限给 delete Product */
   DeleteProduct = 'DeleteProduct',
   /** 授权限给 delete System & GlobalSettings */
@@ -1696,6 +1746,8 @@ export enum Permission {
   ReadAsset = 'ReadAsset',
   /** 授权限给 read Assets, Collections */
   ReadCatalog = 'ReadCatalog',
+  /** 授权限给 read Post */
+  ReadPost = 'ReadPost',
   /** 授权限给 read Product */
   ReadProduct = 'ReadProduct',
   /** 授权限给 read System & GlobalSettings */
@@ -1714,6 +1766,8 @@ export enum Permission {
   UpdateCatalog = 'UpdateCatalog',
   /** 授权更新 GlobalSettings */
   UpdateGlobalSettings = 'UpdateGlobalSettings',
+  /** 授权限给 update Post */
+  UpdatePost = 'UpdatePost',
   /** 授权限给 update Product */
   UpdateProduct = 'UpdateProduct',
   /** 授权限给 update System & GlobalSettings */
@@ -1738,7 +1792,91 @@ export type PhoneConflictError = ErrorResult & {
   message: Scalars['String'];
 };
 
-/** 文章发布状态 */
+/** 内容 */
+export type Post = Node & {
+  __typename?: 'Post';
+  /** 是否允许评论 */
+  allowComment?: Maybe<Scalars['Boolean']>;
+  /** 内容中相关资产 */
+  assets?: Maybe<Array<Maybe<Asset>>>;
+  /** 评论数 */
+  commentCount?: Maybe<Scalars['Int']>;
+  /** 作品内容 */
+  content: Scalars['JSON'];
+  createdAt: Scalars['DateTime'];
+  /** 作者 */
+  creator?: Maybe<User>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  /** 文章描述 */
+  description: Scalars['String'];
+  /** 内容特色图片 */
+  featured?: Maybe<Asset>;
+  id: Scalars['ID'];
+  /** 排序 */
+  order?: Maybe<Scalars['Int']>;
+  /** 父内容 */
+  parent?: Maybe<Scalars['ID']>;
+  /** 文章标识 */
+  slug: Scalars['String'];
+  /** 作品发布状态 */
+  state?: Maybe<PostState>;
+  /** 分类 */
+  terms?: Maybe<Array<Term>>;
+  /** 文章标题 */
+  title?: Maybe<Scalars['String']>;
+  /** 内容类型 */
+  type: PostType;
+  updatedAt: Scalars['DateTime'];
+};
+
+export type PostFilterParameter = {
+  allowComment?: InputMaybe<BooleanOperators>;
+  commentCount?: InputMaybe<NumberOperators>;
+  createdAt?: InputMaybe<DateOperators>;
+  deletedAt?: InputMaybe<DateOperators>;
+  description?: InputMaybe<StringOperators>;
+  order?: InputMaybe<NumberOperators>;
+  slug?: InputMaybe<StringOperators>;
+  state?: InputMaybe<StringOperators>;
+  title?: InputMaybe<StringOperators>;
+  type?: InputMaybe<StringOperators>;
+  updatedAt?: InputMaybe<DateOperators>;
+};
+
+/** 内容列表 */
+export type PostList = PaginatedList & {
+  __typename?: 'PostList';
+  items: Array<Post>;
+  totalItems: Scalars['Int'];
+};
+
+export type PostListOptions = {
+  /** 允许过滤结果 */
+  filter?: InputMaybe<PostFilterParameter>;
+  /** 指定多个 "filter" 参数是否应该与逻辑的 AND 或 OR 操作组合，默认为 AND */
+  filterOperator?: InputMaybe<LogicalOperator>;
+  /** 跳过前n个结果以用于分页 */
+  skip?: InputMaybe<Scalars['Int']>;
+  /** 指定根据哪些属性对结果进行排序 */
+  sort?: InputMaybe<PostSortParameter>;
+  /** 获取n个结果，用于分页 */
+  take?: InputMaybe<Scalars['Int']>;
+};
+
+export type PostSortParameter = {
+  commentCount?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  deletedAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  order?: InputMaybe<SortOrder>;
+  parent?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+/** 内容发布状态 */
 export enum PostState {
   /** 存档 */
   ARCHIVED = 'ARCHIVED',
@@ -1746,6 +1884,18 @@ export enum PostState {
   DRAFT = 'DRAFT',
   /** 发布 */
   PUBLISH = 'PUBLISH'
+}
+
+/** 内容类型 */
+export enum PostType {
+  /** 导航项 */
+  NAV_MENU_ITEM = 'NAV_MENU_ITEM',
+  /** 页面 */
+  PAGE = 'PAGE',
+  /** 博客文章 */
+  POST = 'POST',
+  /** 产品 */
+  PRODUCT = 'PRODUCT'
 }
 
 /** 作品 */
@@ -1980,6 +2130,10 @@ export type Query = {
   assets: AssetList;
   globalSettings: GlobalSettings;
   me?: Maybe<CurrentUser>;
+  /** 查询单个内容，按ID或 slug */
+  post?: Maybe<Post>;
+  /** 查询全部内容 */
+  posts: PostList;
   /** 查询全部作品 */
   products?: Maybe<ProductList>;
   role?: Maybe<Role>;
@@ -2006,6 +2160,17 @@ export type QueryAssetArgs = {
 
 export type QueryAssetsArgs = {
   options?: InputMaybe<AssetListOptions>;
+};
+
+
+export type QueryPostArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryPostsArgs = {
+  options?: InputMaybe<PostListOptions>;
 };
 
 
@@ -2104,6 +2269,7 @@ export type SearchResultSortParameter = {
 
 export type ServerConfig = {
   __typename?: 'ServerConfig';
+  orderProcess: Array<OrderProcessState>;
   permissions: Array<PermissionDefinition>;
   permittedAssetTypes: Array<Scalars['String']>;
 };
@@ -2223,8 +2389,16 @@ export enum TaxonomyEnum {
   CATEGORY = 'CATEGORY',
   /** 链接分类 */
   LINK_CATEGORY = 'LINK_CATEGORY',
+  /** 菜单 */
+  NAV_MENU = 'NAV_MENU',
+  /** 内容格式 */
+  POST_FORMAT = 'POST_FORMAT',
   /** 内容标签 */
-  POST_TAG = 'POST_TAG'
+  POST_TAG = 'POST_TAG',
+  /** 产品类别 */
+  PRODUCT_CATEGORY = 'PRODUCT_CATEGORY',
+  /** 产品类型 */
+  PRODUCT_TYPE = 'PRODUCT_TYPE'
 }
 
 /** 分类法 */
@@ -2319,7 +2493,7 @@ export type UpdateGlobalSettingsInput = {
   trackInventory?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type UpdateGlobalSettingsResult = ChannelDefaultLanguageError | GlobalSettings;
+export type UpdateGlobalSettingsResult = GlobalSettings;
 
 /** 更新配置的输入项 */
 export type UpdateOptionInput = {
@@ -2332,6 +2506,30 @@ export type UpdateOptionInput = {
   shared?: InputMaybe<Scalars['Boolean']>;
   /** 值 */
   value?: InputMaybe<Scalars['JSON']>;
+};
+
+export type UpdatePostInput = {
+  /** 是否允许评论 */
+  allowComment?: InputMaybe<Scalars['Boolean']>;
+  /** 内容 */
+  content?: InputMaybe<Scalars['JSON']>;
+  /** 创建者 */
+  creatorId?: InputMaybe<Scalars['ID']>;
+  /** 特色图 */
+  featuredId?: InputMaybe<Scalars['ID']>;
+  id: Scalars['ID'];
+  /** 排序 */
+  order?: InputMaybe<Scalars['Int']>;
+  /** 父内容 */
+  parent?: InputMaybe<Scalars['ID']>;
+  /** 作品发布状态 */
+  state?: InputMaybe<PostState>;
+  /** 类别 */
+  terms?: InputMaybe<Array<Scalars['ID']>>;
+  /** 作品名 */
+  title?: InputMaybe<Scalars['String']>;
+  /** 作品商品类型 */
+  type?: InputMaybe<PostType>;
 };
 
 export type UpdateRoleInput = {
@@ -2350,20 +2548,25 @@ export type UpdateTermInput = {
   id: Scalars['ID'];
   name: Scalars['String'];
   /** 父级类别 */
-  pid?: InputMaybe<Scalars['ID']>;
+  parent?: InputMaybe<Scalars['ID']>;
   /** slug 标识 */
   slug?: InputMaybe<Scalars['String']>;
   /** 分类法 */
   taxonomy?: InputMaybe<TaxonomyEnum>;
 };
 
+export type UpdateTermResult = NameConflictError | Term;
+
 export type User = Node & {
   __typename?: 'User';
+  authenticationMethods: Array<AuthenticationMethod>;
   createdAt: Scalars['DateTime'];
   displayName?: Maybe<Scalars['String']>;
   featured?: Maybe<Asset>;
   id: Scalars['ID'];
   identifier: Scalars['String'];
+  lastLogin?: Maybe<Scalars['DateTime']>;
+  roles: Array<Role>;
   updatedAt: Scalars['DateTime'];
   verified: Scalars['Boolean'];
 };

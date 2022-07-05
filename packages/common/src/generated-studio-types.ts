@@ -86,12 +86,14 @@ export type BooleanOperators = {
 
 /** 评论状态 */
 export enum CommentState {
-  /** 待审核 */
-  AUDITING = 'AUDITING',
-  /** 审核发布 */
-  PUBLISH = 'PUBLISH',
+  /** 已批准 */
+  APPROVED = 'APPROVED',
+  /** 审核中, 比如审核通 */
+  PENDING = 'PENDING',
   /** 垃圾评论 */
-  SPAM = 'SPAM'
+  SPAM = 'SPAM',
+  /** 已删除 */
+  TRASH = 'TRASH'
 }
 
 export type ConfigArg = {
@@ -1294,6 +1296,8 @@ export enum Permission {
   CreateAsset = 'CreateAsset',
   /** 授权限给 create Assets, Collections */
   CreateCatalog = 'CreateCatalog',
+  /** 授权限给 create Post */
+  CreatePost = 'CreatePost',
   /** 授权限给 create Product */
   CreateProduct = 'CreateProduct',
   /** 授权限给 create System & GlobalSettings */
@@ -1308,6 +1312,8 @@ export enum Permission {
   DeleteAsset = 'DeleteAsset',
   /** 授权限给 delete Assets, Collections */
   DeleteCatalog = 'DeleteCatalog',
+  /** 授权限给 delete Post */
+  DeletePost = 'DeletePost',
   /** 授权限给 delete Product */
   DeleteProduct = 'DeleteProduct',
   /** 授权限给 delete System & GlobalSettings */
@@ -1326,6 +1332,8 @@ export enum Permission {
   ReadAsset = 'ReadAsset',
   /** 授权限给 read Assets, Collections */
   ReadCatalog = 'ReadCatalog',
+  /** 授权限给 read Post */
+  ReadPost = 'ReadPost',
   /** 授权限给 read Product */
   ReadProduct = 'ReadProduct',
   /** 授权限给 read System & GlobalSettings */
@@ -1344,6 +1352,8 @@ export enum Permission {
   UpdateCatalog = 'UpdateCatalog',
   /** 授权更新 GlobalSettings */
   UpdateGlobalSettings = 'UpdateGlobalSettings',
+  /** 授权限给 update Post */
+  UpdatePost = 'UpdatePost',
   /** 授权限给 update Product */
   UpdateProduct = 'UpdateProduct',
   /** 授权限给 update System & GlobalSettings */
@@ -1361,7 +1371,51 @@ export type PhoneConflictError = ErrorResult & {
   message: Scalars['String'];
 };
 
-/** 文章发布状态 */
+/** 内容 */
+export type Post = Node & {
+  __typename?: 'Post';
+  /** 是否允许评论 */
+  allowComment?: Maybe<Scalars['Boolean']>;
+  /** 内容中相关资产 */
+  assets?: Maybe<Array<Maybe<Asset>>>;
+  /** 评论数 */
+  commentCount?: Maybe<Scalars['Int']>;
+  /** 作品内容 */
+  content: Scalars['JSON'];
+  createdAt: Scalars['DateTime'];
+  /** 作者 */
+  creator?: Maybe<User>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  /** 文章描述 */
+  description: Scalars['String'];
+  /** 内容特色图片 */
+  featured?: Maybe<Asset>;
+  id: Scalars['ID'];
+  /** 排序 */
+  order?: Maybe<Scalars['Int']>;
+  /** 父内容 */
+  parent?: Maybe<Scalars['ID']>;
+  /** 文章标识 */
+  slug: Scalars['String'];
+  /** 作品发布状态 */
+  state?: Maybe<PostState>;
+  /** 分类 */
+  terms?: Maybe<Array<Term>>;
+  /** 文章标题 */
+  title?: Maybe<Scalars['String']>;
+  /** 内容类型 */
+  type: PostType;
+  updatedAt: Scalars['DateTime'];
+};
+
+/** 内容列表 */
+export type PostList = PaginatedList & {
+  __typename?: 'PostList';
+  items: Array<Post>;
+  totalItems: Scalars['Int'];
+};
+
+/** 内容发布状态 */
 export enum PostState {
   /** 存档 */
   ARCHIVED = 'ARCHIVED',
@@ -1369,6 +1423,18 @@ export enum PostState {
   DRAFT = 'DRAFT',
   /** 发布 */
   PUBLISH = 'PUBLISH'
+}
+
+/** 内容类型 */
+export enum PostType {
+  /** 导航项 */
+  NAV_MENU_ITEM = 'NAV_MENU_ITEM',
+  /** 页面 */
+  PAGE = 'PAGE',
+  /** 博客文章 */
+  POST = 'POST',
+  /** 产品 */
+  PRODUCT = 'PRODUCT'
 }
 
 /** 作品 */
@@ -1709,8 +1775,16 @@ export enum TaxonomyEnum {
   CATEGORY = 'CATEGORY',
   /** 链接分类 */
   LINK_CATEGORY = 'LINK_CATEGORY',
+  /** 菜单 */
+  NAV_MENU = 'NAV_MENU',
+  /** 内容格式 */
+  POST_FORMAT = 'POST_FORMAT',
   /** 内容标签 */
-  POST_TAG = 'POST_TAG'
+  POST_TAG = 'POST_TAG',
+  /** 产品类别 */
+  PRODUCT_CATEGORY = 'PRODUCT_CATEGORY',
+  /** 产品类型 */
+  PRODUCT_TYPE = 'PRODUCT_TYPE'
 }
 
 /** 分类法 */
@@ -1746,11 +1820,14 @@ export type UpdateAdministratorPasswordResult = InvalidCredentialsError | Native
 
 export type User = Node & {
   __typename?: 'User';
+  authenticationMethods: Array<AuthenticationMethod>;
   createdAt: Scalars['DateTime'];
   displayName?: Maybe<Scalars['String']>;
   featured?: Maybe<Asset>;
   id: Scalars['ID'];
   identifier: Scalars['String'];
+  lastLogin?: Maybe<Scalars['DateTime']>;
+  roles: Array<Role>;
   updatedAt: Scalars['DateTime'];
   verified: Scalars['Boolean'];
 };

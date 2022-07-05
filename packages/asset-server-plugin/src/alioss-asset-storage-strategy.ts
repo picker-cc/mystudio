@@ -34,8 +34,8 @@ export class AliossAssetStorageStrategy implements AssetStorageStrategy {
         }
 
         this.sts = new STS({
-            accessKeyId: 'LTAI4FfvLFwH5ybz57U8yZEa',
-            accessKeySecret: 'YscSIAYpSYru8XMUQA0b70eMI2fEAm',
+            accessKeyId: '',
+            accessKeySecret: '',
         });
     }
 

@@ -8,19 +8,27 @@ import {AssetService} from "./asset.service";
 import {EventBus} from "../../event-bus";
 import {RequestContext} from '../../api';
 import {ListQueryBuilder, parseFilterParams} from "../helpers/list-query-builder/list-query-builder";
+import slug from 'limax';
 
 import {
-    InvalidCredentialsError,
+    InvalidCredentialsError, NameConflictError,
     PasswordResetTokenExpiredError,
     PasswordResetTokenInvalidError, PasswordValidationError,
 } from "../../common/error/generated-graphql-admin-errors";
 import {User} from "../../entity";
 import {FilterQuery} from "@mikro-orm/core";
 import {ID, PaginatedList} from "@picker-cc/common/lib/shared-types";
-import {EntityNotFoundError, ListQueryOptions} from "../../common";
-import {CreateTermInput, DeletionResult} from "@picker-cc/common/lib/generated-types";
+import {EntityNotFoundError, ErrorResultUnion, ListQueryOptions} from "../../common";
+import {
+    CreateTermInput,
+    CreateTermResult,
+    DeletionResult,
+    UpdateTermInput,
+    UpdateTermResult
+} from "@picker-cc/common/lib/generated-types";
 import {NativeAuthenticationMethod} from "../../entity/authentication-method";
 import {Term} from "../../entity/taxonomy/term.entity";
+import {Asset} from "../../../dist/entity/asset/asset.entity";
 
 @Injectable()
 export class TermService {
@@ -28,49 +36,73 @@ export class TermService {
         private readonly em: EntityManager,
         private readonly configService: ConfigService,
         private listQueryBuilder: ListQueryBuilder,
-        private readonly authService: AuthZRBACService,
-        private passwordCipher: PasswordCipher,
-        private verificationTokenGenerator: VerificationTokenGenerator,
         private readonly eventBus: EventBus,
         private readonly assetService: AssetService,
     ) {
     }
-
-
-    // async getUserById(userId: ID): Promise<User | undefined> {
-    //     // return this.em.getRepository(User).findOne({
-    //     //   id: userId,
-    //     // }, [ 'roles', 'authenticationMethods' ]);
-    //     return this.em.getRepository(User).findOne({
-    //         id: userId,
-    //     });
-    // }
-    //
-    //
-    // async getUserByEmailAddress(ctx: RequestContext, emailAddress: string): Promise<User | undefined> {
-    //     return this.em.getRepository(User).findOne({
-    //         identifier: emailAddress,
-    //         deletedAt: null,
-    //     });
-    // }
-    //
-    // async getUserByIdentifier(ctx: RequestContext, identifier: string): Promise<User | undefined> {
-    //     return this.em.getRepository(User).findOne({
-    //         identifier,
-    //         deletedAt: null,
-    //     });
-    // }
-
 
     /**
      * 创建分类法
      * @param ctx
      * @param input
      */
-    async createTerm(ctx: RequestContext, input: CreateTermInput): Promise<Term> {
-        const term = new Term(input);
+    async create(
+        ctx: RequestContext,
+        input: CreateTermInput
+    ): Promise<ErrorResultUnion<CreateTermResult, Term>> {
+        const existingTerm = await this.em.findOne(Term, {
+            $or: [ {
+                name: input.name
+            }, {
+                slug: input.slug
+            } ]
+        })
+        if (existingTerm) {
+            return new NameConflictError()
+        }
+        const term = new Term({
+            name: input.name,
+            slug: input.slug ? input.slug : slug(input.name),
+            taxonomy: input.taxonomy,
+        });
         await this.em.persistAndFlush(term)
         return term
+    }
+
+    async update(
+        ctx: RequestContext,
+        input: UpdateTermInput
+    ): Promise<ErrorResultUnion<UpdateTermResult, Term>> {
+        // const term = await this.em.findOneOrFail(Term, {id: input.id})
+        const existingTerm = await this.em.findOne(Term, {
+            id: input.id
+        })
+        if (!existingTerm) {
+            // return new EntityNotFoundError()
+            throw new EntityNotFoundError(Term.name as any, input.id);
+        }
+        if (input.name || input.slug) {
+            const findTerm = await this.em.findOne(Term, {
+                $or: [ {
+                    name: input.name
+                }, {
+                    slug: input.slug
+                } ]
+            })
+            if (findTerm) {
+                return new NameConflictError()
+            }
+        }
+
+        if (input.featuredId) {
+            existingTerm.featured = new Asset({id: input.featuredId});
+        }
+        existingTerm.description = input.description
+        existingTerm.name = input.name
+        existingTerm.slug = input.slug ? input.slug : slug(input.name)
+        existingTerm.taxonomy = input.taxonomy && input.taxonomy
+        await this.em.persistAndFlush(existingTerm)
+        return existingTerm
     }
 
     /**

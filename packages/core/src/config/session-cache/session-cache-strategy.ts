@@ -2,7 +2,6 @@ import { Permission } from '@picker-cc/common/lib/generated-types';
 import { ID } from '@picker-cc/common/lib/shared-types';
 
 import { InjectableStrategy } from '../../common/types/injectable-strategy';
-import { UserPermission } from '../../service/helpers/get-user-permissions';
 
 /**
  * @description

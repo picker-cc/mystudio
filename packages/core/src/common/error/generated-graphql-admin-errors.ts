@@ -28,18 +28,6 @@ export class AlreadyLoggedInError extends ErrorResult {
   }
 }
 
-export class ChannelDefaultLanguageError extends ErrorResult {
-  readonly __typename = 'ChannelDefaultLanguageError';
-  readonly errorCode = 'CHANNEL_DEFAULT_LANGUAGE_ERROR' as any;
-  readonly message = 'CHANNEL_DEFAULT_LANGUAGE_ERROR';
-  constructor(
-    public channelCode: Scalars['String'],
-    public language: Scalars['String'],
-  ) {
-    super();
-  }
-}
-
 export class EmailAddressConflictError extends ErrorResult {
   readonly __typename = 'EmailAddressConflictError';
   readonly errorCode = 'EMAIL_ADDRESS_CONFLICT_ERROR' as any;
@@ -205,7 +193,7 @@ export class VerificationTokenInvalidError extends ErrorResult {
 }
 
 
-const errorTypeNames = new Set(['AlreadyLoggedInError', 'ChannelDefaultLanguageError', 'EmailAddressConflictError', 'IdentifierChangeTokenExpiredError', 'IdentifierChangeTokenInvalidError', 'InvalidCredentialsError', 'MimeTypeError', 'MissingPasswordError', 'NameConflictError', 'NativeAuthStrategyError', 'NotVerifiedError', 'PasswordAlreadySetError', 'PasswordResetTokenExpiredError', 'PasswordResetTokenInvalidError', 'PasswordValidationError', 'PhoneConflictError', 'VerificationTokenExpiredError', 'VerificationTokenInvalidError']);
+const errorTypeNames = new Set(['AlreadyLoggedInError', 'EmailAddressConflictError', 'IdentifierChangeTokenExpiredError', 'IdentifierChangeTokenInvalidError', 'InvalidCredentialsError', 'MimeTypeError', 'MissingPasswordError', 'NameConflictError', 'NativeAuthStrategyError', 'NotVerifiedError', 'PasswordAlreadySetError', 'PasswordResetTokenExpiredError', 'PasswordResetTokenInvalidError', 'PasswordValidationError', 'PhoneConflictError', 'VerificationTokenExpiredError', 'VerificationTokenInvalidError']);
 function isGraphQLError(input: any): input is import('@picker-cc/common/lib/generated-types').ErrorResult {
   return input instanceof ErrorResult || errorTypeNames.has(input.__typename);
 }
@@ -221,6 +209,11 @@ export const adminErrorOperationTypeResolvers = {
       return isGraphQLError(value) ? (value as any).__typename : 'Asset';
     },
   },
+  CreateTermResult: {
+    __resolveType(value: any) {
+      return isGraphQLError(value) ? (value as any).__typename : 'Term';
+    },
+  },
   NativeAuthenticationResult: {
     __resolveType(value: any) {
       return isGraphQLError(value) ? (value as any).__typename : 'CurrentUser';
@@ -231,9 +224,9 @@ export const adminErrorOperationTypeResolvers = {
       return isGraphQLError(value) ? (value as any).__typename : 'Success';
     },
   },
-  UpdateGlobalSettingsResult: {
+  UpdateTermResult: {
     __resolveType(value: any) {
-      return isGraphQLError(value) ? (value as any).__typename : 'GlobalSettings';
+      return isGraphQLError(value) ? (value as any).__typename : 'Term';
     },
   },
 };

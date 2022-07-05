@@ -1,11 +1,12 @@
 import {
     BooleanOperators,
     DateOperators,
+    LogicalOperator,
     NumberOperators,
     StringOperators,
 } from '@picker-cc/common/lib/generated-types';
-import {ID, Type} from '@picker-cc/common/lib/shared-types';
-import {FilterQuery, FindOneOptions, FindOptions} from '@mikro-orm/core';
+import {Type} from '@picker-cc/common/lib/shared-types';
+import {FilterQuery, FindOptions} from '@mikro-orm/core';
 import {EntityManager} from '@mikro-orm/mongodb';
 import {Injectable} from '@nestjs/common';
 import {addDays, format} from 'date-fns';
@@ -149,12 +150,25 @@ export class ListQueryBuilder {
         extendedOptions.limit = take
         extendedOptions.offset = skip
 
-        const where = parseFilterParams(this.connection, entity.name, options.filter, embeddeds);
+        const filter = parseFilterParams(this.connection, entity.name, options.filter, embeddeds);
+        // const where = parseFilterParams(this.connection, entity.name, options.filter, embeddeds);
+        let where = {}
+        if (filter.length) {
+            const filterOperator = options.filterOperator ?? LogicalOperator.AND;
+            if (filterOperator === LogicalOperator.AND) {
+                // filter.forEach(() => {})
+                where = {
+                    $and: filter
+                }
+            } else {
+                where = {
+                    $or: filter
+                }
+            }
+        }
         return this.connection.findAndCount(
             entity,
-            {
-                ...where
-            },
+            where,
             {
                 ...extendedOptions
             }

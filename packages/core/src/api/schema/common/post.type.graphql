@@ -1,0 +1,42 @@
+"内容"
+type Post implements Node {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+#    languageCode: LanguageCode!
+    deletedAt: DateTime
+    "文章标题"
+    title: String
+    "文章标识"
+    slug: String!
+    "文章描述"
+    description: String!
+    "内容类型"
+    type: PostType!
+    "作者"
+    creator: User
+    "分类"
+    terms: [Term!]
+    "内容特色图片"
+    featured: Asset
+    "内容中相关资产"
+    assets: [Asset]
+    "作品内容"
+    content: JSON!
+    "作品发布状态"
+    state: PostState
+    "是否允许评论"
+    allowComment: Boolean
+    "评论数"
+    commentCount: Int
+    "排序"
+    order: Int
+    "父内容"
+    parent: ID
+}
+
+"内容列表"
+type PostList implements PaginatedList {
+    items: [Post!]!
+    totalItems: Int!
+}

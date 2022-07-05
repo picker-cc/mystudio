@@ -1,6 +1,7 @@
 import { PickerMongoEntity } from '../../entity/base/mongo-base.entity';
 import { Type } from '@picker-cc/common/lib/shared-types';
 import {Tag} from "../../entity/tag/tag.entity";
+import {LogicalOperator} from "@picker-cc/common/lib/generated-types";
 
 /**
  * @description
@@ -53,6 +54,7 @@ export interface ListQueryOptions<T extends PickerMongoEntity> {
   skip?: number | null;
   sort?: NullOptionals<SortParameter<T>> | null;
   filter?: NullOptionals<FilterParameter<T>> | null;
+  filterOperator?: LogicalOperator;
 }
 
 /**

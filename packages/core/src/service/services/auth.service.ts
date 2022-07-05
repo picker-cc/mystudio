@@ -12,11 +12,11 @@ import {
     NativeAuthenticationData,
     NativeAuthenticationStrategy
 } from "../../config/auth/native-authentication-strategy";
-import {AttemptedLoginEvent} from "../../event-bus/events/AttemptedLoginEvent";
 import {InvalidCredentialsError, NotVerifiedError} from "../../common/error/generated-graphql-admin-errors";
 import {AuthenticatedSession} from "../../entity/session/authenticated-session.entity";
 import {SessionService} from "./session.service";
 import {LogoutEvent} from "../../event-bus/events/logout-event";
+import {AttemptedLoginEvent} from "../../event-bus/events/attempted-login-event";
 
 @Injectable()
 export class AuthService {
@@ -89,12 +89,14 @@ export class AuthService {
         //     relations: ['user', 'user.authenticationMethods'],
         // });
         const session = await this.em.findOne(Session, {token: sessionToken})
-
+        console.log('找到 session')
+        console.log(session)
         if (session) {
             const authenticationStrategy = this.getAuthenticationStrategy(
                 ctx.apiType,
                 session.authenticationStrategy,
             );
+            console.log(authenticationStrategy)
             if (typeof authenticationStrategy.onLogOut === 'function') {
                 await authenticationStrategy.onLogOut(ctx, session.user);
             }

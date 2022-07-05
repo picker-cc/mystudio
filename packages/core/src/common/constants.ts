@@ -53,6 +53,7 @@ export const DEFAULT_PERMISSIONS: PermissionDefinition[] = [
     new CrudPermissionDefinition('Asset'),
     new CrudPermissionDefinition('System'),
     new CrudPermissionDefinition('Product'),
+    new CrudPermissionDefinition('Post'),
     new CrudPermissionDefinition('Tag'),
 ];
 

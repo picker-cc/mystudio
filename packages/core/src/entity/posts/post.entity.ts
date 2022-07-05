@@ -16,6 +16,8 @@ import {Asset} from "../asset/asset.entity";
 import {Term} from "../taxonomy/term.entity";
 import {PickerMongoEntity} from "../base/mongo-base.entity";
 import {DeepPartial, ID} from "@picker-cc/common/lib/shared-types";
+import {PostType} from "@picker-cc/common/lib/generated-types";
+import {PostMeta} from "./post.embedded";
 
 @Entity({
     tableName: 'posts',
@@ -35,7 +37,7 @@ export class Post extends PickerMongoEntity implements SoftDeletable {
     })
     date = new Date()
 
-    @Property()
+    @Property({nullable: true})
     url: string;
     // 标识
     @Property()
@@ -43,7 +45,7 @@ export class Post extends PickerMongoEntity implements SoftDeletable {
 
     // default post
     @Property()
-    type: string;
+    type: PostType;
 
     // 内容摘要
     // @Property()
@@ -58,44 +60,47 @@ export class Post extends PickerMongoEntity implements SoftDeletable {
     creator: User
 
     // 分类
-    @Property()
+    @Property({nullable: true})
     terms: Term[];
-
+    //
     // @Property()
     // tags: Term[];
     //
     // 发布状态
-    @Property()
+    @Property({ nullable: true})
     state: string;
 
     // @Property()
     // password: string;
 
-    @ManyToMany(() => Asset)
-    assets = new Collection<Asset>(this);
+    // @ManyToMany(() => Asset)
+    // assets = new Collection<Asset>(this);
+    // @ManyToMany(() => Asset)
+    // assets? = new Collection<Asset>(this);
 
     // 是否允许评论
-    @Property()
+    @Property({default: false})
     allowComment: boolean;
 
     // 评论数
-    @Property()
+    @Property({nullable: true})
     commentCount: number;
 
     // 排序
-    @Property()
-    menuOrder: number;
+    @Property({nullable: true})
+    order: number;
 
     // 特色图
-    @Property()
+    @Property({nullable: true})
     featured: Asset;
 
-    @Property()
+    @Property({ nullable: true})
     parent: ID;
 
     // @Property()
     // settings: string;
 
-    @Property()
-    meta: string;
+    // @Property({ nullable: true})
+    @Embedded()
+    meta: PostMeta;
 }

@@ -66,8 +66,8 @@ export class AuthResolver extends BaseAuthResolver {
     }
 
     // @Transaction()
-    // @Mutation()
-    // @Allow(Permission.Public)
+    @Mutation()
+    @Allow(Permission.Public)
     logout(
         @Ctx() ctx: RequestContext,
         @Context('req') req: Request,
