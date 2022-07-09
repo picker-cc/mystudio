@@ -29,6 +29,12 @@ type NameConflictError implements ErrorResult {
     message: String!
 }
 
+"名字冲突错误"
+type SlugConflictError implements ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
 type AlreadyLoggedInError implements ErrorResult {
     errorCode: ErrorCode!
     message: String!

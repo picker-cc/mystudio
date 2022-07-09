@@ -67,6 +67,23 @@ enum TaxonomyEnum {
 }
 
 """
+Menu item 的类型
+"""
+enum MenuObjectType {
+    POST
+    PAGE
+    LINK
+    PRODUCT
+    CATEGORY
+}
+
+enum ContentParserType {
+    MARKDOWN
+    RICH_TEXT
+    JSON
+    BLOCK
+}
+"""
 内容类型
 """
 enum PostType {

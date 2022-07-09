@@ -236,6 +236,19 @@ export type ConfigurableOperationInput = {
   code: Scalars['String'];
 };
 
+/** 内容格式类型 */
+export type ContentParser = {
+  __typename?: 'ContentParser';
+  type?: Maybe<ContentParserType>;
+};
+
+export enum ContentParserType {
+  BLOCK = 'BLOCK',
+  JSON = 'JSON',
+  MARKDOWN = 'MARKDOWN',
+  RICH_TEXT = 'RICH_TEXT'
+}
+
 export type Coordinate = {
   __typename?: 'Coordinate';
   x: Scalars['Float'];
@@ -287,39 +300,24 @@ export type CreatePostInput = {
   creatorId?: InputMaybe<Scalars['ID']>;
   /** 特色图 */
   featuredId?: InputMaybe<Scalars['ID']>;
+  meta?: InputMaybe<PostMetaInput>;
   /** 排序 */
   order?: InputMaybe<Scalars['Int']>;
   /** 父内容 */
   parent?: InputMaybe<Scalars['ID']>;
+  /** 唯一标识 */
+  slug?: InputMaybe<Scalars['String']>;
   /** 作品发布状态 */
   state?: InputMaybe<PostState>;
   /** 类别 */
   terms?: InputMaybe<Array<Scalars['ID']>>;
   /** 作品名 */
-  title?: InputMaybe<Scalars['String']>;
+  title: Scalars['String'];
   /** 作品商品类型 */
   type?: InputMaybe<PostType>;
 };
 
-/** 创建作品内容 */
-export type CreateProductInput = {
-  /** 作品相关资产 */
-  assetIds?: InputMaybe<Array<Scalars['ID']>>;
-  /** 作品内容 */
-  content?: InputMaybe<Scalars['JSON']>;
-  /** 特色图 */
-  featuredId?: InputMaybe<Scalars['ID']>;
-  /** 作品公开内容、内容描述等 */
-  publicly?: InputMaybe<Scalars['JSON']>;
-  /** 作品配置 */
-  setting?: InputMaybe<ProductSettingInput>;
-  /** 作品发布状态 */
-  state?: InputMaybe<ProductState>;
-  /** 作品名 */
-  title?: InputMaybe<Scalars['String']>;
-  /** 作品商品类型 */
-  type?: InputMaybe<ProductType>;
-};
+export type CreatePostResult = Post | SlugConflictError;
 
 export type CreateRoleInput = {
   code: Scalars['String'];
@@ -732,21 +730,12 @@ export enum DeletionResult {
 /** 作品的价格配置 */
 export type DiffPriceOption = {
   __typename?: 'DiffPriceOption';
-  /** 定价的信息描述 */
+  /** 说明信息 */
   info?: Maybe<Scalars['String']>;
-  /** 售价 */
+  /** 价格 */
   price: Scalars['Float'];
-  /** 价格的版本名称 */
+  /** 版本名称 */
   versionName?: Maybe<Scalars['String']>;
-};
-
-export type DiffPriceOptionInput = {
-  /** 定价的信息描述 */
-  info?: InputMaybe<Scalars['String']>;
-  /** 售价 */
-  price: Scalars['Float'];
-  /** 价格的版本名称 */
-  versionName: Scalars['String'];
 };
 
 export type Discount = {
@@ -781,6 +770,7 @@ export enum ErrorCode {
   PASSWORD_RESET_TOKEN_INVALID_ERROR = 'PASSWORD_RESET_TOKEN_INVALID_ERROR',
   PASSWORD_VALIDATION_ERROR = 'PASSWORD_VALIDATION_ERROR',
   PHONE_CONFLICT_ERROR = 'PHONE_CONFLICT_ERROR',
+  SLUG_CONFLICT_ERROR = 'SLUG_CONFLICT_ERROR',
   UNKNOWN_ERROR = 'UNKNOWN_ERROR',
   VERIFICATION_TOKEN_EXPIRED_ERROR = 'VERIFICATION_TOKEN_EXPIRED_ERROR',
   VERIFICATION_TOKEN_INVALID_ERROR = 'VERIFICATION_TOKEN_INVALID_ERROR'
@@ -1250,6 +1240,15 @@ export enum LogicalOperator {
   OR = 'OR'
 }
 
+/** Menu item 的类型 */
+export enum MenuObjectType {
+  CATEGORY = 'CATEGORY',
+  LINK = 'LINK',
+  PAGE = 'PAGE',
+  POST = 'POST',
+  PRODUCT = 'PRODUCT'
+}
+
 export type MimeTypeError = ErrorResult & {
   __typename?: 'MimeTypeError';
   errorCode: ErrorCode;
@@ -1279,9 +1278,7 @@ export type Mutation = {
   /** Create a new Option */
   createOption: Option;
   /** 创建一个内容 */
-  createPost: Post;
-  /** 创建一个作品 */
-  createProduct?: Maybe<Product>;
+  createPost: CreatePostResult;
   /** 创建一个新角色 */
   createRole: Role;
   /** 创建分类项 */
@@ -1314,7 +1311,7 @@ export type Mutation = {
   updateGlobalSettings: UpdateGlobalSettingsResult;
   updateOption: Option;
   /** 更新一个内容 */
-  updatePost: Post;
+  updatePost: UpdatePostResult;
   /** 更新角色 */
   updateRole: Role;
   /** 更新分类项 */
@@ -1356,11 +1353,6 @@ export type MutationCreateOptionArgs = {
 
 export type MutationCreatePostArgs = {
   input: CreatePostInput;
-};
-
-
-export type MutationCreateProductArgs = {
-  input: CreateProductInput;
 };
 
 
@@ -1482,6 +1474,17 @@ export type NativeAuthStrategyError = ErrorResult & {
 };
 
 export type NativeAuthenticationResult = CurrentUser | InvalidCredentialsError | NativeAuthStrategyError;
+
+/** 导航菜单项 */
+export type NavMenuItem = {
+  __typename?: 'NavMenuItem';
+  /** 菜单对象ID */
+  objectId?: Maybe<Scalars['ID']>;
+  /** 菜单类型 */
+  objectType: MenuObjectType;
+  /** 菜单URL 或 slug */
+  url?: Maybe<Scalars['String']>;
+};
 
 export type Node = {
   id: Scalars['ID'];
@@ -1652,6 +1655,11 @@ export type OrderTaxSummary = {
   taxTotal: Scalars['Int'];
 };
 
+export type PageSetting = {
+  __typename?: 'PageSetting';
+  template?: Maybe<Scalars['String']>;
+};
+
 export type PaginatedList = {
   items: Array<Node>;
   totalItems: Scalars['Int'];
@@ -1812,6 +1820,8 @@ export type Post = Node & {
   /** 内容特色图片 */
   featured?: Maybe<Asset>;
   id: Scalars['ID'];
+  /** Post 元数据 */
+  meta?: Maybe<PostMeta>;
   /** 排序 */
   order?: Maybe<Scalars['Int']>;
   /** 父内容 */
@@ -1863,6 +1873,19 @@ export type PostListOptions = {
   take?: InputMaybe<Scalars['Int']>;
 };
 
+export type PostMeta = {
+  __typename?: 'PostMeta';
+  detail?: Maybe<Scalars['String']>;
+  key: Scalars['String'];
+  value?: Maybe<Scalars['String']>;
+};
+
+export type PostMetaInput = {
+  detail?: InputMaybe<Scalars['String']>;
+  key: Scalars['String'];
+  value?: InputMaybe<Scalars['String']>;
+};
+
 export type PostSortParameter = {
   commentCount?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
@@ -1898,36 +1921,6 @@ export enum PostType {
   PRODUCT = 'PRODUCT'
 }
 
-/** 作品 */
-export type Product = Node & {
-  __typename?: 'Product';
-  /** 作品相关资产 */
-  assets?: Maybe<Array<Maybe<Asset>>>;
-  /** 作品内容 */
-  content: Scalars['JSON'];
-  createdAt: Scalars['DateTime'];
-  /** 创造者 */
-  creator?: Maybe<User>;
-  description: Scalars['String'];
-  /** 作品是否启用 */
-  enabled?: Maybe<Scalars['Boolean']>;
-  /** 作品特色图片 */
-  featured?: Maybe<Asset>;
-  id: Scalars['ID'];
-  languageCode: LanguageCode;
-  /** 作品配置选项 */
-  option?: Maybe<ProductOption>;
-  /** 作品标识 */
-  slug: Scalars['String'];
-  /** 作品发布状态 */
-  state?: Maybe<ProductState>;
-  /** 作品标题 */
-  title?: Maybe<Scalars['String']>;
-  /** 作品类型 */
-  type: ProductType;
-  updatedAt: Scalars['DateTime'];
-};
-
 /** 产品类别 */
 export enum ProductCategory {
   /** 资料 */
@@ -1962,74 +1955,16 @@ export enum ProductCategory {
   WRITING = 'WRITING'
 }
 
-export type ProductFilterParameter = {
-  createdAt?: InputMaybe<DateOperators>;
-  description?: InputMaybe<StringOperators>;
-  enabled?: InputMaybe<BooleanOperators>;
-  languageCode?: InputMaybe<StringOperators>;
-  slug?: InputMaybe<StringOperators>;
-  state?: InputMaybe<StringOperators>;
-  title?: InputMaybe<StringOperators>;
-  type?: InputMaybe<StringOperators>;
-  updatedAt?: InputMaybe<DateOperators>;
-};
-
-/** 作品列表 */
-export type ProductList = PaginatedList & {
-  __typename?: 'ProductList';
-  items: Array<Product>;
-  totalItems: Scalars['Int'];
-};
-
-export type ProductListOptions = {
-  /** 允许过滤结果 */
-  filter?: InputMaybe<ProductFilterParameter>;
-  /** 指定多个 "filter" 参数是否应该与逻辑的 AND 或 OR 操作组合，默认为 AND */
-  filterOperator?: InputMaybe<LogicalOperator>;
-  /** 跳过前n个结果以用于分页 */
-  skip?: InputMaybe<Scalars['Int']>;
-  /** 指定根据哪些属性对结果进行排序 */
-  sort?: InputMaybe<ProductSortParameter>;
-  /** 获取n个结果，用于分页 */
-  take?: InputMaybe<Scalars['Int']>;
-};
-
-/** 作品配置 */
-export type ProductOption = {
-  __typename?: 'ProductOption';
+export type ProductSetting = {
+  __typename?: 'ProductSetting';
   /** 作品差异化定价 */
   diffPrice?: Maybe<Array<Maybe<DiffPriceOption>>>;
   /** 作品定价 */
-  price?: Maybe<Scalars['Float']>;
-  /** 作品的保护机制配置 */
-  protect?: Maybe<ProtectOption>;
-  /** 开启订阅制的配置 */
+  price: Scalars['Float'];
+  /** 作品保护配置 */
+  protect?: Maybe<Array<Maybe<ProtectOption>>>;
+  /** 订阅周期 */
   subscription?: Maybe<ProductSubscriptionPeriod>;
-};
-
-/** 作品的保护机制配置 */
-export type ProductSettingInput = {
-  /** 作品差异化定价 */
-  diffPrice?: InputMaybe<Array<DiffPriceOptionInput>>;
-  /** 保护方法 */
-  method: Scalars['String'];
-  /** 作品定价 */
-  price?: InputMaybe<Scalars['Float']>;
-  /** 作品的保护机制配置 */
-  protect?: InputMaybe<Array<ProductSettingInput>>;
-  /** 开启订阅制的配置 */
-  subscription?: InputMaybe<ProductSubscriptionPeriod>;
-  /** 保护类型 */
-  type: Scalars['String'];
-};
-
-export type ProductSortParameter = {
-  createdAt?: InputMaybe<SortOrder>;
-  description?: InputMaybe<SortOrder>;
-  id?: InputMaybe<SortOrder>;
-  slug?: InputMaybe<SortOrder>;
-  title?: InputMaybe<SortOrder>;
-  updatedAt?: InputMaybe<SortOrder>;
 };
 
 /** 作品状态 */
@@ -2113,10 +2048,8 @@ export type PromotionList = PaginatedList & {
 /** 作品的保护机制配置 */
 export type ProtectOption = {
   __typename?: 'ProtectOption';
-  /** 保护方法 */
   method?: Maybe<Scalars['String']>;
-  /** 保护类型 */
-  type?: Maybe<Scalars['String']>;
+  type: Scalars['String'];
 };
 
 export type Query = {
@@ -2134,8 +2067,6 @@ export type Query = {
   post?: Maybe<Post>;
   /** 查询全部内容 */
   posts: PostList;
-  /** 查询全部作品 */
-  products?: Maybe<ProductList>;
   role?: Maybe<Role>;
   roles: RoleList;
   /** 查询全部分类方法 */
@@ -2171,11 +2102,6 @@ export type QueryPostArgs = {
 
 export type QueryPostsArgs = {
   options?: InputMaybe<PostListOptions>;
-};
-
-
-export type QueryProductsArgs = {
-  options?: InputMaybe<ProductListOptions>;
 };
 
 
@@ -2328,6 +2254,13 @@ export type ShippingMethodTranslation = {
   languageCode: LanguageCode;
   name: Scalars['String'];
   updatedAt: Scalars['DateTime'];
+};
+
+/** 名字冲突错误 */
+export type SlugConflictError = ErrorResult & {
+  __typename?: 'SlugConflictError';
+  errorCode: ErrorCode;
+  message: Scalars['String'];
 };
 
 export enum SortOrder {
@@ -2518,10 +2451,13 @@ export type UpdatePostInput = {
   /** 特色图 */
   featuredId?: InputMaybe<Scalars['ID']>;
   id: Scalars['ID'];
+  meta?: InputMaybe<PostMetaInput>;
   /** 排序 */
   order?: InputMaybe<Scalars['Int']>;
   /** 父内容 */
   parent?: InputMaybe<Scalars['ID']>;
+  /** 标识名 */
+  slug?: InputMaybe<Scalars['String']>;
   /** 作品发布状态 */
   state?: InputMaybe<PostState>;
   /** 类别 */
@@ -2531,6 +2467,8 @@ export type UpdatePostInput = {
   /** 作品商品类型 */
   type?: InputMaybe<PostType>;
 };
+
+export type UpdatePostResult = Post | SlugConflictError;
 
 export type UpdateRoleInput = {
   code?: InputMaybe<Scalars['String']>;

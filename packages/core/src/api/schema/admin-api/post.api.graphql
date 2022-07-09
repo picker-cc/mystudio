@@ -7,20 +7,111 @@ type Query {
 
 type Mutation {
     "创建一个内容"
-    createPost(input: CreatePostInput!): Post!
+    createPost(input: CreatePostInput!): CreatePostResult!
     "更新一个内容"
-    updatePost(input: UpdatePostInput): Post!
+    updatePost(input: UpdatePostInput): UpdatePostResult!
     "删除一个内容"
     deletePost(id: ID!): DeletionResponse!
+#    "创建一个菜单"
+#    createMenu(input: CreateMenuInput): Post!
+#    "更新一个菜单"
+#    updateMenu(input: UpdateMenuInput): Post!
 }
 
 "运行时自动生成"
 input PostListOptions
+#
+#"创建菜单"
+#input CreateMenuInput {
+#    "菜单名"
+#    title: String!
+#    "菜单标识"
+#    slug: String
+#    "菜单顺序"
+#    order: Int
+#    "父菜单"
+#    parent: ID
+#    "菜单类型"
+#    objectType: MenuObjectType!
+#    "菜单对像ID"
+#    objectId: ID
+#    "菜单链接"
+#    url: String
+#
+#}
+#input UpdateMenuInput {
+#    id: ID!
+#    "菜单名"
+#    title: String!
+#    "菜单标识"
+#    slug: String
+#    "排序"
+#    order: Int
+#    "父内容"
+#    parent: ID
+#    "菜单类型"
+#    objectType: MenuObjectType!
+#    "菜单对像ID"
+#    objectId: ID
+#    "菜单链接"
+#    url: String
+#}
 
+#input NavMenuItemInput {
+#    "菜单类型"
+#    objectType: MenuObjectType!
+#    "菜单对象ID"
+#    objectId: ID
+#    "菜单URL 或 slug"
+#    url: String
+#}
+#
+#input DiffPriceOptionInput {
+#    "版本名称"
+#    versionName: String
+#    "价格"
+#    price: Float!
+#    "说明信息"
+#    info: String
+#}
+#input ProtectOptionInput {
+#    type: String!
+#    method: String
+#}
+#input ProductSettingInput {
+#    "作品定价"
+#    price: Float!
+#    "作品差异化定价"
+#    diffPrice: [DiffPriceOptionInput]
+#    "订阅周期"
+#    subscription: ProductSubscriptionPeriod
+#    "作品保护配置"
+#    protect: [ProtectOptionInput]
+#}
+#input ContentParserInput {
+#    type: ContentParserType
+#}
+#
+#input PostMetaInput {
+#    "菜单项"
+#    menuItem: NavMenuItemInput
+#    "产品配置"
+#    productSetting: ProductSettingInput
+#    "内容解析类型"
+#    parser: ContentParserInput
+#}
+#
+input PostMetaInput {
+    key: String!
+    value: String
+    detail: String
+}
 "创建作品内容"
 input CreatePostInput {
     "作品名"
-    title: String
+    title: String!
+    "唯一标识"
+    slug: String
     "作品商品类型"
     type: PostType
     "特色图"
@@ -41,12 +132,16 @@ input CreatePostInput {
     order: Int
     "父内容"
     parent: ID
+
+    meta: PostMetaInput
 }
 
 input UpdatePostInput {
     id: ID!
     "作品名"
     title: String
+    "标识名"
+    slug: String
     "作品商品类型"
     type: PostType
     "特色图"
@@ -65,4 +160,9 @@ input UpdatePostInput {
     order: Int
     "父内容"
     parent: ID
+
+    meta: PostMetaInput
 }
+
+union CreatePostResult = Post | SlugConflictError
+union UpdatePostResult = Post | SlugConflictError

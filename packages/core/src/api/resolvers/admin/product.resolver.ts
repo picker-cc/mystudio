@@ -11,7 +11,7 @@ import {RequestContext} from "../../common/request-context";
 import {Allow} from "../../decorators/allow.decorator";
 import {Product} from "../../../entity";
 
-@Resolver('Product')
+// @Resolver('Product')
 export class ProductResolver {
     constructor(
         private productService: ProductService,
@@ -19,8 +19,8 @@ export class ProductResolver {
     ) {
     }
 
-    @Query()
-    @Allow(Permission.ReadAdministrator)
+    // @Query()
+    // @Allow(Permission.ReadAdministrator)
     async products(
         @Ctx() ctx: RequestContext,
         @Args() args: QueryTermsArgs,
@@ -41,8 +41,8 @@ export class ProductResolver {
     }
 
 
-    @Mutation()
-    @Allow(Permission.CreateCatalog, Permission.CreateProduct)
+    // @Mutation()
+    // @Allow(Permission.CreateCatalog, Permission.CreateProduct)
     createProduct(
         @Ctx() ctx: RequestContext,
         @Args() args: MutationCreateProductArgs

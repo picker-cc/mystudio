@@ -33,10 +33,70 @@ type Post implements Node {
     order: Int
     "父内容"
     parent: ID
+    "Post 元数据"
+    meta: PostMeta
 }
 
 "内容列表"
 type PostList implements PaginatedList {
     items: [Post!]!
     totalItems: Int!
+}
+
+
+
+"作品的价格配置"
+type DiffPriceOption {
+    "版本名称"
+    versionName: String
+    "价格"
+    price: Float!
+    "说明信息"
+    info: String
+}
+
+"作品的保护机制配置"
+type ProtectOption {
+    type: String!
+    method: String
+}
+
+type ProductSetting {
+    "作品定价"
+    price: Float!
+    "作品差异化定价"
+    diffPrice: [DiffPriceOption]
+    "订阅周期"
+    subscription: ProductSubscriptionPeriod
+    "作品保护配置"
+    protect: [ProtectOption]
+}
+
+"内容格式类型"
+type ContentParser {
+    type: ContentParserType
+}
+"导航菜单项"
+type NavMenuItem {
+    "菜单类型"
+    objectType: MenuObjectType!
+    "菜单对象ID"
+    objectId: ID
+    "菜单URL 或 slug"
+    url: String
+}
+
+type PageSetting {
+    template: String
+}
+type PostMeta {
+#    "菜单项"
+#    menuItem: NavMenuItem
+#    "产品配置"
+#    productSetting: ProductSetting
+#    "内容解析类型"
+#    parser: ContentParser
+    key: String!
+    value: String
+    detail: String
 }

@@ -16,7 +16,8 @@
     "VERIFICATION_TOKEN_EXPIRED_ERROR": "Verification token has expired. Use refreshCustomerVerification to send a new token.",
     "VERIFICATION_TOKEN_INVALID_ERROR": "Verification token not recognized",
     "INVALID_CREDENTIALS_ERROR": "The provided credentials are invalid",
-    "NAME_CONFLICT_ERROR": "名字冲突"
+    "NAME_CONFLICT_ERROR": "The name is not available",
+    "SLUG_CONFLICT_ERROR": "The slug is not available"
   },
   "message": {
     "asset-to-be-deleted-is-featured": "The selected {assetCount, plural, one {Asset is} other {Assets are}} featured by {products, plural, =0 {} one {1 Product} other {# Products}} {variants, plural, =0 {} one { 1 ProductVariant} other { # ProductVariants}} {collections, plural, =0 {} one { 1 Collection} other { # Collections}}",

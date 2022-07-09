@@ -1,17 +1,22 @@
 import {Args, Mutation, Query, Resolver} from '@nestjs/graphql';
 import {
+    CreatePostResult, DeletionResponse,
+    DeletionResult,
     MutationCreatePostArgs,
-    MutationCreateProductArgs, MutationUpdatePostArgs,
-    Permission, QueryPostsArgs,
-    QueryTermsArgs,
+    MutationDeletePostArgs,
+    MutationUpdatePostArgs,
+    Permission,
+    QueryPostsArgs,
+    UpdatePostResult,
 } from '@picker-cc/common/lib/generated-types';
-import { ListQueryBuilder, ProductService } from "../../../service";
+import {ListQueryBuilder} from "../../../service";
 import {Ctx} from "../../decorators/request-context.decorator";
 import {PaginatedList} from "@picker-cc/common/lib/shared-types";
 import {RequestContext} from "../../common/request-context";
 import {Allow} from "../../decorators/allow.decorator";
-import { PostService } from '../../../service/services/post.service';
+import {PostService} from '../../../service/services/post.service';
 import {Post} from "../../../entity";
+import {ErrorResultUnion} from "../../../common";
 
 @Resolver('Post')
 export class PostResolver {
@@ -36,18 +41,29 @@ export class PostResolver {
     async createPost(
         @Ctx() ctx: RequestContext,
         @Args() args: MutationCreatePostArgs
-    ): Promise<Post> {
+    ): Promise<ErrorResultUnion<CreatePostResult, Post>> {
         const { input } = args
         return this.postService.create(ctx, input)
     }
 
-    // async updatePost(
-    //    @Ctx() ctx: RequestContext,
-    //    @Args() args: MutationUpdatePostArgs
-    // ): Promise<Post> {
-        // const { input } = args
-        // return this.postService.
-    // }
-//
+    @Mutation()
+    @Allow(Permission.UpdateCatalog, Permission.UpdatePost)
+    async updatePost(
+       @Ctx() ctx: RequestContext,
+       @Args() args: MutationUpdatePostArgs
+    ): Promise<ErrorResultUnion<UpdatePostResult, Post>> {
+        const { input } = args
+        return this.postService.update(ctx, input)
+    }
 
+    @Mutation()
+    @Allow(Permission.DeleteCatalog, Permission.DeletePost)
+    async deletePost(
+        @Ctx() ctx: RequestContext,
+        @Args() args: MutationDeletePostArgs
+    ): Promise<DeletionResponse> {
+        const { id } = args
+        return this.postService.softDelete(ctx, id);
+    }
+//
 }

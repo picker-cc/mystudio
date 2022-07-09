@@ -172,6 +172,16 @@ export class PhoneConflictError extends ErrorResult {
   }
 }
 
+export class SlugConflictError extends ErrorResult {
+  readonly __typename = 'SlugConflictError';
+  readonly errorCode = 'SLUG_CONFLICT_ERROR' as any;
+  readonly message = 'SLUG_CONFLICT_ERROR';
+  constructor(
+  ) {
+    super();
+  }
+}
+
 export class VerificationTokenExpiredError extends ErrorResult {
   readonly __typename = 'VerificationTokenExpiredError';
   readonly errorCode = 'VERIFICATION_TOKEN_EXPIRED_ERROR' as any;
@@ -193,7 +203,7 @@ export class VerificationTokenInvalidError extends ErrorResult {
 }
 
 
-const errorTypeNames = new Set(['AlreadyLoggedInError', 'EmailAddressConflictError', 'IdentifierChangeTokenExpiredError', 'IdentifierChangeTokenInvalidError', 'InvalidCredentialsError', 'MimeTypeError', 'MissingPasswordError', 'NameConflictError', 'NativeAuthStrategyError', 'NotVerifiedError', 'PasswordAlreadySetError', 'PasswordResetTokenExpiredError', 'PasswordResetTokenInvalidError', 'PasswordValidationError', 'PhoneConflictError', 'VerificationTokenExpiredError', 'VerificationTokenInvalidError']);
+const errorTypeNames = new Set(['AlreadyLoggedInError', 'EmailAddressConflictError', 'IdentifierChangeTokenExpiredError', 'IdentifierChangeTokenInvalidError', 'InvalidCredentialsError', 'MimeTypeError', 'MissingPasswordError', 'NameConflictError', 'NativeAuthStrategyError', 'NotVerifiedError', 'PasswordAlreadySetError', 'PasswordResetTokenExpiredError', 'PasswordResetTokenInvalidError', 'PasswordValidationError', 'PhoneConflictError', 'SlugConflictError', 'VerificationTokenExpiredError', 'VerificationTokenInvalidError']);
 function isGraphQLError(input: any): input is import('@picker-cc/common/lib/generated-types').ErrorResult {
   return input instanceof ErrorResult || errorTypeNames.has(input.__typename);
 }
@@ -209,6 +219,11 @@ export const adminErrorOperationTypeResolvers = {
       return isGraphQLError(value) ? (value as any).__typename : 'Asset';
     },
   },
+  CreatePostResult: {
+    __resolveType(value: any) {
+      return isGraphQLError(value) ? (value as any).__typename : 'Post';
+    },
+  },
   CreateTermResult: {
     __resolveType(value: any) {
       return isGraphQLError(value) ? (value as any).__typename : 'Term';
@@ -222,6 +237,11 @@ export const adminErrorOperationTypeResolvers = {
   UpdateAdministratorPasswordResult: {
     __resolveType(value: any) {
       return isGraphQLError(value) ? (value as any).__typename : 'Success';
+    },
+  },
+  UpdatePostResult: {
+    __resolveType(value: any) {
+      return isGraphQLError(value) ? (value as any).__typename : 'Post';
     },
   },
   UpdateTermResult: {

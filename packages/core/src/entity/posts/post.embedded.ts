@@ -1,7 +1,12 @@
 import { Embeddable, Embedded, Property } from "@mikro-orm/core";
 import {ID} from "@picker-cc/common/lib/shared-types";
 
-import {ProductState, ProductSubscriptionPeriod, ProductType} from "@picker-cc/common/lib/generated-types";
+import {
+    MenuObjectType,
+    ProductState,
+    ProductSubscriptionPeriod,
+    ProductType
+} from "@picker-cc/common/lib/generated-types";
 
 /**
  * 作品的价格配置
@@ -23,7 +28,7 @@ export class DiffPriceOption {
  * 作品的保护机制配置
  */
 @Embeddable()
-export class ProtectSetting {
+export class ProtectOption {
     @Property()
     type: string;
     @Property()
@@ -46,7 +51,7 @@ export class ProductSetting {
     subscription?: ProductSubscriptionPeriod
     // 作品保护设置
     @Property()
-    protect?: ProtectSetting[]
+    protect?: ProtectOption[]
 }
 
 /**
@@ -55,11 +60,12 @@ export class ProductSetting {
 @Embeddable()
 export class NavMenuItem {
     @Property()
-    type: 'POST' | 'PAGE' | 'LINK';
+    objectType: MenuObjectType
+    // objectType: 'POST' | 'PAGE' | 'LINK' | 'PRODUCT';
+    @Property()
+    objectId?: ID
     @Property()
     url?: string;
-    @Property()
-    object?: ID
 }
 @Embeddable()
 export class ContentParser {
@@ -67,10 +73,16 @@ export class ContentParser {
 }
 @Embeddable()
 export class PostMeta {
-    @Embedded({object: true})
-    menuItem?: NavMenuItem;
-    @Embedded({object: true})
-    productSetting?: ProductSetting;
-    @Embedded({object: true})
-    parser?: ContentParser;
+    // @Embedded({object: true})
+    // menuItem?: NavMenuItem;
+    // @Embedded({object: true})
+    // productSetting?: ProductSetting;
+    // @Embedded({object: true})
+    // parser?: ContentParser;
+    @Property()
+    key: String
+    @Property()
+    value: String
+    @Property()
+    detail?: String
 }
