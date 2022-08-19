@@ -1,7 +1,6 @@
 import {Args, Mutation, Query, Resolver} from '@nestjs/graphql';
 import {
     CreatePostResult, DeletionResponse,
-    DeletionResult,
     MutationCreatePostArgs,
     MutationDeletePostArgs,
     MutationUpdatePostArgs,
@@ -9,7 +8,7 @@ import {
     QueryPostsArgs,
     UpdatePostResult,
 } from '@picker-cc/common/lib/generated-types';
-import {ListQueryBuilder} from "../../../service";
+
 import {Ctx} from "../../decorators/request-context.decorator";
 import {PaginatedList} from "@picker-cc/common/lib/shared-types";
 import {RequestContext} from "../../common/request-context";
@@ -22,7 +21,6 @@ import {ErrorResultUnion} from "../../../common";
 export class PostResolver {
     constructor(
         private postService: PostService,
-        private listQueryBuilder: ListQueryBuilder,
     ) {
     }
 
@@ -42,17 +40,17 @@ export class PostResolver {
         @Ctx() ctx: RequestContext,
         @Args() args: MutationCreatePostArgs
     ): Promise<ErrorResultUnion<CreatePostResult, Post>> {
-        const { input } = args
+        const {input} = args
         return this.postService.create(ctx, input)
     }
 
     @Mutation()
     @Allow(Permission.UpdateCatalog, Permission.UpdatePost)
     async updatePost(
-       @Ctx() ctx: RequestContext,
-       @Args() args: MutationUpdatePostArgs
+        @Ctx() ctx: RequestContext,
+        @Args() args: MutationUpdatePostArgs
     ): Promise<ErrorResultUnion<UpdatePostResult, Post>> {
-        const { input } = args
+        const {input} = args
         return this.postService.update(ctx, input)
     }
 
@@ -62,8 +60,9 @@ export class PostResolver {
         @Ctx() ctx: RequestContext,
         @Args() args: MutationDeletePostArgs
     ): Promise<DeletionResponse> {
-        const { id } = args
+        const {id} = args
         return this.postService.softDelete(ctx, id);
     }
+
 //
 }

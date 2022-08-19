@@ -10,14 +10,15 @@ import {
     Property
 } from '@mikro-orm/core';
 
-import { SoftDeletable } from '../../common';
+import {SoftDeletable} from '../../common';
 import {User} from "../user/user.entity";
 import {Asset} from "../asset/asset.entity";
 import {Term} from "../taxonomy/term.entity";
 import {PickerMongoEntity} from "../base/mongo-base.entity";
 import {DeepPartial, ID} from "@picker-cc/common/lib/shared-types";
-import {PostType} from "@picker-cc/common/lib/generated-types";
-import {PostMeta} from "./post.embedded";
+import {PostType, ProductSubscriptionPeriod} from "@picker-cc/common/lib/generated-types";
+import {PostMeta, PostSetting} from "./post.embedded";
+
 
 @Entity({
     tableName: 'posts',
@@ -26,7 +27,8 @@ export class Post extends PickerMongoEntity implements SoftDeletable {
     constructor(input?: DeepPartial<Post>) {
         super(input);
     }
-    @Property({ type: Date, nullable: true })
+
+    @Property({type: Date, nullable: true})
     deletedAt: Date;
 
     @Property()
@@ -67,7 +69,7 @@ export class Post extends PickerMongoEntity implements SoftDeletable {
     // tags: Term[];
     //
     // 发布状态
-    @Property({ nullable: true})
+    @Property({nullable: true})
     state: string;
 
     // @Property()
@@ -94,11 +96,14 @@ export class Post extends PickerMongoEntity implements SoftDeletable {
     @Property({nullable: true})
     featured: Asset;
 
-    @Property({ nullable: true})
+    @Property({nullable: true})
     parent: ID;
 
     // @Property()
     // settings: string;
+
+    @Embedded(() => PostSetting, {object: true})
+    setting: PostSetting;
 
     // @Property({ nullable: true})
     @Embedded()

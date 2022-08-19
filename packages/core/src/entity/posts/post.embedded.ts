@@ -35,6 +35,10 @@ export class ProtectOption {
     method?: string;
 }
 
+@Embeddable()
+export class PageOption {
+    template: string
+}
 /**
  * 作品配置
  */
@@ -58,7 +62,7 @@ export class ProductSetting {
  * 导航菜单项
  */
 @Embeddable()
-export class NavMenuItem {
+export class NavMenuItemOption {
     @Property()
     objectType: MenuObjectType
     // objectType: 'POST' | 'PAGE' | 'LINK' | 'PRODUCT';
@@ -68,9 +72,26 @@ export class NavMenuItem {
     url?: string;
 }
 @Embeddable()
-export class ContentParser {
+export class ContentOption {
     type: 'MARKDOWN' | 'EDITOR_JSON'
 }
+
+/**
+ * 作品配置
+ */
+@Embeddable()
+export class PostSetting {
+    @Property()
+    content: ContentOption
+    @Property()
+    menu?: NavMenuItemOption
+    // 作品保护设置
+    @Property()
+    product?: ProductSetting[]
+    @Property()
+    page?: PageOption
+}
+
 @Embeddable()
 export class PostMeta {
     // @Embedded({object: true})

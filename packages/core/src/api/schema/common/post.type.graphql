@@ -33,6 +33,7 @@ type Post implements Node {
     order: Int
     "父内容"
     parent: ID
+    setting: PostSetting
     "Post 元数据"
     meta: PostMeta
 }
@@ -61,7 +62,7 @@ type ProtectOption {
     method: String
 }
 
-type ProductSetting {
+type ProductOption {
     "作品定价"
     price: Float!
     "作品差异化定价"
@@ -73,11 +74,12 @@ type ProductSetting {
 }
 
 "内容格式类型"
-type ContentParser {
+type ContentOption {
     type: ContentParserType
 }
+
 "导航菜单项"
-type NavMenuItem {
+type NavMenuItemOption {
     "菜单类型"
     objectType: MenuObjectType!
     "菜单对象ID"
@@ -86,9 +88,17 @@ type NavMenuItem {
     url: String
 }
 
-type PageSetting {
-    template: String
+type PageOption {
+    template: String!
 }
+
+type PostSetting {
+    content: ContentOption
+    menu: NavMenuItemOption
+    product: ProductOption
+    page: PageOption
+}
+
 type PostMeta {
 #    "菜单项"
 #    menuItem: NavMenuItem

@@ -101,6 +101,57 @@ input PostListOptions
 #    parser: ContentParserInput
 #}
 #
+"作品的价格配置输入"
+input DiffPriceOptionInput {
+    "版本名称"
+    versionName: String
+    "价格"
+    price: Float!
+    "说明信息"
+    info: String
+}
+
+"作品的保护机制配置输入"
+input ProtectOptionInput {
+    type: String!
+    method: String
+}
+
+input ProductOptionInput {
+    "作品定价"
+    price: Float!
+    "作品差异化定价"
+    diffPrice: [DiffPriceOptionInput]
+    "订阅周期"
+    subscription: ProductSubscriptionPeriod
+    "作品保护配置"
+    protect: [ProtectOptionInput]
+}
+
+input ContentOptionInput {
+    type: ContentParserType
+}
+
+input NavMenuItemOptionInput {
+    "菜单类型"
+    objectType: MenuObjectType!
+    "菜单对象ID"
+    objectId: ID
+    "菜单URL 或 slug"
+    url: String
+}
+
+input PageOptionInput {
+    template: String!
+}
+
+input PostSettingInput {
+    content: ContentOptionInput
+    menu: NavMenuItemOptionInput
+    product: ProductOptionInput
+    page: PageOptionInput
+}
+
 input PostMetaInput {
     key: String!
     value: String
@@ -132,7 +183,8 @@ input CreatePostInput {
     order: Int
     "父内容"
     parent: ID
-
+    "配置"
+    setting: PostSettingInput
     meta: PostMetaInput
 }
 
@@ -160,7 +212,8 @@ input UpdatePostInput {
     order: Int
     "父内容"
     parent: ID
-
+    "配置"
+    setting: PostSettingInput
     meta: PostMetaInput
 }
 
